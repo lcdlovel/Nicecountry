@@ -23,8 +23,14 @@ export default class Loader extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Image source={require('../../assets/images/nc_loader.png')}/>
-				<Text>美丽乡村hahha </Text>
+				<Image style={styles.load_image} source={require('../../assets/images/nc_loader.png')}/>
+				<Text style={styles.nc_font}>美丽乡村</Text>
+				<View style={styles.nc_inputView}>
+					<View style={styles.nc_input}>
+						{/*<Image source={require('')}></Image>*/}
+					</View>
+				</View>
+
 			</View>
 		);
 	}
@@ -33,9 +39,20 @@ export default class Loader extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex:1,
+		justifyContent:'center',
+		alignItems:'center',
 	},
 	load_image:{
-		// width:400,
-		// height:400,
+		width:80.5,
+		height:80.5,
+	},
+  nc_font:{
+		fontSize:15
+	},
+  nc_inputView:{
+
+	},
+  nc_input:{
+
 	}
 });
