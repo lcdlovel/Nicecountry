@@ -23,8 +23,8 @@ export default class Loader extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Image style={styles.load_image} sourse={require('../../assets/images/nc_loader.png')}/>
-				<Text>美丽乡村</Text>
+				<Image source={require('../../assets/images/nc_loader.png')}/>
+				<Text>美丽乡村hahha </Text>
 			</View>
 		);
 	}
@@ -32,9 +32,10 @@ export default class Loader extends Component<Props> {
 
 const styles = StyleSheet.create({
 	container: {
+		flex:1,
 	},
 	load_image:{
-		width:400,
-		height:400,
+		// width:400,
+		// height:400,
 	}
 });
