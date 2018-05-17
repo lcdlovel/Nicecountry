@@ -27,6 +27,10 @@ export default class Loader extends Component<Props> {
 				<Text style={styles.nc_font}>美丽乡村</Text>
 				<View style={styles.nc_inputView}>
 					<View style={styles.nc_input}>
+						<Text>我的ios</Text>
+						{/*<Image source={require('')}></Image>*/}
+					</View>
+					<View style={styles.nc_input}>
 						{/*<Image source={require('')}></Image>*/}
 					</View>
 				</View>
@@ -38,21 +42,23 @@ export default class Loader extends Component<Props> {
 
 const styles = StyleSheet.create({
 	container: {
-		flex:1,
-		justifyContent:'center',
-		alignItems:'center',
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
-	load_image:{
-		width:80.5,
-		height:80.5,
+	load_image: {
+		width: 80.5,
+		height: 80.5,
 	},
-  nc_font:{
-		fontSize:15
+	nc_font: {
+		fontSize: 15
 	},
-  nc_inputView:{
-
-	},
-  nc_input:{
-
+	nc_inputView: {},
+	nc_input: {
+		width: 340,
+		height: 50,
+		borderRadius: 30,
+		marginTop: 20,
+		backgroundColor: "#ffffff"
 	}
 });
