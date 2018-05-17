@@ -7,7 +7,7 @@
  */
 import axios from './interceptors'
 import {baseUrl} from './url'
-
+import global from '../global/global'
 axios.defaults.baseURL = baseUrl
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 axios.defaults.headers.common['Accept'] = 'application/json'
@@ -16,16 +16,18 @@ axios.defaults.withCredentials = true
 
 class Requests {
   static sendAjax ({type: type1, url: url1, data: data1, callback: callbackFn}) {
-		if (typeof (sessionStorage.getItem('Token')) !== 'undefined') {
-			axios.defaults.headers.common['token'] = sessionStorage.getItem('Token')
+		if (global.token !=='') {
+			axios.defaults.headers.common['token'] = global.token
 		} else {
 			console.log('登录中')
 		}
     let datas = ''
     type1 === 'get' ? datas = {params: data1} : datas = data1
+		console.log('这是sendAjax')
     return new Promise((resolve, reject) => {
       axios[type1](url1, datas)
         .then((res) => {
+					console.log(url1)
           if (res) {
             if (callbackFn) {
               callbackFn(res.data)

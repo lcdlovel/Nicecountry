@@ -2,13 +2,14 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  * @flow
+ * 自定义输入组件
  */
 
 import React, {Component} from 'react';
 import {View,TextInput} from 'react-native';
 
 type Props = {};
-export default class UserlessTextIput extends Component<Props> {
+export default class UselessTextInput extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -26,6 +27,15 @@ export default class UserlessTextIput extends Component<Props> {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-});
+//使用方法
+{/*<View style={styles.textInput}
+						>
+							<UselessTextInput
+								multiline = {true}
+								numberOfLines = {4}
+								underlineColorAndroid='transparent'
+								placeholder='请输入用户名'
+								onChangeText={(text) => this.setState({text})}
+								value={this.state.text}
+							/>
+					</View>*/}

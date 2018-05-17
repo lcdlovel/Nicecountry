@@ -1,19 +1,26 @@
-import {StackNavigator} from 'react-navigation'
+import {createStackNavigator } from 'react-navigation'
 
 import {Button} from 'react-native'
 import StartUp from "../pages/Startup/StartUp";
 import Loader from "../pages/loader/Loader";
+import HomePage from "../pages/homePage/HomePage";
 
 
-export const AppStackNavgator = StackNavigator(    {
-	StartUp: {
-		screen:StartUp,
+export const AppStackNavgator = createStackNavigator ({
+	// StartUp: {
+	// 	screen:StartUp,
+	// 	navigationOptions:{
+	// 		header:null
+	// 	}
+	// },
+	Loader:{
+		screen:Loader,
 		navigationOptions:{
 			header:null
 		}
 	},
-	Loader:{
-		screen:Loader,
+	HomePage:{
+		screen:HomePage,
 		navigationOptions:{
 			header:null
 		}

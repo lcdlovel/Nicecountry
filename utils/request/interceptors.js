@@ -5,9 +5,11 @@ import Golbals from '../global/global'
 
 axios.interceptors.response.use(
   (response) => {
+    console.log('拦截器')
+    console.log(response)
     if (!response.hasOwnProperty('data') ||
-      !response.data.hasOwnProperty('status') ||
-      response.data.status !== 0) {
+      !response.data.hasOwnProperty('Status') ||
+      response.data.Status !== 0) {
       // 状态码对应关系
       let statusList = {
         0: '请求成功',
@@ -18,19 +20,21 @@ axios.interceptors.response.use(
       }
       // 失败提示信息
       let message = ''
-      if (response.data.hasOwnProperty('msg')) {
-        message = response.data.msg
-      } else {
-        if (response.data.hasOwnProperty('status') && statusList[response.data.status]) {
-          message = statusList[response.data.status]
-        } else {
-          message = '请求错误'
-        }
-      }
-     return message
+      // if (response.data.hasOwnProperty('Msg')) {
+      //   message = response.data.Msg
+      // } else {
+      //   if (response.data.hasOwnProperty('Status') && statusList[response.data.Status]) {
+      message = statusList[response.data.Status]
+      //   } else {
+      //     message = '请求错误'
+      //   }
+      // }
+     alert(message)
       // 如果身份失效，则跳转到登陆界面
+      const {navigation} = this.props
       if (response.data.status === Golbals.NEED_LOGIN) {
         // TODO: 实现跳转逻辑
+        navigation.navigate()
       }
       return
     }
@@ -41,16 +45,17 @@ axios.interceptors.response.use(
       (response.data.data.list === null ||
       response.data.data.list.length <= 0)) {
        let message =  '查询不到相关内容'
-				 return message
+			alert(message)
       }
     return response
   },
   (error) => {
+    alert('error')
     if (error.response) {
       switch (error.response.status) {
         case 401: {
 					let message =  '请求失败,请检查用户权限 ! (401)'
-					return message
+					alert(message)
         } break;
       }
     }

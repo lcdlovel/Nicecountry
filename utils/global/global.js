@@ -1,5 +1,6 @@
 
 export default {
+	token:'',
 	SUCCESS: 0, // 成功请求
 	ERROR: 1, // 错误请求
 	ILLEGAL_ARGUMENT: 2, // 参数错误

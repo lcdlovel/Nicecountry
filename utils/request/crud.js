@@ -7,7 +7,7 @@
  */
 import Requests from './requests'
 
-class Crud extends Requests {
+class CrudApi extends Requests {
   static getInfo ({url: url1, data: data1, callback: callbackFn}) {
     return super.sendAjax({type: 'get', url: url1, data: data1, callback: callbackFn})
   }
@@ -25,4 +25,4 @@ class Crud extends Requests {
   }
 }
 
-export default Crud
+export default CrudApi

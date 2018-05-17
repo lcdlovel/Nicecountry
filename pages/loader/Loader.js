@@ -13,16 +13,20 @@ import {
 	Image,
 	TextInput,
 } from 'react-native';
+import YgButton from '../common/YgButton'
+import loaderFun from './LoaderFun'
+
 type Props = {};
 export default class Loader extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text:''
+				username: '',
+				password: ''
 		}
 	}
-
 	render() {
+		const {navigation} = this.props
 		return (
 			<View style={styles.container}>
 				<Image style={styles.load_image} source={require('../../assets/images/nc_loader.png')}/>
@@ -30,22 +34,37 @@ export default class Loader extends Component<Props> {
 				<View style={styles.nc_inputView}>
 					<View style={styles.nc_input}>
 						<Image style={styles.manIocn} source={require('../../assets/images/manIocn.png')}/>
+						<View style={styles.line}></View>
 						<TextInput
 							style={styles.textInput}
-							onChangeText={(text) => this.setState({text})}
-							placeholder='请输入密码'
+							onChangeText={(username) => this.setState({username})}
+							placeholder='请输入用户名'
 							underlineColorAndroid='transparent'
-							value={this.state.text}
+							value={this.state.username}
 						/>
 					</View>
 					<View style={styles.nc_input}>
 						<Image style={styles.manIocn} source={require('../../assets/images/password.png')}/>
+						<View style={styles.line}></View>
 						<TextInput
 							style={styles.textInput}
-							onChangeText={(text) => this.setState({text})}
+							onChangeText={(password) => this.setState({password})}
 							placeholder='请输入密码'
 							underlineColorAndroid='transparent'
-							value={this.state.text}
+							value={this.state.password}
+						/>
+					</View>
+					<View>
+						<YgButton
+							title='登录'
+							onPress={()=>{
+								loaderFun.signIn(this.state.username,this.state.password)
+									.then(()=>{
+										navigation.navigate('HomePage')
+									})
+							}}
+							fontstyle={styles.load_btn_font}
+							btnstyle={styles.load_btn}
 						/>
 					</View>
 				</View>
@@ -74,8 +93,8 @@ const styles = StyleSheet.create({
 	nc_inputView: {},
 	//输入框外部样式
 	nc_input: {
-		flex:0,
-		flexDirection:'row',
+		flex: 0,
+		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
 		width: 300,
@@ -85,13 +104,36 @@ const styles = StyleSheet.create({
 		backgroundColor: "#ffffff"
 	},
 	//输入框内的图片
-	manIocn:{
-		width:30,
-		height:30
+	manIocn: {
+		width: 30.5,
+		height: 37,
 	},
 	//输入框
-	textInput:{
+	textInput: {
 		height: 40,
-		width:200,
+		width: 200,
+	},
+	//竖线
+	line: {
+		width: 2,
+		height: 38,
+		backgroundColor: "#cfdee3",
+		marginLeft: 15,
+		marginRight: 5
+	},
+	//登陆按钮
+	load_btn_font:{
+		textAlign:'center',
+		lineHeight:50,
+		fontFamily: "SourceHanSansCN-Normal",
+		fontSize: 27,
+		color: "#ffffff"
+	},
+	load_btn:{
+		width: 300,
+		height: 50,
+		borderRadius: 30,
+		marginTop: 20,
+		backgroundColor:'#14c5a0',
 	}
 });
