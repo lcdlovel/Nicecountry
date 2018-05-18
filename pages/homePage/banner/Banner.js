@@ -36,7 +36,7 @@ export default class Banner extends Component<Props> {
 		this.startTimer()
 	}
 	static defaultProps = {
-		duration: 1000 //定义轮播时间
+		duration: 3000 //定义轮播时间
 	}
 
 	/*图片根据数据动态加载*/
@@ -82,10 +82,10 @@ export default class Banner extends Component<Props> {
 			let curr = this.state.position
 			if (curr + 1>banner.length - 1){
 				curr = 0
-				scrollView.scrollTo({x:curr*width,y:0,animated:false})
+				scrollView.scrollTo({x:curr * width,y:0,animated:false})
 			}else{
 				curr ++
-				scrollView.scrollTo({x:curr*width,y:0,animated:true})
+				scrollView.scrollTo({x:curr * width,y:0,animated:true})
 			}
 			this.setState({
 				position:curr

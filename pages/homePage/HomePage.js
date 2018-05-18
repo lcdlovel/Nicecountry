@@ -12,7 +12,7 @@ import {
 	View,
 	Image
 } from 'react-native';
-import Banner from './banner/Banner'
+import Banner2 from './banner/Banner2'
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -29,7 +29,7 @@ export default class HomePage extends Component<Props> {
 		return (
 			<View style={styles.container}>
 				{/*轮播图*/}
-				<Banner/>
+				<Banner2/>
 				{/*中间信息*/}
 				<View style={styles.areaMsg}>
 					<View style={styles.hf_item}>
