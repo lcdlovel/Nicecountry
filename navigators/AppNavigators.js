@@ -13,12 +13,12 @@ export const AppStackNavgator = createStackNavigator ({
 	// 		header:null
 	// 	}
 	// },
-	Loader:{
-		screen:Loader,
-		navigationOptions:{
-			header:null
-		}
-	},
+	// Loader:{
+	// 	screen:Loader,
+	// 	navigationOptions:{
+	// 		header:null
+	// 	}
+	// },
 	HomePage:{
 		screen:HomePage,
 		navigationOptions:{
