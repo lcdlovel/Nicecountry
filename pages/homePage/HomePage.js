@@ -10,7 +10,8 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	Image
+	Image,
+	TouchableOpacity
 } from 'react-native';
 import Banner2 from './banner/Banner2'
 //获取屏幕信息
@@ -26,6 +27,7 @@ export default class HomePage extends Component<Props> {
 	}
 
 	render() {
+		const {navigation} = this.props
 		return (
 			<View style={styles.container}>
 				{/*轮播图*/}
@@ -43,13 +45,41 @@ export default class HomePage extends Component<Props> {
 				</View>
 				{/*显示有哪些功能模块*/}
 				<View style={styles.hf_fun}>
-					<View>
-						<Image source={require('../../assets/images/message.png')} style={styles.hf_funicon}/>
-						<Text>基础信息</Text>
+					<View style={styles.fun_item}>
+						<Image source={require('../../assets/images/message.png')}
+									 style={styles.hf_funicon}
+									 onPress={() => {
+										 navigation.navigate('')
+									 }}
+						/>
+						<Text style={styles.fun_font}>基础信息</Text>
 					</View>
-					<View>
+						<View style={styles.fun_item}>
+							<TouchableOpacity
+								activeOpacity={0.8}
+								onPress={() => {
+									navigation.navigate('RepeatCheckTab')
+								}}>
+							<Image source={require('../../assets/images/check.png')} style={styles.hf_funicon}/>
+							</TouchableOpacity >
+							<Text style={styles.fun_font}>检查自查</Text>
+						</View>
+
+					<View style={styles.fun_item}>
+						<Image source={require('../../assets/images/inform.png')} style={styles.hf_funicon}/>
+						<Text style={styles.fun_font}>考核评分</Text>
+					</View>
+					<View style={styles.fun_item}>
 						<Image source={require('../../assets/images/sasa.png')} style={styles.hf_funicon}/>
-						<Text>基础信息</Text>
+						<Text style={styles.fun_font}>文件通知</Text>
+					</View>
+					<View style={styles.fun_item}>
+						<Image source={require('../../assets/images/signIn.png')} style={styles.hf_funicon}/>
+						<Text style={styles.fun_font}>人脸签到</Text>
+					</View>
+					<View style={styles.fun_item}>
+						<Image source={require('../../assets/images/setUp.png')} style={styles.hf_funicon}/>
+						<Text style={styles.fun_font}>设置</Text>
 					</View>
 				</View>
 			</View>
@@ -62,12 +92,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 	},
-	areaMsg:{
-		flex:0,
-		flexDirection:'row',
+	areaMsg: {
+		flex: 0,
+		flexDirection: 'row',
 		justifyContent: 'space-between',
-		paddingLeft:20,
-		paddingRight:20,
+		paddingLeft: 20,
+		paddingRight: 20,
 		alignItems: 'center',
 		width: width,
 		height: 50,
@@ -80,29 +110,42 @@ const styles = StyleSheet.create({
 		shadowRadius: 0,
 		shadowOpacity: 1
 	},
-	hf_item:{
-		flex:0,
-		flexDirection:'row'
+	hf_item: {
+		flex: 0,
+		flexDirection: 'row'
 	},
-	hf_font:{
+	hf_font: {
 		fontSize: 15,
 	},
-	hf_icon:{
-		marginLeft:10,
+	hf_icon: {
+		marginLeft: 10,
 		width: 18,
 		height: 18,
 	},
-	hf_fun:{
-		width:width,
-		borderTopColor:'#d3d7d6',
-		borderTopWidth:6,
-		paddingTop:15,
-		justifyContent:'space-around',
-		flex:0,
-		flexDirection:'row'
+	hf_fun: {
+		width: width,
+		borderTopColor: '#d3d7d6',
+		borderTopWidth: 6,
+		paddingTop: 15,
+		justifyContent: 'space-around',
+		flex: 0,
+		flexDirection: 'row',
+		flexWrap: 'wrap'
 	},
-	hf_funicon:{
+	hf_funicon: {
 		width: 47,
 		height: 47,
+	},
+	fun_item: {
+		marginTop: 8,
+		width: 1 / 3 * width,
+		flex: 0,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	fun_font: {
+		fontSize: 16,
+		marginTop: 3,
+		color: "#364a51"
 	}
 });
