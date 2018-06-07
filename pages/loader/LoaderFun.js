@@ -5,14 +5,14 @@ export default class loaderFun {
 	static signIn(name, password) {
 		return new Promise((resolve, reject) => {
 			CrudApi.postInfo({
-				url: 'auth',
+				url: 'user/login',
 				data: {
 					username: name,
-					password: password
+					password: password,
+					clientType:'2'
 				},
 				callback: (res) => {
-					console.log(res)
-					 global.token = res.Data.token
+					 global.token = res.data.token
 					resolve()
 				}
 			})

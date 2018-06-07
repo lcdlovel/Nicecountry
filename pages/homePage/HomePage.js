@@ -46,40 +46,67 @@ export default class HomePage extends Component<Props> {
 				{/*显示有哪些功能模块*/}
 				<View style={styles.hf_fun}>
 					<View style={styles.fun_item}>
-						<Image source={require('../../assets/images/message.png')}
-									 style={styles.hf_funicon}
-									 onPress={() => {
-										 navigation.navigate('')
-									 }}
-						/>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={() => {
+								navigation.navigate('BasicData')
+							}}>
+							<Image source={require('../../assets/images/message.png')}
+										 style={styles.hf_funicon}
+										 onPress={() => {
+											 navigation.navigate('')
+										 }}
+							/>
+						</TouchableOpacity>
 						<Text style={styles.fun_font}>基础信息</Text>
 					</View>
-						<View style={styles.fun_item}>
-							<TouchableOpacity
-								activeOpacity={0.8}
-								onPress={() => {
-									navigation.navigate('RepeatCheckTab')
-								}}>
-							<Image source={require('../../assets/images/check.png')} style={styles.hf_funicon}/>
-							</TouchableOpacity >
-							<Text style={styles.fun_font}>检查自查</Text>
-						</View>
-
 					<View style={styles.fun_item}>
-						<Image source={require('../../assets/images/inform.png')} style={styles.hf_funicon}/>
-						<Text style={styles.fun_font}>考核评分</Text>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={() => {
+								navigation.navigate('RepeatCheckTab')
+							}}>
+							<Image source={require('../../assets/images/check.png')} style={styles.hf_funicon}/>
+						</TouchableOpacity>
+						<Text style={styles.fun_font}>检查自查</Text>
 					</View>
 					<View style={styles.fun_item}>
-						<Image source={require('../../assets/images/sasa.png')} style={styles.hf_funicon}/>
-						<Text style={styles.fun_font}>文件通知</Text>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={() => {
+								navigation.navigate('CheckScore')
+							}}>
+							<Image source={require('../../assets/images/inform.png')} style={styles.hf_funicon}/>
+							<Text style={styles.fun_font}>考核评分</Text>
+						</TouchableOpacity>
+					</View>
+					<View style={styles.fun_item}>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={() => {
+								navigation.navigate('MsgInfomation')
+							}}>
+							<View style={styles.msgInformation}>
+								<Image source={require('../../assets/images/sasa.png')} style={styles.hf_funicon}/>
+							</View>
+							<Text style={styles.fun_font}>文件通知</Text>
+						</TouchableOpacity>
 					</View>
 					<View style={styles.fun_item}>
 						<Image source={require('../../assets/images/signIn.png')} style={styles.hf_funicon}/>
 						<Text style={styles.fun_font}>人脸签到</Text>
 					</View>
 					<View style={styles.fun_item}>
-						<Image source={require('../../assets/images/setUp.png')} style={styles.hf_funicon}/>
-						<Text style={styles.fun_font}>设置</Text>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={() => {
+								navigation.navigate('SetUp')
+							}}>
+							<View style={styles.setUp}>
+								<Image source={require('../../assets/images/setUp.png')} style={styles.hf_funicon}/>
+								<Text style={styles.fun_font}>设置</Text>
+							</View>
+						</TouchableOpacity>
 					</View>
 				</View>
 			</View>
@@ -146,6 +173,13 @@ const styles = StyleSheet.create({
 	fun_font: {
 		fontSize: 16,
 		marginTop: 3,
+		textAlign: 'center',
 		color: "#364a51"
+	},
+	msgInformation: {
+		paddingLeft: 10
+	},
+	setUp: {
+		paddingRight: 10
 	}
 });

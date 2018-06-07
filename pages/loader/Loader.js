@@ -57,7 +57,7 @@ export default class Loader extends Component<Props> {
 					<View>
 						<YgButton
 							title='登录'
-							onPress={()=>{
+							onPres s={()=>{
 								loaderFun.signIn(this.state.username,this.state.password)
 									.then(()=>{
 										navigation.navigate('HomePage')

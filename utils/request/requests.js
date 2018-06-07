@@ -27,7 +27,7 @@ class Requests {
     return new Promise((resolve, reject) => {
       axios[type1](url1, datas)
         .then((res) => {
-					console.log(url1)
+					console.log(res)
           if (res) {
             if (callbackFn) {
               callbackFn(res.data)

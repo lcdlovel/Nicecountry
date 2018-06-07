@@ -7,7 +7,7 @@ axios.interceptors.response.use(
   (response) => {
     alert('拦截器')
     if (!response.hasOwnProperty('data') ||
-      !response.data.hasOwnProperty('Status') ||
+      !response.data.hasOwnProperty('status') ||
       response.data.Status !== 0) {
       // 状态码对应关系
       let statusList = {
@@ -23,19 +23,19 @@ axios.interceptors.response.use(
       //   message = response.data.Msg
       // } else {
       //   if (response.data.hasOwnProperty('Status') && statusList[response.data.Status]) {
-      message = statusList[response.data.Status]
+      message = statusList[response.data.status]
       //   } else {
       //     message = '请求错误'
       //   }
       // }
      alert(message)
       // 如果身份失效，则跳转到登陆界面
-      const {navigation} = this.props
-      if (response.data.Status === Golbals.NEED_LOGIN) {
-        // TODO: 实现跳转逻辑
-        navigation.navigate()
-      }
-      return
+      // const {navigation} = this.props
+      // if (response.data.status === Golbals.NEED_LOGIN) {
+      //   // TODO: 实现跳转逻辑
+      //   navigation.navigate()
+      // }
+      // return
     }
 
     // 如果有list，则检查是否长度为0

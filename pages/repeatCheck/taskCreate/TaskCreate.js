@@ -13,25 +13,23 @@ import {
 	Image,
 	TouchableOpacity
 } from 'react-native';
+import TaskContent from "../../common/TaskContent";
 
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width} = dimensions.get('window')
-class TaskContent extends Component{
-	render(){
-		{/*<TouchableOpacity>*/}
-			{/*<Text></Text>*/}
-		{/*</TouchableOpacity>*/}
-	}
-}
 type Props = {};
 export default class TaskCreate extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {}
 	}
-
+	_taskconstructor(taskType){
+		return(
+			<TaskContent content={taskType}></TaskContent>
+		)
+	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -49,8 +47,10 @@ export default class TaskCreate extends Component<Props> {
 					<View style={styles.tc_title}>
 						<Text>村容村貌</Text>
 					</View>
-					<View>
-
+					<View style={styles.tc_tasktype}>
+						{this._taskconstructor('有露天粪坑')}
+						{this._taskconstructor('呵呵')}
+						{this._taskconstructor('玩笑')}
 					</View>
 				</View>
 			</View>
@@ -102,5 +102,9 @@ const styles = StyleSheet.create({
 		borderBottomWidth:2,
 		borderBottomColor:'#dcdbdb',
 
+	},
+	tc_tasktype:{
+		flex:0,
+		flexDirection:'row'
 	}
 });
