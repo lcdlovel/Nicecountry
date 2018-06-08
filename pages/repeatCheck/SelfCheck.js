@@ -21,6 +21,7 @@ export default class SelfCheck extends Component<Props> {
 		this.state = {}
 	}
 	_rowconstrutor(imgSource,name,click){
+		const {navigation} = this.props
 		return(
 			<TouchableOpacity
 				activeOpacity={0.8}
@@ -40,7 +41,7 @@ export default class SelfCheck extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受自查')}
+				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受自查','ReceviedCheck')}
 				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已统计任务')}
 			</View>
 		);

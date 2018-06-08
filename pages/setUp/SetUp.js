@@ -9,7 +9,9 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
-	View
+	View,
+	Image,
+	TouchableOpacity
 } from 'react-native';
 //获取屏幕信息
 let dimensions = require('Dimensions')
@@ -22,10 +24,27 @@ export default class SetUp extends Component<Props> {
 		this.state = {}
 	}
 
+	_listconstractor(url, name,to) {
+		const {navigation} = this.props
+		return (
+			<TouchableOpacity
+			onPress={()=>{
+				navigation.navigate(to)
+			}}>
+				<View style={styles.su_listRow}>
+					<Image style={styles.lock} source={url}/>
+					<Text>{name}</Text>
+				</View>
+			</TouchableOpacity>
+		)
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text>这里是设置</Text>
+				{this._listconstractor(require('../../assets/images/revisePassWord.png'), '修改密码','ReceivedCheck')}
+				{this._listconstractor(require('../../assets/images/qrcode.png'), '二维码下载','QrCodeDown')}
+				{this._listconstractor(require('../../assets/images/logout.png'), '退出系统')}
 			</View>
 		);
 	}
@@ -34,8 +53,19 @@ export default class SetUp extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
+	},
+	lock: {
+		width: 30,
+		height: 30
+	},
+	su_listRow: {
+		flex: 0,
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingLeft: 20,
+		height: 40,
+		borderWidth: 1,
+		borderColor: '#d4dcda'
 	}
 });

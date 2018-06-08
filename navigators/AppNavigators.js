@@ -1,19 +1,18 @@
 import {StackNavigator, TabNavigator} from 'react-navigation'
 import React from 'react'
-import {Text} from 'react-native'
-import {Button} from 'react-native'
-import StartUp from "../pages/Startup/StartUp";
-import Loader from "../pages/loader/Loader";
 import HomePage from "../pages/homePage/HomePage";
 import Check from "../pages/repeatCheck/Check";
 import SelfCheck from "../pages/repeatCheck/SelfCheck";
 import TaskCreate from "../pages/repeatCheck/taskCreate/TaskCreate";
 import BasicData from "../pages/basicData/BasicData";
 import CheckScore from '../pages/checkScore/CheckScore'
-import MsgInfomation from '../pages/msgInformation/MsgInfomation'
 import SetUp from '../pages/setUp/SetUp'
 import CreateMsg from '../pages/msgInformation/CreatMsg'
 import MsgSended from '../pages/msgInformation/MsgSended'
+import ReceviedChecked from '../pages/repeatCheck/SelfCheck/ReceivedCheck'
+import ConfirmedCheck from '../pages/repeatCheck/SelfCheck/ConfirmedCheck'
+import ReceivedCheck from '../pages/setUp/SetUp/RevisePassWord'
+import QrCodeDown from '../pages/setUp/SetUp/QrCodeDown'
 
 export const RepeatCheckTab = TabNavigator({
 	Check: {
@@ -53,6 +52,33 @@ export const MessageInformation = TabNavigator({
 		screen: MsgSended,
 		navigationOptions: {
 			tabBarLabel: '已发送',
+		}
+	},
+}, {
+	tabBarPosition: 'top',
+	swipeEnabled: false,
+	tabBarOptions: {
+		style: {
+			height: 49,
+			backgroundColor: '#FFF'
+		},
+		activeBackgroundColor: '#ffffff',
+		activeTintColor: '#4ECBFC',
+		inactiveBackgroundColor: '#ffffff',
+		inactiveTintColor: '#aaa',
+	}
+})
+export const ReceviedCheck = TabNavigator({
+	ReceviedChecked: {
+		screen: ReceviedChecked,
+		navigationOptions: {
+			tabBarLabel: '待处理',
+		}
+	},
+	ConfirmedCheck: {
+		screen: ConfirmedCheck,
+		navigationOptions: {
+			tabBarLabel: '已接受',
 		}
 	},
 }, {
@@ -174,11 +200,64 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
+	/*设置*/
 	SetUp: {
 		screen: SetUp,
 		navigationOptions: (props) => {
 			return {
 				title: '设置',
+				headerTitleStyle: {
+					color: '#ffffff',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#2bc39a'
+				},
+			}
+		}
+	},
+	/*设置下的三个选项*/
+	ReceivedCheck: {
+		screen: ReceivedCheck,
+		navigationOptions: (props) => {
+			return {
+				title: '修改密码',
+				headerTitleStyle: {
+					color: '#ffffff',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#2bc39a'
+				},
+			}
+		}
+	},
+	QrCodeDown: {
+		screen: QrCodeDown,
+		navigationOptions: (props) => {
+			return {
+				title: '二维码下载',
+				headerTitleStyle: {
+					color: '#ffffff',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#2bc39a'
+				},
+			}
+		}
+	},
+	ReceviedCheck: {
+		screen: ReceviedCheck,
+		navigationOptions: (props) => {
+			return {
+				title: '自查任务',
 				headerTitleStyle: {
 					color: '#ffffff',
 					fontSize: 15,
