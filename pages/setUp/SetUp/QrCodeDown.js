@@ -26,7 +26,7 @@ export default class QrCodeDown extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Image source={require('../')}/>
+				{/*<Image source={require('../')}/>*/}
 			</View>
 		);
 	}

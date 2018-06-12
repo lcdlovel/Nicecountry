@@ -13,6 +13,7 @@ import ReceviedChecked from '../pages/repeatCheck/SelfCheck/ReceivedCheck'
 import ConfirmedCheck from '../pages/repeatCheck/SelfCheck/ConfirmedCheck'
 import ReceivedCheck from '../pages/setUp/SetUp/RevisePassWord'
 import QrCodeDown from '../pages/setUp/SetUp/QrCodeDown'
+import AllArea from '../pages/basicData/subInformation/AllArea'
 
 export const RepeatCheckTab = TabNavigator({
 	Check: {
@@ -149,6 +150,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
+	/*基础信息*/
 	BasicData: {
 		screen: BasicData,
 		navigationOptions: (props) => {
@@ -166,6 +168,25 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
+	/*基础信息下的路由*/
+	BdArea: {
+		screen: AllArea,
+		navigationOptions: (props) => {
+			return {
+				title: '基础信息',
+				headerTitleStyle: {
+					color: '#ffffff',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#2bc39a'
+				},
+			}
+		}
+	},
+
 	CheckScore: {
 		screen: CheckScore,
 		navigationOptions: (props) => {
