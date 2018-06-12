@@ -33,8 +33,14 @@ export const RepeatCheckTab = TabNavigator({
 	swipeEnabled: false,
 	tabBarOptions: {
 		style: {
-			height: 49,
-			backgroundColor: '#FFF'
+			height: 50,
+			backgroundColor: '#FFF',
+		},
+		labelStyle:{
+			fontSize:15,
+			flex:0,
+			alignItems:'center',
+			justifyContent:'center'
 		},
 		activeBackgroundColor: '#ffffff',
 		activeTintColor: '#4ECBFC',

@@ -32,7 +32,8 @@ export default class YgInput extends Component<Props> {
 					<View style={styles.search_img}>
 						<Image source={require('../../assets/images/search_info.png')} style={styles.search_info}/>
 					</View>
-					<TextInput placeholder ='搜索' style={styles.search_input} underlineColorAndroid='transparent' onChangeText={onChangeText}/>
+					<TextInput placeholder='搜索' style={styles.search_input} underlineColorAndroid='transparent'
+										 onChangeText={onChangeText}/>
 				</View>
 			</View>
 		);
@@ -44,25 +45,24 @@ const styles = StyleSheet.create({
 		flex: 0,
 		backgroundColor: '#F5FCFF',
 	},
-	search:{
-		flex:0,
-		width:width,
-		flexDirection:'row'
+	search: {
+		flex: 0,
+		width: width,
+		flexDirection: 'row'
 	},
-	search_info:{
-		width:15,
-		height:15,
+	search_info: {
+		width: 15,
+		height: 15,
+		position: 'absolute',
+		right: 0,
+		bottom:5
 	},
-	search_img:{
-		paddingLeft:20,
-		paddingBottom:4,
-		width:30,
-		height:30,
-		justifyContent:'flex-end',
-		alignItems:'center'
+	search_img: {
+		width: 30,
+		height: 30,
 	},
-	search_input:{
-		width:0.8 * width,
-		height:40
+	search_input: {
+		width: 0.8 * width,
+		height: 40,
 	}
 });
