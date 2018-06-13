@@ -1,5 +1,6 @@
 import {StackNavigator, TabNavigator} from 'react-navigation'
 import React from 'react'
+import Loader from '../pages/loader/Loader'
 import HomePage from "../pages/homePage/HomePage";
 import Check from "../pages/repeatCheck/Check";
 import SelfCheck from "../pages/repeatCheck/SelfCheck";
@@ -110,12 +111,12 @@ export const AppStackNavgator = StackNavigator({
 	// 		header:null
 	// 	}
 	// },
-	// Loader:{
-	// 	screen:Loader,
-	// 	navigationOptions:{
-	// 		header:null
-	// 	}
-	// },
+	Loader:{
+		screen:Loader,
+		navigationOptions:{
+			header:null
+		}
+	},
 	HomePage: {
 		screen: HomePage,
 		navigationOptions: {

@@ -12,29 +12,38 @@ import {
 	View,
 	Image,
 	TextInput,
+	TouchableOpacity
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import BVLinearGraient from 'react-native'
+
 import YgButton from '../common/YgButton'
 import loaderFun from './LoaderFun'
+import global from "../../utils/global/global";
+
+let dimensions = require('Dimensions')
+//获取屏幕宽度
+let {width, height} = dimensions.get('window')
 
 type Props = {};
 export default class Loader extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
-				username: '',
-				password: ''
+			username: '',
+			password: ''
 		}
 	}
+
 	render() {
 		const {navigation} = this.props
 		return (
 			<View style={styles.container}>
-				<Image style={styles.load_image} source={require('../../assets/images/nc_loader.png')}/>
-				<Text style={styles.nc_font}>美丽乡村</Text>
+				<Image style={styles.load_image} source={require('../../assets/images/loader_top.png')}/>
+
 				<View style={styles.nc_inputView}>
 					<View style={styles.nc_input}>
-						<Image style={styles.manIocn} source={require('../../assets/images/manIocn.png')}/>
-						<View style={styles.line}></View>
+						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/Sign_in.png')}/>
 						<TextInput
 							style={styles.textInput}
 							onChangeText={(username) => this.setState({username})}
@@ -42,10 +51,10 @@ export default class Loader extends Component<Props> {
 							underlineColorAndroid='transparent'
 							value={this.state.username}
 						/>
+						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/empty.png')}/>
 					</View>
 					<View style={styles.nc_input}>
-						<Image style={styles.manIocn} source={require('../../assets/images/password.png')}/>
-						<View style={styles.line}></View>
+						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/password.png')}/>
 						<TextInput
 							style={styles.textInput}
 							onChangeText={(password) => this.setState({password})}
@@ -53,22 +62,22 @@ export default class Loader extends Component<Props> {
 							underlineColorAndroid='transparent'
 							value={this.state.password}
 						/>
+						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/display.png')}/>
 					</View>
-					<View>
-						<YgButton
-							title='登录'
-							onPress={()=>{
-								loaderFun.signIn(this.state.username,this.state.password)
-									.then(()=>{
-										navigation.navigate('HomePage')
-									})
-							}}
-							fontstyle={styles.load_btn_font}
-							btnstyle={styles.load_btn}
-						/>
-					</View>
-				</View>
 
+					<LinearGradient colors={['#70daad', '#8ae8b2', '#96efb4',]}
+													start={{x: 0, y: 0}}
+													end={{x: 1, y: 0}}
+													style={styles.load_btn}>
+						<Text style={styles.load_btn_font}>登录</Text>
+					</LinearGradient>
+					<Text style={{
+						fontFamily: "SourceHanSansCN-Normal",
+						fontSize: 10,
+						textAlign: 'center',
+						marginTop: 10
+					}}>已阅读并同意《美丽乡村协议》!</Text>
+				</View>
 			</View>
 		);
 	}
@@ -77,41 +86,44 @@ export default class Loader extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
 		alignItems: 'center',
+		backgroundColor: "#ffffff"
 	},
 	//登陆图片
 	load_image: {
-		width: 80.5,
-		height: 80.5,
+		width: width,
+		height: height * 0.3
 	},
 	//登陆图片下的字体
 	nc_font: {
 		fontSize: 15
 	},
 	//输入框总体
-	nc_inputView: {},
+	nc_inputView: {
+		marginTop: height * 0.1
+	},
 	//输入框外部样式
 	nc_input: {
 		flex: 0,
 		flexDirection: 'row',
-		justifyContent: 'center',
 		alignItems: 'center',
 		width: 300,
 		height: 50,
-		borderRadius: 30,
+		// borderRadius: 30,
+		borderBottomWidth: 0.5,
+		borderColor: global.commonCss.borderColor,
 		marginTop: 20,
-		backgroundColor: "#ffffff"
 	},
 	//输入框内的图片
 	manIocn: {
-		width: 30.5,
-		height: 37,
+		width: 20,
+		height: 20,
 	},
 	//输入框
 	textInput: {
 		height: 40,
-		width: 200,
+		width: width * 0.7,
+		paddingLeft: 8
 	},
 	//竖线
 	line: {
@@ -122,18 +134,21 @@ const styles = StyleSheet.create({
 		marginRight: 5
 	},
 	//登陆按钮
-	load_btn_font:{
-		textAlign:'center',
-		lineHeight:50,
+	load_btn_font: {
 		fontFamily: "SourceHanSansCN-Normal",
 		fontSize: 27,
 		color: "#ffffff"
 	},
-	load_btn:{
-		width: 300,
+	load_btn: {
+		marginTop: height * 0.1,
 		height: 50,
 		borderRadius: 30,
-		marginTop: 20,
-		backgroundColor:'#14c5a0',
+		backgroundColor: '#14c5a0',
+		flex: 0,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	ygbtn: {
+		marginTop: height * 0.1
 	}
 });

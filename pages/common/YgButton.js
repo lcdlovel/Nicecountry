@@ -29,7 +29,7 @@ export default class YgButton extends Component {
 				activeOpacity={0.8}
 				style={btnstyle}>
 				<View style={styles.container}>
-					<Text style={fontstyle}>{title}</Text>
+					<Text style={[fontstyle,styles.btn_font]}>{title}</Text>
 				</View>
 
 			</TouchableOpacity >
@@ -42,5 +42,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
+	btn_font:{
+		fontFamily:'PingFangSC-Light'
+	}
 })
 
