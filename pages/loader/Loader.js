@@ -15,9 +15,6 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import BVLinearGraient from 'react-native'
-
-import YgButton from '../common/YgButton'
 import loaderFun from './LoaderFun'
 import global from "../../utils/global/global";
 
@@ -31,7 +28,8 @@ export default class Loader extends Component<Props> {
 		super(props);
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			secureTextEntry:true
 		}
 	}
 
@@ -46,12 +44,18 @@ export default class Loader extends Component<Props> {
 						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/Sign_in.png')}/>
 						<TextInput
 							style={styles.textInput}
-							onChangeText={(username) => this.setState({username})}
+							onChangeText={(username) => this.setState({username: username})}
 							placeholder='请输入用户名'
 							underlineColorAndroid='transparent'
 							value={this.state.username}
 						/>
-						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/empty.png')}/>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={() => {
+								this.setState({username: ''})
+							}}>
+							<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/empty.png')}/>
+						</TouchableOpacity>
 					</View>
 					<View style={styles.nc_input}>
 						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/password.png')}/>
@@ -59,10 +63,17 @@ export default class Loader extends Component<Props> {
 							style={styles.textInput}
 							onChangeText={(password) => this.setState({password})}
 							placeholder='请输入密码'
+							secureTextEntry={this.state.secureTextEntry}
 							underlineColorAndroid='transparent'
 							value={this.state.password}
 						/>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={() => {
+								this.setState({secureTextEntry: false})
+							}}>
 						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/display.png')}/>
+						</TouchableOpacity>
 					</View>
 
 					<LinearGradient colors={['#70daad', '#8ae8b2', '#96efb4',]}
