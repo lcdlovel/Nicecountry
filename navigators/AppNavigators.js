@@ -8,6 +8,7 @@ import TaskCreate from "../pages/repeatCheck/taskCreate/TaskCreate";
 import BasicData from "../pages/basicData/BasicData";
 import CheckScore from '../pages/checkScore/CheckScore'
 import SetUp from '../pages/setUp/SetUp'
+import StartUp from '../pages/Startup/StartUp'
 import CreateMsg from '../pages/msgInformation/CreatMsg'
 import MsgSended from '../pages/msgInformation/MsgSended'
 import ReceviedChecked from '../pages/repeatCheck/SelfCheck/ReceivedCheck'
@@ -15,7 +16,30 @@ import ConfirmedCheck from '../pages/repeatCheck/SelfCheck/ConfirmedCheck'
 import ReceivedCheck from '../pages/setUp/SetUp/RevisePassWord'
 import QrCodeDown from '../pages/setUp/SetUp/QrCodeDown'
 import AllArea from '../pages/basicData/subInformation/AllArea'
+import WorkNewsList from '../pages/NewsList/WorkNewsList'
 
+export const Home = TabNavigator({
+	HomePage: {
+		screen: HomePage,
+		navigationOptions: {
+			tabBarLabel: '主页面'
+		}
+	},
+	Check: {
+		screen: CreateMsg,
+		navigationOptions: {
+			tabBarLabel: '已创建',
+		}
+	},
+	SelfCheck: {
+		screen: MsgSended,
+		navigationOptions: {
+			tabBarLabel: '已发送',
+		}
+	},
+},{
+	tabBarPosition: 'bottom'
+})
 export const RepeatCheckTab = TabNavigator({
 	Check: {
 		screen: Check,
@@ -111,14 +135,14 @@ export const AppStackNavgator = StackNavigator({
 	// 		header:null
 	// 	}
 	// },
-	Loader:{
-		screen:Loader,
-		navigationOptions:{
-			header:null
-		}
-	},
-	HomePage: {
-		screen: HomePage,
+	// Loader:{
+	// 	screen:Loader,
+	// 	navigationOptions:{
+	// 		header:null
+	// 	}
+	// },
+	Home: {
+		screen: Home,
 		navigationOptions: {
 			header: null
 		}
@@ -286,6 +310,24 @@ export const AppStackNavgator = StackNavigator({
 		navigationOptions: (props) => {
 			return {
 				title: '自查任务',
+				headerTitleStyle: {
+					color: '#ffffff',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#2bc39a'
+				},
+			}
+		}
+	},
+	/*x新闻列表组件*/
+	WorkNewsList:{
+		screen:WorkNewsList,
+		navigationOptions: (props) => {
+			return {
+				title: '工作动态',
 				headerTitleStyle: {
 					color: '#ffffff',
 					fontSize: 15,

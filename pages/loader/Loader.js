@@ -15,6 +15,7 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {NavigationActions} from 'react-navigation'
 import loaderFun from './LoaderFun'
 import global from "../../utils/global/global";
 
@@ -29,16 +30,23 @@ export default class Loader extends Component<Props> {
 		this.state = {
 			username: '',
 			password: '',
-			secureTextEntry:true
+			secureTextEntry: true
 		}
 	}
 
 	render() {
 		const {navigation} = this.props
+		const resetAction = NavigationActions.init({
+			index: 0,
+			actions: [
+				NavigationActions.navigate({
+					routeName: 'Home',
+				})
+			]
+		})
 		return (
 			<View style={styles.container}>
 				<Image style={styles.load_image} source={require('../../assets/images/loader_top.png')}/>
-
 				<View style={styles.nc_inputView}>
 					<View style={styles.nc_input}>
 						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/Sign_in.png')}/>
@@ -69,21 +77,34 @@ export default class Loader extends Component<Props> {
 						/>
 						<TouchableOpacity
 							activeOpacity={0.8}
-							onPress={() => {
+							onPressIn={() => {
 								this.setState({secureTextEntry: false})
+							}}
+							onPressOut={() => {
+								this.setState({secureTextEntry: true})
 							}}>
-						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/display.png')}/>
+							<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/display.png')}/>
 						</TouchableOpacity>
 					</View>
+					<TouchableOpacity
+						onPress={() => {
+							navigation.dispatch(resetAction)
+							// loaderFun.signIn(this.state).then(() => {
+							navigation.navigate('HomePage')
+							// })
+						}}>
+						<LinearGradient colors={['#70daad', '#8ae8b2', '#96efb4',]}
+														start={{x: 0, y: 0}}
+														end={{x: 1, y: 0}}
+														style={styles.load_btn}>
+							<Text style={styles.load_btn_font}
 
-					<LinearGradient colors={['#70daad', '#8ae8b2', '#96efb4',]}
-													start={{x: 0, y: 0}}
-													end={{x: 1, y: 0}}
-													style={styles.load_btn}>
-						<Text style={styles.load_btn_font}>登录</Text>
-					</LinearGradient>
+							>登录</Text>
+						</LinearGradient>
+					</TouchableOpacity>
 					<Text style={{
-						fontFamily: "SourceHanSansCN-Normal",
+						fontFamily: 'Helvetica',
+						fontWeight: '100',
 						fontSize: 10,
 						textAlign: 'center',
 						marginTop: 10
@@ -146,7 +167,7 @@ const styles = StyleSheet.create({
 	},
 	//登陆按钮
 	load_btn_font: {
-		fontFamily: "SourceHanSansCN-Normal",
+		fontFamily: "Helvetica",
 		fontSize: 27,
 		color: "#ffffff"
 	},

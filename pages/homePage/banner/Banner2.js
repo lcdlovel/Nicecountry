@@ -23,7 +23,7 @@ export default class Banner2 extends Component {
 	// 轮播图
 	render() {
 		return (
-			<View style={{height:240}}>
+			<View style={{height:180}}>
 				<Swiper
 					style={styles.wrpaper}
 					height={240}

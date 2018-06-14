@@ -2,18 +2,19 @@ import CrudApi from '../../utils/request/crud'
 import global from "../../utils/global/global";
 // const {navigation} = this.props
 export default class loaderFun {
-	static signIn(name, password) {
+	static signIn(data) {
+		const {username,password} = data
 		return new Promise((resolve, reject) => {
 			CrudApi.postInfo({
 				url: 'user/login',
 				data: {
-					username: name,
+					username: username,
 					password: password,
 					clientType:'2'
 				},
 				callback: (res) => {
 					 global.token = res.data.token
-					resolve()
+					resolve(res)
 				}
 			})
 		})
