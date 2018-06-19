@@ -1,11 +1,12 @@
 import {StackNavigator, TabNavigator} from 'react-navigation'
 import React from 'react'
+import {Image, StyleSheet} from 'react-native'
 import Loader from '../pages/loader/Loader'
 import HomePage from "../pages/homePage/HomePage";
 import Check from "../pages/repeatCheck/Check";
 import SelfCheck from "../pages/repeatCheck/SelfCheck";
 import TaskCreate from "../pages/repeatCheck/taskCreate/TaskCreate";
-import BasicData from "../pages/basicData/BasicData";
+import BasicDataType from "../pages/basicData/BasicDataType";
 import CheckScore from '../pages/checkScore/CheckScore'
 import SetUp from '../pages/setUp/SetUp'
 import StartUp from '../pages/Startup/StartUp'
@@ -17,28 +18,64 @@ import ReceivedCheck from '../pages/setUp/SetUp/RevisePassWord'
 import QrCodeDown from '../pages/setUp/SetUp/QrCodeDown'
 import AllArea from '../pages/basicData/subInformation/AllArea'
 import WorkNewsList from '../pages/NewsList/WorkNewsList'
+import global from "../utils/global/global";
 
+const styles = StyleSheet.create({
+	Icon: {
+		width: 25,
+		height: 25
+	}
+})
 export const Home = TabNavigator({
 	HomePage: {
 		screen: HomePage,
 		navigationOptions: {
-			tabBarLabel: '主页面'
+			tabBarLabel: '首页',
+			tabBarIcon: ({tintColor, focused}) => (
+				<Image resizeMode='contain'
+							 source={focused?require('../assets/images/TabNav/homepage.png'):require('../assets/images/TabNav/homepage1.png')}
+							 style={[styles.Icon]}
+				/>
+			)
 		}
 	},
 	Check: {
 		screen: CreateMsg,
 		navigationOptions: {
-			tabBarLabel: '已创建',
+			tabBarLabel: '报表',
+			tabBarIcon: ({tintColor, focused}) => (
+				<Image resizeMode='contain'
+							 source={focused?require('../assets/images/TabNav/My.png'):require('../assets/images/TabNav/My1.png')}
+							 style={[styles.Icon]}/>
+			)
 		}
 	},
 	SelfCheck: {
 		screen: MsgSended,
 		navigationOptions: {
-			tabBarLabel: '已发送',
+			tabBarLabel: '我的',
+			tabBarIcon: ({tintColor, focused}) => (
+				<Image resizeMode='contain'
+							 source={focused?require('../assets/images/TabNav/Reportform.png'):require('../assets/images/TabNav/Reportform1.png')}
+							 style={[styles.Icon]}/>
+			)
 		}
-	},
-},{
-	tabBarPosition: 'bottom'
+	}
+}, {
+	tabBarPosition: 'bottom',
+	tabBarOptions:{
+		showIcon: true,
+		style: {
+			height:50,
+			backgroundColor: '#FFF'
+		},
+		labelStyle:{
+			color:global.commonCss.fontColor,
+			fontSize:12,
+			paddingTop:0,
+			marginTop:0,
+		}
+	}
 })
 export const RepeatCheckTab = TabNavigator({
 	Check: {
@@ -61,11 +98,11 @@ export const RepeatCheckTab = TabNavigator({
 			height: 50,
 			backgroundColor: '#FFF',
 		},
-		labelStyle:{
-			fontSize:15,
-			flex:0,
-			alignItems:'center',
-			justifyContent:'center'
+		labelStyle: {
+			fontSize: 15,
+			flex: 0,
+			alignItems: 'center',
+			justifyContent: 'center'
 		},
 		activeBackgroundColor: '#ffffff',
 		activeTintColor: '#4ECBFC',
@@ -182,19 +219,19 @@ export const AppStackNavgator = StackNavigator({
 		}
 	},
 	/*基础信息*/
-	BasicData: {
-		screen: BasicData,
+	BasicDataType: {
+		screen: BasicDataType,
 		navigationOptions: (props) => {
 			return {
 				title: '基础信息',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#666666',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
 				},
 			}
 		}
@@ -323,8 +360,8 @@ export const AppStackNavgator = StackNavigator({
 		}
 	},
 	/*x新闻列表组件*/
-	WorkNewsList:{
-		screen:WorkNewsList,
+	WorkNewsList: {
+		screen: WorkNewsList,
 		navigationOptions: (props) => {
 			return {
 				title: '工作动态',

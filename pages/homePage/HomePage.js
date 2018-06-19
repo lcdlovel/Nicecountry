@@ -32,15 +32,18 @@ export default class HomePage extends Component<Props> {
 		super(props);
 		this.state = {
 			modules: [
-				{routeName: 'BasicData', imgUrl: require('../../assets/images/message.png'), name: '基础信息'},
+				{routeName: 'BasicDataType', imgUrl: require('../../assets/images/message.png'), name: '基础信息'},
 				{routeName: 'RepeatCheckTab', imgUrl: require('../../assets/images/check.png'), name: '检查自查'},
 				{routeName: 'CheckScore', imgUrl: require('../../assets/images/inform.png'), name: '考核评分'},
 				{routeName: 'MsgInfomation', imgUrl: require('../../assets/images/sasa.png'), name: '文件通知'},
 				{routeName: 'BasicData', imgUrl: require('../../assets/images/signIn.png'), name: '人脸签到'}
-			]
+			],
+			Index: 0,
+			newsType: ['美丽乡村', '优美环境', '特色产业', '乡村文明']
 		}
 	}
 
+	/*页面模块功能构建*/
 	_moduleConstrator(data) {
 		const {navigation} = this.props
 		return (
@@ -59,11 +62,13 @@ export default class HomePage extends Component<Props> {
 		)
 	}
 
+	/*新闻列表头部构建*/
 	_newListHeaderComponent() {
 		return (
 			<View style={styles.news_list}>
 				<View style={styles.news_list_header}>
-					<View>
+					<View style={styles.news_title}>
+						<View style={styles.circleDot}></View>
 						<Text>新闻动态</Text>
 					</View>
 					<View>
@@ -74,6 +79,7 @@ export default class HomePage extends Component<Props> {
 		)
 	}
 
+	/*新闻列表构建函数*/
 	_newListItem(data) {
 		return (
 			<View style={styles.news_list}>
@@ -91,6 +97,47 @@ export default class HomePage extends Component<Props> {
 				<Text style={{width: 0.9 * width, textAlign: 'left'}}>新闻来源:南京市云感物联科技有限公司</Text>
 			</View>
 		)
+	}
+
+	/*美丽乡村不同类型函数构建*/
+	_newTypeList(data) {
+		return (
+			<View style={{marginTop: 8}}>
+				<FlatList
+					ItemSeparatorComponent={() => {
+						return (<View style={styles.item_separator}></View>)
+					}}
+					data={data}
+					renderItem={({item}) => this._newListItem(item)}
+				/>
+			</View>
+		)
+	}
+
+	/*不同新闻标题的信息*/
+	_newTypeTitle(item, index) {
+		return (
+			<View key={item} style={styles.news_title_head}>
+				<Text style={[styles.news_typeTitle_item, this.state.Index == index ? styles.activeFont : '']}>
+					{item}
+				</Text>
+				<View style={[styles.underline, this.state.Index == index ? styles.active : '']}></View>
+			</View>
+		)
+	}
+
+	OnScroll(event) {
+		let offsetX = event.nativeEvent.contentOffset.x
+		console.log(offsetX)
+		if (offsetX >=3 * width) {
+			this.setState({Index: 3})
+		}else if (offsetX >= 2 * width) {
+			this.setState({Index: 2})
+		}else if (offsetX>=  width) {
+			this.setState({Index: 1})
+		}else {
+			this.setState({Index: 0})
+		}
 	}
 
 	render() {
@@ -127,13 +174,30 @@ export default class HomePage extends Component<Props> {
 						/>
 					</View>
 					<View style={{marginTop: 8}}>
+						<View style={styles.news_list}>
+							<View style={styles.news_list_header}>
+								<View style={styles.news_title}>
+									<View style={styles.circleDot}></View>
+									<Text>美丽乡村</Text>
+								</View>
+								<View>
+									<Text>查看更多</Text>
+								</View>
+							</View>
+						</View>
+						<View style={styles.newTypeTitle}>
+							{this.state.newsType.map((item, index) => this._newTypeTitle(item, index))}
+						</View>
 						<FlatList
-							ListHeaderComponent={this._newListHeaderComponent()}
-							ItemSeparatorComponent={() => {
-								return (<View style={styles.item_separator}></View>)
-							}}
-							data={[{title: '市委书记韩立明专程赴高港调研', time: '2018-06-11'}, {title: '委书记韩立明专程赴高港调研', time: '2018-07-11'}]}
-							renderItem={({item}) => this._newListItem(item)}
+							data={[
+								[{title: '市委书记韩立明专程赴高港调研', time: '2018-06-11'},
+								{title: '委书记韩立明专程赴高港调研', time: '2018-07-11'}],
+								[{title: '书记韩立明专程赴高港调研', time: '2018-07-11'}],
+								[{title: '委记韩立明专程赴高港调研', time: '2018-07-11'}],
+								[{title: '委韩立明专程赴高港调研', time: '2018-07-11'}]
+							]}
+							renderItem={({item}) => this._newTypeList(item)}
+							onScroll={this.OnScroll.bind(this)}
 							horizontal={true}
 							showsHorizontalScrollIndicator={false}
 						/>
@@ -186,6 +250,7 @@ const styles = StyleSheet.create({
 		borderTopColor: '#d3d7d6',
 		borderTopWidth: 6,
 		paddingTop: 10,
+		paddingBottom: 10,
 		flex: 0,
 		backgroundColor: '#ffffff',
 		flexDirection: 'row',
@@ -216,8 +281,8 @@ const styles = StyleSheet.create({
 	},
 	news_list: {
 		backgroundColor: '#ffffff',
-
-		flex: 1,
+		width: width,
+		flex: 0,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
@@ -262,5 +327,48 @@ const styles = StyleSheet.create({
 		height: 6,
 		width: width,
 		backgroundColor: '#fafafa'
+	},
+	newTypeTitle: {
+		flex: 0,
+		height: 40,
+		justifyContent: 'space-around',
+		alignItems: 'center',
+		flexDirection: 'row',
+		backgroundColor: '#ffffff'
+	},
+	news_typeTitle_item: {
+		fontSize: 12
+	},
+	underline: {
+		height: 5,
+		width: 13,
+		borderRadius: 5,
+		marginTop: 4,
+		backgroundColor: '#ffffff'
+	},
+	news_title_head: {
+		flex: 0,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	news_title: {
+		flex: 0,
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	circleDot: {
+		width: 8,
+		height: 8,
+		borderRadius: 12,
+		marginRight: 10,
+		backgroundColor: global.commonCss.mainColor
+	},
+	active: {
+		backgroundColor: global.commonCss.mainColor
+	},
+	activeFont: {
+		color: '#000'
 	}
 });
+
+//TODO:直接设置滑动是一个屏宽

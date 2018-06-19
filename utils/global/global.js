@@ -6,6 +6,16 @@ export default {
 	ILLEGAL_ARGUMENT: 2, // 参数错误
 	NEED_LOGIN: 10, // 需要重新登录
 	commonCss:{
-		borderColor:'#eeeeee'
+		borderColor:'#eeeeee',
+		mainColor:'#91e6bb',
+		fontColor:'#666666'
 	}
 }
+
+{/*<TouchableHighlight activeOpacity={0.8} style={styles.basic_type} key={item.name}>*/}
+{/*<View>*/}
+{/*<Image source={item.url} style={styles.basic_img}/>*/}
+{/*<View style={styles.basic_line}></View>*/}
+{/*<Text>{item.name}</Text>*/}
+{/*</View>*/}
+{/*</TouchableHighlight>*/}
