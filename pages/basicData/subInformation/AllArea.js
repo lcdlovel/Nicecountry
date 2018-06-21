@@ -42,7 +42,7 @@ export default class allArea extends Component<Props> {
 						ListFooterComponent={()=>(<View style={{height:1,backgroundColor:'#dcdbdb'}}/>)}
 						ItemSeparatorComponent={ () => (<View style={{height:0.5,backgroundColor:'#dcdbdb'}} /> )}
 						data={[{key: '海港区'}, {key: '高港区'}]}
-						renderItem={({item}) => <Text style={{fontSize:15,height:40,lineHeight:40,paddingLeft:10 }}>{item.key}</Text>}
+						renderItem={({item}) => <Text key={item.key} style={{fontSize:15,height:40,lineHeight:40,paddingLeft:10 }}>{item.key}</Text>}
 					/>
 				</View>
 			</View>
@@ -52,7 +52,8 @@ export default class allArea extends Component<Props> {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1
+		flex: 1,
+		backgroundColor:'#ffffff'
 	},
 	line:{
 		height:3,

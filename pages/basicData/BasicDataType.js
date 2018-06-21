@@ -12,7 +12,7 @@ import {
 	View,
 	Image,
 	FlatList,
-	TouchableHighlight
+	TouchableOpacity
 } from 'react-native';
 import global from "../../utils/global/global";
 //获取屏幕信息
@@ -27,8 +27,15 @@ export default class BasicDataType extends Component<Props> {
 	}
 
 	_dataListItem(item) {
+		const {navigation} = this.props
 		return (
-			<TouchableHighlight activeOpacity={0.8} style={styles.basic_type} key={item.name}>
+			<TouchableOpacity
+				activeOpacity={0.8}
+				style={styles.basic_type}
+				onPress={()=>{
+					navigation.navigate('BasicData',{title:item.name,info:item.message})
+				}}
+				key={item.name}>
 				<View>
 					<View style={styles.basic_imgModule}>
 						<Image resizeMode='cover' source={item.url} style={styles.basic_img}/>
@@ -36,7 +43,7 @@ export default class BasicDataType extends Component<Props> {
 					<View style={styles.basic_line}></View>
 					<Text style={styles.basic_font}>{item.name}</Text>
 				</View>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		)
 	}
 
@@ -56,10 +63,10 @@ export default class BasicDataType extends Component<Props> {
 					<FlatList
 						ItemSeparatorComponent={this._separator}
 						data={[
-							{url: require('../../assets/images/Regionalbaseinformation.png'), navigation: '', name: '区域基础信息'},
-							{url: require('../../assets/images/Staffinginformation.png'), navigation: '', name: '人员基础信息'},
-							{url: require('../../assets/images/Generalbasicinformation.png'), navigation: '', name: '普通基础信息'},
-							{url: require('../../assets/images/Nodataavailable.png'), navigation: '', name: '暂无'},
+							{url: require('../../assets/images/Regionalbaseinformation.png'), navigation: 'BasicData', name: '区域基础信息',message:{headerList:['名称','尺寸','数量'],isHaveSize:true}},
+							{url: require('../../assets/images/Staffinginformation.png'), navigation: 'BasicData', name: '人员基础信息',message:{headerList:['名称','数量'],isHaveSize:false}},
+							{url: require('../../assets/images/Generalbasicinformation.png'), navigation: '', name: '普通基础信息',message:{headerList:['名称','尺寸','数量'],isHaveSize:true}},
+							{url: require('../../assets/images/Basicinformationofcontract.png'), navigation: '', name: '合同基础信息',message:{headerList:['名称','数量']},isHaveSize:false},
 						]}
 						renderItem={({item}) => this._dataListItem(item)}
 						columnWrapperStyle={{paddingLeft:5}}

@@ -19,3 +19,16 @@ export default {
 {/*<Text>{item.name}</Text>*/}
 {/*</View>*/}
 {/*</TouchableHighlight>*/}
+
+{/*<View style={styles.bd_tabItem}>*/}
+{/*<View style={styles.point}></View>*/}
+{/*<Text>名称</Text>*/}
+{/*</View>*/}
+{/*<View style={styles.bd_tabItem}>*/}
+{/*<View style={styles.point}></View>*/}
+{/*<Text>尺寸</Text>*/}
+{/*</View>*/}
+{/*<View style={styles.bd_tabItem}>*/}
+{/*<View style={styles.point}></View>*/}
+{/*<Text>数量</Text>*/}
+{/*</View>*/}

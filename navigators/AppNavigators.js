@@ -7,6 +7,7 @@ import Check from "../pages/repeatCheck/Check";
 import SelfCheck from "../pages/repeatCheck/SelfCheck";
 import TaskCreate from "../pages/repeatCheck/taskCreate/TaskCreate";
 import BasicDataType from "../pages/basicData/BasicDataType";
+import BasicData from '../pages/basicData/BasicData'
 import CheckScore from '../pages/checkScore/CheckScore'
 import SetUp from '../pages/setUp/SetUp'
 import StartUp from '../pages/Startup/StartUp'
@@ -236,6 +237,24 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
+	BasicData: {
+		screen: BasicData,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: params.title?params.title:'没找到name',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
 	/*基础信息下的路由*/
 	BdArea: {
 		screen: AllArea,
@@ -243,13 +262,13 @@ export const AppStackNavgator = StackNavigator({
 			return {
 				title: '基础信息',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#666666',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
 				},
 			}
 		}
