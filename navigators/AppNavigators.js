@@ -20,6 +20,10 @@ import QrCodeDown from '../pages/setUp/SetUp/QrCodeDown'
 import AllArea from '../pages/basicData/subInformation/AllArea'
 import WorkNewsList from '../pages/NewsList/WorkNewsList'
 import global from "../utils/global/global";
+import AllCleaner from "../pages/basicData/cleaner/AllCleaner";
+import MsgList from "../pages/basicData/subInformation/MsgList";
+import AddCleaner from "../pages/basicData/cleaner/AddCleaner";
+import OneCleanerMsg from "../pages/basicData/cleaner/OneCleanerMsg";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -259,8 +263,9 @@ export const AppStackNavgator = StackNavigator({
 	BdArea: {
 		screen: AllArea,
 		navigationOptions: (props) => {
+			const {params} = props.navigation.state
 			return {
-				title: '基础信息',
+				title: params.title?params.title:'没找到name',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: 15,
@@ -274,6 +279,82 @@ export const AppStackNavgator = StackNavigator({
 		}
 	},
 
+	/*保洁人员的信息下*/
+	AllCleaner: {
+		screen: AllCleaner,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title:'保洁员汇总',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	AddCleaner: {
+		screen: AddCleaner,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: params.title?params.title:'没找到name',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/*人员基础信息*/
+	MsgList:
+		{
+			screen: MsgList,
+			navigationOptions: (props) => {
+				const {params} = props.navigation.state
+				return {
+					title: params.title?params.title:'没找到name',
+					headerTitleStyle: {
+						color: '#666666',
+						fontSize: 15,
+						flex: 1,
+						textAlign: 'center'
+					},
+					headerStyle: {
+						backgroundColor: '#ffffff'
+					},
+				}
+			}
+		},
+	OneCleanerMsg:
+		{
+			screen: OneCleanerMsg,
+			navigationOptions: (props) => {
+				const {params} = props.navigation.state
+				return {
+					title: params.title?params.title:'没找到name',
+					headerTitleStyle: {
+						color: '#666666',
+						fontSize: 15,
+						flex: 1,
+						textAlign: 'center'
+					},
+					headerStyle: {
+						backgroundColor: '#ffffff'
+					},
+				}
+			}
+		},
 	CheckScore: {
 		screen: CheckScore,
 		navigationOptions: (props) => {

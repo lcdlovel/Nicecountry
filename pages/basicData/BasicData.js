@@ -13,7 +13,7 @@ import {
 	ScrollView,
 	ListView,
 	FlatList,
-	TouchableHighlight
+	TouchableOpacity
 } from 'react-native';
 import {Table, TableWrapper, Row} from 'react-native-table-component';
 import CrudApi from "../../utils/request/crud";
@@ -41,11 +41,11 @@ export default class BasicData extends Component<Props> {
 		const {isHaveSize} = this.props.navigation.state.params.info
 		const {navigation} = this.props
 		return (
-			<TouchableHighlight
+			<TouchableOpacity
 				key={item.name}
 				activeOpacity={0.8}
 				onPress={() => {
-					navigation.navigate('BdArea', {url: 'area'})
+					navigation.navigate(item.navigation, {title:item.name ,url: 'area'})
 				}}
 			>
 				<View style={styles.bd_tabContent}>
@@ -54,7 +54,7 @@ export default class BasicData extends Component<Props> {
 					<View style={[styles.bd_tabItem,isHaveSize?'':styles.isHave]}><Text>{item.size}</Text></View>
 					<View style={styles.bd_tabItem}><Text>{item.number}</Text></View>
 				</View>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		)
 	}
 	_headerColumn(item) {
@@ -119,7 +119,8 @@ export default class BasicData extends Component<Props> {
 					data={[
 						{name: '县/区', size: 265, number: 5,navigation:'BdArea'},
 						{name: '人口', size: 215, number: 6},
-						{name: '县/区', size: 205, number: 5}
+						{name: '户数', size: 205, number: 5},
+						{name: '保洁员', size: 265, number: 6,navigation:'AllCleaner'},
 					]}
 					ListHeaderComponent={() => this._headRow()}
 					renderItem={({item}) => this._rowItem(item)}

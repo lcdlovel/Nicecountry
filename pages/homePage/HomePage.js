@@ -28,6 +28,7 @@ let {width} = dimensions.get('window')
 type Props = {};
 
 export default class HomePage extends Component<Props> {
+	_flatList;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -102,7 +103,7 @@ export default class HomePage extends Component<Props> {
 	/*美丽乡村不同类型函数构建*/
 	_newTypeList(data) {
 		return (
-			<View style={{marginTop: 8}}>
+			<View style={{marginTop: 8,width:width}}>
 				<FlatList
 					ItemSeparatorComponent={() => {
 						return (<View style={styles.item_separator}></View>)
@@ -127,19 +128,18 @@ export default class HomePage extends Component<Props> {
 	}
 
 	OnScroll(event) {
-		let offsetX = event.nativeEvent.contentOffset.x
-		console.log(offsetX)
-		if (offsetX >=3 * width) {
+		let offsetX = parseInt(event.nativeEvent.contentOffset.x)
+		let screenWidth = parseInt(width)
+		if (offsetX >=3 * screenWidth) {
 			this.setState({Index: 3})
-		}else if (offsetX >= 2 * width) {
+		}else if (offsetX >= 2 * screenWidth) {
 			this.setState({Index: 2})
-		}else if (offsetX>=  width) {
+		}else if (offsetX>=  screenWidth) {
 			this.setState({Index: 1})
 		}else {
 			this.setState({Index: 0})
 		}
 	}
-
 	render() {
 		const {navigation} = this.props
 		return (
@@ -189,6 +189,7 @@ export default class HomePage extends Component<Props> {
 							{this.state.newsType.map((item, index) => this._newTypeTitle(item, index))}
 						</View>
 						<FlatList
+							ref={(flatList)=>this._flatList = flatList}
 							data={[
 								[{title: '市委书记韩立明专程赴高港调研', time: '2018-06-11'},
 								{title: '委书记韩立明专程赴高港调研', time: '2018-07-11'}],
@@ -198,6 +199,7 @@ export default class HomePage extends Component<Props> {
 							]}
 							renderItem={({item}) => this._newTypeList(item)}
 							onScroll={this.OnScroll.bind(this)}
+							pagingEnabled={true}
 							horizontal={true}
 							showsHorizontalScrollIndicator={false}
 						/>
