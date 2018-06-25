@@ -59,7 +59,7 @@ _itemList(item){
 				<TouchableOpacity
 					activeOpacity={0.8}
 					onPress={() => {
-						navigation.navigate('MsgList',{title:'保洁员信息'})
+						navigation.navigate('MsgList',{title:'保洁员信息',headList:['姓名','性别','年龄']})
 					}}>
 				<View style={styles.header}>
 					<Text style={styles.header_item}>查看详情列表</Text>

@@ -32,8 +32,8 @@ export default class BasicDataType extends Component<Props> {
 			<TouchableOpacity
 				activeOpacity={0.8}
 				style={styles.basic_type}
-				onPress={()=>{
-					navigation.navigate('BasicData',{title:item.name,info:item.message})
+				onPress={() => {
+					navigation.navigate('BasicData', {title: item.name, info: item.message})
 				}}
 				key={item.name}>
 				<View>
@@ -49,7 +49,7 @@ export default class BasicDataType extends Component<Props> {
 
 	_separator() {
 		return (
-			<View style={{height:5}}></View>
+			<View style={{height: 5}}></View>
 		)
 	}
 
@@ -63,13 +63,49 @@ export default class BasicDataType extends Component<Props> {
 					<FlatList
 						ItemSeparatorComponent={this._separator}
 						data={[
-							{url: require('../../assets/images/Regionalbaseinformation.png'), navigation: 'BasicData', name: '区域基础信息',message:{headerList:['名称','尺寸','数量'],isHaveSize:true}},
-							{url: require('../../assets/images/Staffinginformation.png'), navigation: 'BasicData', name: '人员基础信息',message:{headerList:['名称','数量'],isHaveSize:false}},
-							{url: require('../../assets/images/Generalbasicinformation.png'), navigation: '', name: '普通基础信息',message:{headerList:['名称','尺寸','数量'],isHaveSize:true}},
-							{url: require('../../assets/images/Basicinformationofcontract.png'), navigation: '', name: '合同基础信息',message:{headerList:['名称','数量']},isHaveSize:false},
+							{
+								url: require('../../assets/images/Regionalbaseinformation.png'),
+								navigation: 'BasicData',
+								name: '区域基础信息',
+								message: {
+									headerList: ['名称', '尺寸', '数量'],
+									isHaveSize: true,
+									queryUrl:'Region'
+								}
+							},
+							{
+								url: require('../../assets/images/Staffinginformation.png'),
+								navigation: 'BasicData',
+								name: '人员基础信息',
+								message: {
+									headerList: ['名称', '数量'],
+									isHaveSize: false,
+									queryUrl:'PersonBaseInfo'
+								}
+							},
+							{
+								url: require('../../assets/images/Generalbasicinformation.png'),
+								navigation: '',
+								name: '普通基础信息',
+								message: {
+									headerList: ['名称', '尺寸', '数量'],
+									isHaveSize: true,
+									queryUrl:'BaseInfo'
+								}
+							},
+							{
+								url: require('../../assets/images/Basicinformationofcontract.png'),
+								navigation: '',
+								name: '合同基础信息',
+								message: {
+									headerList: ['名称', '数量'],
+									queryUrl:'ContractType',
+									isHaveSize: false,
+								},
+							},
 						]}
 						renderItem={({item}) => this._dataListItem(item)}
-						columnWrapperStyle={{paddingLeft:5}}
+						columnWrapperStyle={{paddingLeft: 5}}
 						numColumns={2}
 					>
 					</FlatList>
@@ -89,46 +125,46 @@ const styles = StyleSheet.create({
 		height: 0.3 * height
 	},
 	basic_type: {
-		width:0.45 * width,
-		marginRight:5,
-		marginTop:6,
-		marginBottom:6,
+		width: 0.45 * width,
+		marginRight: 5,
+		marginTop: 6,
+		marginBottom: 6,
 		flex: 0,
 		justifyContent: 'center',
-		alignItems:'center',
-		height:150,
+		alignItems: 'center',
+		height: 150,
 		backgroundColor: '#ffffff',
-		borderRadius:10,
+		borderRadius: 10,
 		shadowOffset: {width: 0, height: 5},
 		shadowOpacity: 0.5,
 		shadowRadius: 5,
 		shadowColor: 'gray',
-		elevation:4,
+		elevation: 4,
 	},
 	basic_module: {
 		flex: 0,
-		marginTop:7,
+		marginTop: 7,
 		justifyContent: 'center',
-		alignItems:'center',
+		alignItems: 'center',
 
 	},
 	basic_line: {
-		width:0.3 * width,
-		height:2,
-		backgroundColor:global.commonCss.borderColor,
-		marginTop:15
+		width: 0.3 * width,
+		height: 2,
+		backgroundColor: global.commonCss.borderColor,
+		marginTop: 15
 	},
 	basic_img: {
 		width: 50,
 		height: 50,
 	},
-	basic_font:{
-		textAlign:'center',
-		marginTop:10
+	basic_font: {
+		textAlign: 'center',
+		marginTop: 10
 	},
-	basic_imgModule:{
-		flex:0,
-		justifyContent:'center',
-		alignItems:'center'
+	basic_imgModule: {
+		flex: 0,
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });

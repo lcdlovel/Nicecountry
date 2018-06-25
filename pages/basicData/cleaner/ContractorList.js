@@ -10,35 +10,44 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TouchableOpacity,
-	FlatList
+	FlatList,
+	TouchableOpacity
 } from 'react-native';
-import YgInput from '../../common/YgInput'
 import global from "../../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width} = dimensions.get('window')
 type Props = {};
-export default class MsgList extends Component<Props> {
+export default class ContractorList extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: '',
-			headList:this.props.navigation.state.params.headList,
-			queryUrl:''
+			tableHead: ['Head', 'Head2', 'Head3'],
+			widthArr: [1 / 3 * width, 1 / 3 * width, 1 / 3 * width],
+			header: this.props.navigation.state.params.info.headerList,
 		}
+	}
+	_headerColumn(item) {
+		return (
+			<View style={styles.bd_tabItem} key={item}>
+				<View style={styles.point}></View>
+				<Text>{item}</Text>
+			</View>
+		)
 	}
 	_headRow() {
 		return (
 			<View>
 				<View style={styles.bd_tabHead}>
-					{this.state.headList.map(item =>(<View style={styles.bd_tabItem}><Text >{item}</Text></View>))}
+					{this.state.header.map(item => this._headerColumn(item))}
 				</View>
+				<View style={styles.bd_headbtot}></View>
 			</View>
 		)
 	}
 	_rowItem(item) {
+		const {isHaveSize} = this.props.navigation.state.params.info
 		const {navigation} = this.props
 		return (
 			<TouchableOpacity
@@ -49,8 +58,9 @@ export default class MsgList extends Component<Props> {
 				}}
 			>
 				<View style={styles.bd_tabContent}>
+					{}
 					<View style={styles.bd_tabItem}><Text>{item.name}</Text></View>
-					<View style={styles.bd_tabItem}><Text>{item.size}</Text></View>
+					<View style={[styles.bd_tabItem]}><Text>{item.size}</Text></View>
 					<View style={styles.bd_tabItem}><Text>{item.number}</Text></View>
 				</View>
 			</TouchableOpacity>
@@ -59,15 +69,9 @@ export default class MsgList extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<YgInput onChangeText={(val) => {
-					this.setState({text: val})
-				}}/>
 				<FlatList
 					data={[
-						{name: '洁白男', size: '男', number: 5,navigation:'OneCleanerMsg'},
-						{name: '户数', size: '眺望户数', number: 6,navigation:'OneCleanerMsg'},
-						{name: '合同', size: 205, number: 5,navigation:'Contractor'},
-						{name: '洁白男', size: 265, number: 6},
+						{name:'解百女',size:'信服村',number:'不信服组',navigation:'Contractor'}
 					]}
 					ListHeaderComponent={() => this._headRow()}
 					renderItem={({item}) => this._rowItem(item)}
@@ -79,17 +83,38 @@ export default class MsgList extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#F5FCFF',
+	container: {flex: 1, backgroundColor: '#ffffff'},
+	header: {height: 50, backgroundColor: '#E7E6E1'},
+	text: {textAlign: 'center', fontWeight: '100'},
+	dataWrapper: {marginTop: -1},
+	row: {height: 40, backgroundColor: '#ffffff'},
+	bd_tabHead: {
+		flex: 0,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		height: 50,
+		backgroundColor: '#fafafa',
 	},
-	center:{
-
+	bd_tabItem: {
+		width: 1 / 3 * width,
+		flex: 0,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	point: {
+		width: 5,
+		height: 5,
+		backgroundColor: global.commonCss.mainColor,
+		borderRadius: 3,
+		marginRight: 5
 	},
 	bd_tabContent: {
 		flex: 0,
 		flexDirection: 'row',
-		justifyContent:'space-between',
+		alignItems: 'center',
+		// justifyContent:'center',
 		height: 50,
 		backgroundColor: '#ffffff',
 		// borderBottomWidth: 1,
@@ -99,27 +124,11 @@ const styles = StyleSheet.create({
 		height: 1,
 		backgroundColor: global.commonCss.borderColor
 	},
-	bd_tabItem: {
-		width:1/3 * width,
-		flex: 0,
-		flexDirection: 'row',
-		justifyContent:'center',
-		alignItems: 'center',
+	bd_headbtot: {
+		height: 5,
+		backgroundColor: '#f3f3f3'
 	},
-	bd_tabHead: {
-		flex: 0,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		height: 50,
-		backgroundColor: '#fafafa',
-		shadowColor: "rgba(0, 0, 0, 0.2)",
-		shadowOffset: {
-			width: 0,
-			height: 1
-		},
-		shadowRadius: 15,
-		shadowOpacity: 1,
-		elevation:4,
-	},
+	isHave:{
+		opacity:0
+	}
 });

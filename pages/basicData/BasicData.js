@@ -30,13 +30,11 @@ export default class BasicData extends Component<Props> {
 		this.state = {
 			tableHead: ['Head', 'Head2', 'Head3'],
 			widthArr: [1 / 3 * width, 1 / 3 * width, 1 / 3 * width],
-			header: this.props.navigation.state.params.info.headerList
+			header: this.props.navigation.state.params.info.headerList,
+			listDataInfo:this.props.navigation.state.params.info.queryUrl,
+			listData:''
 		}
 	}
-
-	componentWillMount() {
-	}
-
 	_rowItem(item) {
 		const {isHaveSize} = this.props.navigation.state.params.info
 		const {navigation} = this.props
@@ -45,7 +43,7 @@ export default class BasicData extends Component<Props> {
 				key={item.name}
 				activeOpacity={0.8}
 				onPress={() => {
-					navigation.navigate(item.navigation, {title:item.name ,url: 'area'})
+					navigation.navigate(item.navigation, {title:item.name ,url: item.queryUrl,headList:item.headList})
 				}}
 			>
 				<View style={styles.bd_tabContent}>
@@ -56,6 +54,32 @@ export default class BasicData extends Component<Props> {
 				</View>
 			</TouchableOpacity>
 		)
+	}
+
+
+	componentWillMount() {
+		switch (this.state.listDataInfo){
+			case 'Region':
+				this.setState({listData:[
+						{name: '县/区', size: 265, number: 5,navigation:'BdArea',queryUrl:'Region'},
+					]})
+				break;
+			case 'PersonBaseInfo':
+				this.setState({listData:[
+						{name: '保洁员', size: 265, number: 6,navigation:'AllCleaner'},
+					]})
+				break;
+			case 'BaseInfo':
+				this.setState({listData:[
+						{name: '人口', size: 215, number: 6,navigation:'MsgList',queryUrl:'BaseInfo',headList:['名称','村名称','组名称']},
+					]})
+				break;
+			case 'ContractType':
+				this.setState({listData:[
+						{name: '保洁员合同', size: 265, number: 5,navigation:'MsgList',headList:['名称','村名称','组名称']},
+					]})
+				break;
+		}
 	}
 	_headerColumn(item) {
 		return (
@@ -116,12 +140,7 @@ export default class BasicData extends Component<Props> {
 		</View>*/
 			<View style={styles.container}>
 				<FlatList
-					data={[
-						{name: '县/区', size: 265, number: 5,navigation:'BdArea'},
-						{name: '人口', size: 215, number: 6},
-						{name: '户数', size: 205, number: 5},
-						{name: '保洁员', size: 265, number: 6,navigation:'AllCleaner'},
-					]}
+					data={this.state.listData}
 					ListHeaderComponent={() => this._headRow()}
 					renderItem={({item}) => this._rowItem(item)}
 					ItemSeparatorComponent={() => <View style={styles.line}></View>}

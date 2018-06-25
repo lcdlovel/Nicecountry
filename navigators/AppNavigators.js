@@ -1,6 +1,6 @@
 import {StackNavigator, TabNavigator} from 'react-navigation'
 import React from 'react'
-import {Image, StyleSheet} from 'react-native'
+import {Image, StyleSheet, TouchableOpacity, Text} from 'react-native'
 import Loader from '../pages/loader/Loader'
 import HomePage from "../pages/homePage/HomePage";
 import Check from "../pages/repeatCheck/Check";
@@ -24,6 +24,12 @@ import AllCleaner from "../pages/basicData/cleaner/AllCleaner";
 import MsgList from "../pages/basicData/subInformation/MsgList";
 import AddCleaner from "../pages/basicData/cleaner/AddCleaner";
 import OneCleanerMsg from "../pages/basicData/cleaner/OneCleanerMsg";
+import ContractorList from "../pages/basicData/cleaner/ContractorList";
+import Contractor from "../pages/basicData/cleaner/Contractor";
+import AddContractor from "../pages/basicData/cleaner/AddContractor";
+import AddAreaMsg from "../pages/basicData/addBaseMsg/AddAreaMsg";
+import AddManMsg from "../pages/basicData/addBaseMsg/AddManMsg";
+import AddBaseMsg from "../pages/basicData/addBaseMsg/AddBaseMsg";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -38,7 +44,7 @@ export const Home = TabNavigator({
 			tabBarLabel: '首页',
 			tabBarIcon: ({tintColor, focused}) => (
 				<Image resizeMode='contain'
-							 source={focused?require('../assets/images/TabNav/homepage.png'):require('../assets/images/TabNav/homepage1.png')}
+							 source={focused ? require('../assets/images/TabNav/homepage.png') : require('../assets/images/TabNav/homepage1.png')}
 							 style={[styles.Icon]}
 				/>
 			)
@@ -50,7 +56,7 @@ export const Home = TabNavigator({
 			tabBarLabel: '报表',
 			tabBarIcon: ({tintColor, focused}) => (
 				<Image resizeMode='contain'
-							 source={focused?require('../assets/images/TabNav/My.png'):require('../assets/images/TabNav/My1.png')}
+							 source={focused ? require('../assets/images/TabNav/My.png') : require('../assets/images/TabNav/My1.png')}
 							 style={[styles.Icon]}/>
 			)
 		}
@@ -61,24 +67,24 @@ export const Home = TabNavigator({
 			tabBarLabel: '我的',
 			tabBarIcon: ({tintColor, focused}) => (
 				<Image resizeMode='contain'
-							 source={focused?require('../assets/images/TabNav/Reportform.png'):require('../assets/images/TabNav/Reportform1.png')}
+							 source={focused ? require('../assets/images/TabNav/Reportform.png') : require('../assets/images/TabNav/Reportform1.png')}
 							 style={[styles.Icon]}/>
 			)
 		}
 	}
 }, {
 	tabBarPosition: 'bottom',
-	tabBarOptions:{
+	tabBarOptions: {
 		showIcon: true,
 		style: {
-			height:50,
+			height: 50,
 			backgroundColor: '#FFF'
 		},
-		labelStyle:{
-			color:global.commonCss.fontColor,
-			fontSize:12,
-			paddingTop:0,
-			marginTop:0,
+		labelStyle: {
+			color: global.commonCss.fontColor,
+			fontSize: 12,
+			paddingTop: 0,
+			marginTop: 0,
 		}
 	}
 })
@@ -245,8 +251,108 @@ export const AppStackNavgator = StackNavigator({
 		screen: BasicData,
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
+			const {navigation} = props
 			return {
-				title: params.title?params.title:'没找到name',
+				title: params.title ? params.title : '没找到name',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+				headerRight: (
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={() => {
+							let address
+							switch (params.title){
+								case '区域基础信息':
+								address = 'AddAreaMsg'
+								break;
+								case '人员基础信息':
+									address = 'AddManMsg'
+									break;
+								case '普通基础信息':
+									address = 'AddBaseMsg'
+									break;
+								case '合同基础信息':
+									address = 'AddContractorMsg'
+									break;
+
+ 							}
+							navigation.navigate(address,)
+						}}
+					>
+						<Text style={{fontSize: 25, color: '#000'}}>+</Text>
+					</TouchableOpacity>
+				)
+			}
+		}
+	},
+	/*基础信息下的添加各个基础信息模块*/
+	AddAreaMsg:{
+		screen: AddAreaMsg,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '添加组信息',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	AddManMsg:{
+		screen: AddManMsg,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '添加人员信息',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	AddBaseMsg:{
+		screen: AddBaseMsg,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '添加基础信息',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	AddContractorMsg:{
+		screen: AddContractor,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '添加合同信息',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: 15,
@@ -265,7 +371,7 @@ export const AppStackNavgator = StackNavigator({
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
-				title: params.title?params.title:'没找到name',
+				title: params.title ? params.title : '没找到name',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: 15,
@@ -278,14 +384,14 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-
+	/**/
 	/*保洁人员的信息下*/
 	AllCleaner: {
 		screen: AllCleaner,
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
-				title:'保洁员汇总',
+				title: '保洁员汇总',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: 15,
@@ -303,7 +409,7 @@ export const AppStackNavgator = StackNavigator({
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
-				title: params.title?params.title:'没找到name',
+				title: params.title ? params.title : '没找到name',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: 15,
@@ -323,7 +429,7 @@ export const AppStackNavgator = StackNavigator({
 			navigationOptions: (props) => {
 				const {params} = props.navigation.state
 				return {
-					title: params.title?params.title:'没找到name',
+					title: params.title ? params.title : params.name ? params.name : '没找到name',
 					headerTitleStyle: {
 						color: '#666666',
 						fontSize: 15,
@@ -342,7 +448,7 @@ export const AppStackNavgator = StackNavigator({
 			navigationOptions: (props) => {
 				const {params} = props.navigation.state
 				return {
-					title: params.title?params.title:'没找到name',
+					title: params.title ? params.title : '没找到name',
 					headerTitleStyle: {
 						color: '#666666',
 						fontSize: 15,
@@ -355,6 +461,64 @@ export const AppStackNavgator = StackNavigator({
 				}
 			}
 		},
+	/*人员的合同列表*/
+	ContractorList:
+		{
+			screen: ContractorList,
+			navigationOptions: (props) => {
+				const {params} = props.navigation.state
+				return {
+					title: params.title ? params.title : '没找到name',
+					headerTitleStyle: {
+						color: '#666666',
+						fontSize: 15,
+						flex: 1,
+						textAlign: 'center'
+					},
+					headerStyle: {
+						backgroundColor: '#ffffff'
+					},
+				}
+			}
+		},
+	Contractor: {
+		screen: Contractor,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: params.title ? params.title : '没找到name',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	AddContractor: {
+		screen: AddContractor,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '添加合同(' + params.title ? params.title : '没找到name' + ')',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+
+
 	CheckScore: {
 		screen: CheckScore,
 		navigationOptions: (props) => {

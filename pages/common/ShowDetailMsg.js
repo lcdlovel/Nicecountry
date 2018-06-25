@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
+		paddingBottom:10,
 	},
 	bac_head: {
 		width: width,
@@ -93,7 +94,15 @@ const styles = StyleSheet.create({
 		backgroundColor: '#ffffff',
 		paddingTop: 20,
 		paddingBottom: 20,
-		marginTop: -0.2 * height
+		marginTop: -0.2 * height,
+		shadowColor: "rgba(0, 0, 0, 0.1)",
+		shadowOffset: {
+			width: 0,
+			height: 1
+		},
+		shadowRadius: 10,
+		shadowOpacity: 1,
+		elevation:1,
 	},
 	circle_dot: {
 		width: 7,

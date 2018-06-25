@@ -38,10 +38,9 @@ export default class Check extends Component<Props> {
 				}}>
 			<View style={styles.ck_row}>
 				<View style={styles.ck_item}>
-					<Image style={styles.ck_png} source={imgSource}/>
-					<Text style={styles.ck_font}>{name}</Text>
+					<Image style={styles.ck_png} source={require('../../assets/images/Receivedtask.png')}/>
 				</View>
-				<Image style={styles.arrow} source={require('../../assets/images/arrow.png')}/>
+				<Text style={styles.ck_font}>{name}</Text>
 			</View>
 			</TouchableOpacity>
 		)
@@ -60,6 +59,7 @@ export default class Check extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		alignItems:'center',
 		backgroundColor: '#F5FCFF',
 	},
 	ck_item:{
@@ -70,21 +70,36 @@ const styles = StyleSheet.create({
 		height:45,
 	},
 	ck_png:{
-		width: 27,
-		height: 27,
+		width: 53,
+		height: 35,
 	},
 	ck_font:{
 		marginLeft:10,
-		fontSize: 14,
+		fontSize: 17,
 		color: "#313735"
 	},
 	ck_row:{
 		flex:0,
 		flexDirection:'row',
-		justifyContent:'space-between',
+		// justifyContent:'center',
+		width:0.9 * width,
+		height: 70,
+		paddingLeft: 15,
 		alignItems:'center',
-		borderBottomWidth:2,
-		borderBottomColor:'#d4dcda',
+		borderRadius: 7,
+		backgroundColor: "#ffffff",
+		shadowColor: "rgba(68, 68, 68, 0.2)",
+		shadowOffset: {
+			width: 0,
+			height: 0
+		},
+		elevation:2,
+		shadowRadius: 8,
+		shadowOpacity: 1,
+		marginTop:10,
+		marginBottom: 6,
+		marginLeft:4,
+		marginRight:4
 	},
 	arrow:{
 		width: 10,
