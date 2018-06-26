@@ -35,7 +35,7 @@ export default class ReplyInformation extends Component<Props> {
 					<Text style={styles.header_text}>内容</Text>
 				</View>
 				<View style={styles.text_content}></View>
-				<ImgList url={require('../../assets/News/201806141307.jpg')} imgStyle={styles.img_style}/>
+				<ImgList url={require('../../assets/News/201806141307.jpg')} imgsStyle={styles.imgs_style} titleStyle={styles.allimg_title}/>
 				<View style={styles.item_header}>
 					<Point pointColor={styles.pointColor}/>
 					<Text style={styles.header_text}>回复内容</Text>
@@ -67,13 +67,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems:'center',
 		backgroundColor: '#F5FCFF',
+		paddingBottom:20
 	},
 	item_header:{
 		flex:0,
 		width:width,
 		flexDirection:'row',
 		alignItems:'center',
-		height:30,
+		height:45,
 		paddingLeft:10
 	},
 	header_text:{
@@ -126,5 +127,8 @@ const styles = StyleSheet.create({
 	},
 	imgs_style:{
 		width:0.95 * width
+	},
+  allimg_title:{
+		paddingLeft:0.025 * width
 	}
 });

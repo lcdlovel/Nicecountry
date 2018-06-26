@@ -16,7 +16,7 @@ let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width} = dimensions.get('window')
 type Props = {};
-export default class MsgInfomation extends Component<Props> {
+export default class CreatInformation extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {}
@@ -25,7 +25,7 @@ export default class MsgInfomation extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text>文件通知</Text>
+				<Text>已创建</Text>
 			</View>
 		);
 	}

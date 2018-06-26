@@ -34,6 +34,9 @@ import AddTaskImg from "../pages/repeatCheck/taskCreate/AddTaskImg";
 import AddTextArea from "../pages/repeatCheck/taskCreate/AddTextArea";
 import TaskDetail from "../pages/repeatCheck/TaskDetail";
 import ReplyInformation from "../pages/repeatCheck/ReplyInformation";
+import CreatInformation from '../pages/msgInformation/Message/CreatInformation'
+import SendedInformation from "../pages/msgInformation/Message/SendedInformation";
+import ReceviedInformation from '../pages/msgInformation/Message/ReceviedInformation'
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -130,18 +133,24 @@ export const RepeatCheckTab = TabNavigator({
 })
 /**/
 export const MessageInformation = TabNavigator({
-	Check: {
-		screen: CreateMsg,
+  CreatInformation: {
+		screen: CreatInformation,
 		navigationOptions: {
 			tabBarLabel: '已创建',
 		}
 	},
-	SelfCheck: {
-		screen: MsgSended,
+  SendedInformation: {
+		screen: SendedInformation,
 		navigationOptions: {
 			tabBarLabel: '已发送',
 		}
 	},
+  ReceviedInformation: {
+    screen: ReceviedInformation,
+    navigationOptions: {
+      tabBarLabel: '已接受',
+    }
+  },
 }, {
 	tabBarPosition: 'top',
 	swipeEnabled: false,
@@ -156,6 +165,7 @@ export const MessageInformation = TabNavigator({
 		inactiveTintColor: '#aaa',
 	}
 })
+/**检查任务下已接受任务*/
 export const CheckReceviedCheck = TabNavigator({
 	ReceviedChecked: {
 		screen: ReceviedChecked,
@@ -334,7 +344,7 @@ export const AppStackNavgator = StackNavigator({
 		}
 
 	},
-	/**基础信息*/
+	/**基础信息类型*/
 	BasicDataType: {
 		screen: BasicDataType,
 		navigationOptions: (props) => {
@@ -352,6 +362,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
+  /**基础信息模块*/
 	BasicData: {
 		screen: BasicData,
 		navigationOptions: (props) => {
@@ -586,6 +597,7 @@ export const AppStackNavgator = StackNavigator({
 				}
 			}
 		},
+	/**人员的合同*/
 	Contractor: {
 		screen: Contractor,
 		navigationOptions: (props) => {
@@ -604,6 +616,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
+  /**添加合同信息*/
 	AddContractor: {
 		screen: AddContractor,
 		navigationOptions: (props) => {
@@ -734,7 +747,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	/*设置*/
+	/**设置*/
 	SetUp: {
 		screen: SetUp,
 		navigationOptions: (props) => {
@@ -752,7 +765,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	/*设置下的三个选项*/
+	/**设置下的三个选项*/
 	ReceivedCheck: {
 		screen: ReceivedCheck,
 		navigationOptions: (props) => {
@@ -804,7 +817,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	/*x新闻列表组件*/
+	/**新闻列表组件*/
 	WorkNewsList: {
 		screen: WorkNewsList,
 		navigationOptions: (props) => {

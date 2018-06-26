@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
 		flex: 0,
 		backgroundColor: '#F5FCFF',
 		alignItems:'center',
-		paddingBottom:20
 	},
 	item_header:{
 		flex:0,
