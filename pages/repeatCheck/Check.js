@@ -49,7 +49,7 @@ export default class Check extends Component<Props> {
 		return (
 			<View style={styles.container}>
 				{this._rowconstrutor(require('../../assets/images/found.png'),'创建任务','TaskCreate')}
-				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受任务')}
+				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受任务','CheckReceviedCheck')}
 				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已统计任务')}
 			</View>
 		);

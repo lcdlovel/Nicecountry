@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 	},
 	font: {
-		color: "#828383",
+		color: "#8a8f8e",
 		fontSize: 13,
 	},
 	focused_font: {

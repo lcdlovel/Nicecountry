@@ -30,6 +30,10 @@ import AddContractor from "../pages/basicData/cleaner/AddContractor";
 import AddAreaMsg from "../pages/basicData/addBaseMsg/AddAreaMsg";
 import AddManMsg from "../pages/basicData/addBaseMsg/AddManMsg";
 import AddBaseMsg from "../pages/basicData/addBaseMsg/AddBaseMsg";
+import AddTaskImg from "../pages/repeatCheck/taskCreate/AddTaskImg";
+import AddTextArea from "../pages/repeatCheck/taskCreate/AddTextArea";
+import TaskDetail from "../pages/repeatCheck/TaskDetail";
+import ReplyInformation from "../pages/repeatCheck/ReplyInformation";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -37,6 +41,8 @@ const styles = StyleSheet.create({
 		height: 25
 	}
 })
+
+/**主页面的底部导航器*/
 export const Home = TabNavigator({
 	HomePage: {
 		screen: HomePage,
@@ -88,6 +94,7 @@ export const Home = TabNavigator({
 		}
 	}
 })
+/**检查自查主页面的导航器*/
 export const RepeatCheckTab = TabNavigator({
 	Check: {
 		screen: Check,
@@ -116,11 +123,12 @@ export const RepeatCheckTab = TabNavigator({
 			justifyContent: 'center'
 		},
 		activeBackgroundColor: '#ffffff',
-		activeTintColor: '#4ECBFC',
+		activeTintColor: '#70daad',
 		inactiveBackgroundColor: '#ffffff',
 		inactiveTintColor: '#aaa',
 	}
 })
+/**/
 export const MessageInformation = TabNavigator({
 	Check: {
 		screen: CreateMsg,
@@ -143,7 +151,34 @@ export const MessageInformation = TabNavigator({
 			backgroundColor: '#FFF'
 		},
 		activeBackgroundColor: '#ffffff',
-		activeTintColor: '#4ECBFC',
+		activeTintColor: '#70daad',
+		inactiveBackgroundColor: '#ffffff',
+		inactiveTintColor: '#aaa',
+	}
+})
+export const CheckReceviedCheck = TabNavigator({
+	ReceviedChecked: {
+		screen: ReceviedChecked,
+		navigationOptions: {
+			tabBarLabel: '待处理',
+		}
+	},
+	ConfirmedCheck: {
+		screen: ConfirmedCheck,
+		navigationOptions: {
+			tabBarLabel: '已回复',
+		}
+	},
+}, {
+	tabBarPosition: 'top',
+	swipeEnabled: false,
+	tabBarOptions: {
+		style: {
+			height: 49,
+			backgroundColor: '#FFF'
+		},
+		activeBackgroundColor: '#ffffff',
+		activeTintColor: '#70daad',
 		inactiveBackgroundColor: '#ffffff',
 		inactiveTintColor: '#aaa',
 	}
@@ -170,11 +205,12 @@ export const ReceviedCheck = TabNavigator({
 			backgroundColor: '#FFF'
 		},
 		activeBackgroundColor: '#ffffff',
-		activeTintColor: '#4ECBFC',
+		activeTintColor: '#70daad',
 		inactiveBackgroundColor: '#ffffff',
 		inactiveTintColor: '#aaa',
 	}
 })
+
 
 export const AppStackNavgator = StackNavigator({
 	// StartUp: {
@@ -201,35 +237,104 @@ export const AppStackNavgator = StackNavigator({
 			return {
 				title: '检查自查',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#545454',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
 				},
 			}
 		}
 	},
+	/**创建任务*/
 	TaskCreate: {
 		screen: TaskCreate,
 		navigationOptions: (props) => {
+			const {navigation} = props
 			return {
 				title: '创建任务',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#666666',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
 				},
+				headerRight: (
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={() => {
+							navigation.navigate('AddTaskImg')
+						}}>
+						<Text>确认</Text>
+					</TouchableOpacity>
+				)
 			}
 		}
 	},
-	/*基础信息*/
+	/** 创建任务之后添加图片*/
+	AddTaskImg: {
+		screen: AddTaskImg,
+		navigationOptions: (props) => {
+			const {navigation} = props
+			return {
+				title: '创建任务',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+				headerRight: (
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={() => {
+							// navigation.navigate('AddTextArea')
+							console.log(navigation)
+						}}>
+						<Text>添加</Text>
+					</TouchableOpacity>
+				)
+			}
+		}
+	},
+	/**创建检查任务之后的选择区域*/
+	AddTextArea: {
+		screen: AddTextArea,
+		navigationOptions: (props) => {
+			const {navigation} = props
+			return {
+				title: '选择区域',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+				headerRight: (
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={() => {
+							console.log(this.state)
+						}}>
+						<Text>发送</Text>
+					</TouchableOpacity>
+				)
+			}
+		}
+
+	},
+	/**基础信息*/
 	BasicDataType: {
 		screen: BasicDataType,
 		navigationOptions: (props) => {
@@ -268,10 +373,10 @@ export const AppStackNavgator = StackNavigator({
 						activeOpacity={0.8}
 						onPress={() => {
 							let address
-							switch (params.title){
+							switch (params.title) {
 								case '区域基础信息':
-								address = 'AddAreaMsg'
-								break;
+									address = 'AddAreaMsg'
+									break;
 								case '人员基础信息':
 									address = 'AddManMsg'
 									break;
@@ -282,7 +387,7 @@ export const AppStackNavgator = StackNavigator({
 									address = 'AddContractorMsg'
 									break;
 
- 							}
+							}
 							navigation.navigate(address,)
 						}}
 					>
@@ -292,8 +397,8 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	/*基础信息下的添加各个基础信息模块*/
-	AddAreaMsg:{
+	/**基础信息下的添加各个基础信息模块*/
+	AddAreaMsg: {
 		screen: AddAreaMsg,
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
@@ -311,7 +416,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	AddManMsg:{
+	AddManMsg: {
 		screen: AddManMsg,
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
@@ -329,7 +434,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	AddBaseMsg:{
+	AddBaseMsg: {
 		screen: AddBaseMsg,
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
@@ -347,7 +452,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	AddContractorMsg:{
+	AddContractorMsg: {
 		screen: AddContractor,
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
@@ -365,7 +470,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	/*基础信息下的路由*/
+	/**基础信息下的路由*/
 	BdArea: {
 		screen: AllArea,
 		navigationOptions: (props) => {
@@ -385,7 +490,7 @@ export const AppStackNavgator = StackNavigator({
 		}
 	},
 	/**/
-	/*保洁人员的信息下*/
+	/**保洁人员的信息下*/
 	AllCleaner: {
 		screen: AllCleaner,
 		navigationOptions: (props) => {
@@ -422,7 +527,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-	/*人员基础信息*/
+	/**人员基础信息*/
 	MsgList:
 		{
 			screen: MsgList,
@@ -461,7 +566,7 @@ export const AppStackNavgator = StackNavigator({
 				}
 			}
 		},
-	/*人员的合同列表*/
+	/**人员的合同列表*/
 	ContractorList:
 		{
 			screen: ContractorList,
@@ -517,7 +622,83 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-
+	/**检查任务下的已接受任务**/
+	CheckReceviedCheck: {
+		screen: CheckReceviedCheck,
+		navigationOptions: (props) => {
+			return {
+				title: '已接受任务',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**任务详情*/
+	TaskDetail: {
+		screen: TaskDetail,
+		navigationOptions: (props) => {
+			const {navigation} = props
+			return {
+				title: '查看详情',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerRight: (
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={() => {
+								navigation.navigate('ReplyInformation')
+							}
+						}
+					>
+						<Text>回复</Text>
+					</TouchableOpacity>
+				),
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**回复检查信息*/
+	ReplyInformation: {
+		screen: ReplyInformation,
+		navigationOptions: (props) => {
+			const {navigation} = props
+			return {
+				title: '回复检查信息',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerRight: (
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={
+							navigation.navigate('')
+						}
+					>
+						<Text>发送</Text>
+					</TouchableOpacity>
+				),
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
 
 	CheckScore: {
 		screen: CheckScore,

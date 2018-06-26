@@ -8,7 +8,8 @@ export default {
 	commonCss:{
 		borderColor:'#eeeeee',
 		mainColor:'#91e6bb',
-		fontColor:'#666666'
+		fontColor:'#666666',
+		screenColor:'#fafafa'
 	}
 }
 

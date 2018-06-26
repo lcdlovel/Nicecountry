@@ -23,6 +23,7 @@ export default class ReceivedCheck extends Component<Props> {
 		this.state = {}
 	}
  _contentConstractor(){
+		const {navigation} = this.props
 		return(
 			<View style={styles.rc_content}>
 				<View style={[styles.rc_conItem,styles.rc_content_first]}>
@@ -36,12 +37,12 @@ export default class ReceivedCheck extends Component<Props> {
 						<Text style={styles.rc_bottomFont}>17:03:02</Text>
 					</View>
 				</View>
-				<View style={styles.rc_conItem}>
+				<View style={[styles.rc_conItem,styles.rc_content_last]}>
 					<Text style={styles.rc_Itemfont}>村办公室院内未清理</Text>
 				</View>
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
-					<TouchableOpacity style={styles.rc_confirm}>
-						<Text style={{fontSize:10,color:'#4ECBFC'}}>确认</Text>
+					<TouchableOpacity activeOpacity={0.8} onPress={()=>{navigation.navigate('TaskDetail')}} style={styles.rc_confirm}>
+						<Text style={{fontSize:15,color:'#4ECBFC'}}>查看及回复</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -95,8 +96,8 @@ const styles = StyleSheet.create({
 		justifyContent:'center'
 	},
 	rc_Itemfont:{
-		fontSize:12,
-		color:'#4ECBFC'
+		fontSize: 14,
+		color: "#0c0c0c"
 	},
 	rc_ItemBottom:{
 		marginTop:10
@@ -108,10 +109,6 @@ const styles = StyleSheet.create({
 		flex:0,
 		justifyContent:'center',
 		alignItems:'center',
-		width:35,
-		height:20,
-		borderWidth:1,
-		borderColor:'#4ECBFC',
 		borderRadius:4
 	}
 });
