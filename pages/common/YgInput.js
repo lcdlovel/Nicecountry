@@ -29,7 +29,7 @@ export default class YgInput extends Component<Props> {
 		const {onChangeText} = this.props
 		return (
 			<View style={styles.container}>
-				<View style={[styles.search,}>
+				<View style={[styles.search]}>
 					<View style={styles.text_Input}>
 						<TextInput placeholder='搜索' style={styles.search_input} underlineColorAndroid='transparent'
 											 onChangeText={onChangeText}/>
