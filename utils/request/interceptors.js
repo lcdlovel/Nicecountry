@@ -5,7 +5,6 @@ import Golbals from '../global/global'
 
 axios.interceptors.response.use(
   (response) => {
-    alert('拦截器')
     if (!response.hasOwnProperty('data') ||
       !response.data.hasOwnProperty('status') ||
       response.data.Status !== 0) {
@@ -29,6 +28,7 @@ axios.interceptors.response.use(
       //   }
       // }
      alert(message)
+      console.log(response.data)
       // 如果身份失效，则跳转到登陆界面
       // const {navigation} = this.props
       // if (response.data.status === Golbals.NEED_LOGIN) {
@@ -49,7 +49,7 @@ axios.interceptors.response.use(
     return response
   },
   (error) => {
-    alert('error')
+    alert(error.response.status)
     if (error.response) {
       switch (error.response.status) {
         case 401: {

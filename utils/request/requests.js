@@ -18,12 +18,15 @@ class Requests {
   static sendAjax ({type: type1, url: url1, data: data1, callback: callbackFn}) {
 		if (global.token !=='') {
 			axios.defaults.headers.common['token'] = global.token
+			console.log(global.token)
 		} else {
 			console.log('登录中')
 		}
     let datas = ''
     type1 === 'get' ? datas = {params: data1} : datas = data1
 		console.log('这是sendAjax')
+		console.log(url1)
+		console.log(data1)
     return new Promise((resolve, reject) => {
       axios[type1](url1, datas)
         .then((res) => {

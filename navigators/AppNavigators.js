@@ -1,4 +1,4 @@
-import {StackNavigator, TabNavigator} from 'react-navigation'
+import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation'
 import React from 'react'
 import {Image, StyleSheet, TouchableOpacity, Text} from 'react-native'
 import Loader from '../pages/loader/Loader'
@@ -37,6 +37,13 @@ import ReplyInformation from "../pages/repeatCheck/ReplyInformation";
 import CreatInformation from '../pages/msgInformation/Message/CreatInformation'
 import SendedInformation from "../pages/msgInformation/Message/SendedInformation";
 import ReceviedInformation from '../pages/msgInformation/Message/ReceviedInformation'
+import RecoScore from "../pages/checkScore/RecoScore/RecoScore";
+import EditScore from "../pages/checkScore/RecoScore/EditScore";
+import ScoreEdit from "../pages/checkScore/RecoScore/ScoreEdit";
+import queryTabData from "../pages/checkScore/RecoScore/queryTabData";
+import SelfRating from "../pages/checkScore/RecoScore/SelfRating";
+import Selfexamination from "../pages/checkScore/Selfexamination/Selfexamination";
+import OptRegion from "../pages/checkScore/Selfexamination/OptRegion";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
 })
 
 /**主页面的底部导航器*/
-export const Home = TabNavigator({
+export const Home = createMaterialTopTabNavigator({
 	HomePage: {
 		screen: HomePage,
 		navigationOptions: {
@@ -98,7 +105,7 @@ export const Home = TabNavigator({
 	}
 })
 /**检查自查主页面的导航器*/
-export const RepeatCheckTab = TabNavigator({
+export const RepeatCheckTab = createMaterialTopTabNavigator({
 	Check: {
 		screen: Check,
 		navigationOptions: {
@@ -132,25 +139,25 @@ export const RepeatCheckTab = TabNavigator({
 	}
 })
 /**/
-export const MessageInformation = TabNavigator({
-  CreatInformation: {
+export const MessageInformation = createMaterialTopTabNavigator({
+	CreatInformation: {
 		screen: CreatInformation,
 		navigationOptions: {
 			tabBarLabel: '已创建',
 		}
 	},
-  SendedInformation: {
+	SendedInformation: {
 		screen: SendedInformation,
 		navigationOptions: {
 			tabBarLabel: '已发送',
 		}
 	},
-  ReceviedInformation: {
-    screen: ReceviedInformation,
-    navigationOptions: {
-      tabBarLabel: '已接受',
-    }
-  },
+	ReceviedInformation: {
+		screen: ReceviedInformation,
+		navigationOptions: {
+			tabBarLabel: '已接受',
+		}
+	},
 }, {
 	tabBarPosition: 'top',
 	swipeEnabled: false,
@@ -166,7 +173,7 @@ export const MessageInformation = TabNavigator({
 	}
 })
 /**检查任务下已接受任务*/
-export const CheckReceviedCheck = TabNavigator({
+export const CheckReceviedCheck = createMaterialTopTabNavigator({
 	ReceviedChecked: {
 		screen: ReceviedChecked,
 		navigationOptions: {
@@ -193,7 +200,7 @@ export const CheckReceviedCheck = TabNavigator({
 		inactiveTintColor: '#aaa',
 	}
 })
-export const ReceviedCheck = TabNavigator({
+export const ReceviedCheck = createMaterialTopTabNavigator({
 	ReceviedChecked: {
 		screen: ReceviedChecked,
 		navigationOptions: {
@@ -222,7 +229,7 @@ export const ReceviedCheck = TabNavigator({
 })
 
 
-export const AppStackNavgator = StackNavigator({
+export const AppStackNavgator = createStackNavigator({
 	// StartUp: {
 	// 	screen:StartUp,
 	// 	navigationOptions:{
@@ -241,6 +248,7 @@ export const AppStackNavgator = StackNavigator({
 			header: null
 		}
 	},
+	/**检查自查*/
 	RepeatCheckTab: {
 		screen: RepeatCheckTab,
 		navigationOptions: (props) => {
@@ -362,7 +370,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-  /**基础信息模块*/
+	/**基础信息模块*/
 	BasicData: {
 		screen: BasicData,
 		navigationOptions: (props) => {
@@ -616,7 +624,7 @@ export const AppStackNavgator = StackNavigator({
 			}
 		}
 	},
-  /**添加合同信息*/
+	/**添加合同信息*/
 	AddContractor: {
 		screen: AddContractor,
 		navigationOptions: (props) => {
@@ -670,8 +678,8 @@ export const AppStackNavgator = StackNavigator({
 					<TouchableOpacity
 						activeOpacity={0.8}
 						onPress={() => {
-								navigation.navigate('ReplyInformation')
-							}
+							navigation.navigate('ReplyInformation')
+						}
 						}
 					>
 						<Text>回复</Text>
@@ -713,19 +721,152 @@ export const AppStackNavgator = StackNavigator({
 		}
 	},
 
+	/**考核评分*/
 	CheckScore: {
 		screen: CheckScore,
 		navigationOptions: (props) => {
 			return {
-				title: '考核评分',
+				title: '考核评分表',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#666666',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**考核评分表的items*/
+	RecoScore: {
+		screen: RecoScore,
+		navigationOptions: (props) => {
+			return {
+				title: '考核评分表',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**考核评分的编辑分数*/
+	EditScore: {
+		screen: EditScore,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: params.title ? params.title : '没找到name',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**分数编辑*/
+	ScoreEdit: {
+		screen: ScoreEdit,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '编辑',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**查看表评分*/
+	queryTabData: {
+		screen: queryTabData,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '查看表评分',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**查看自身*/
+	SelfRating: {
+		screen: SelfRating,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '查看表评分',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**自查评分表*/
+	Selfexamination: {
+		screen: Selfexamination,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '自查评分表',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+	/**自查评分表的选择区域*/
+	OptRegion:{
+		screen: OptRegion,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '选择区域',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
 				},
 			}
 		}

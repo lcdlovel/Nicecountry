@@ -55,26 +55,55 @@ export default class BasicData extends Component<Props> {
 			</TouchableOpacity>
 		)
 	}
+	baseMsgGet(url,data){
+		return new Promise((resolve, reject)=>{
+			CrudApi.getInfo({
+				url:url,
+				data:data,
+				callback:(res)=>{
+					resolve (res.data)
+				}
+			})
+		})
 
+	}
 
 	componentWillMount() {
 		switch (this.state.listDataInfo){
 			case 'Region':
-				this.setState({listData:[
-						{name: '县/区', size: 265, number: 5,navigation:'BdArea',queryUrl:'Region'},
-					]})
+				let requireData = {
+					regionId:global.User_msg.regionId,
+				}
+				let data=[
+					{name: '县/区', size: 265, number: 5,navigation:'BdArea',queryUrl:'Region'},
+				]
+				this.setState({listData:data})
+				this.baseMsgGet('Region/findRegionStatisticsByRegionId',requireData).then((res)=>{
+					// this.setState({listData:res})
+				})
 				break;
 			case 'PersonBaseInfo':
+				this.baseMsgGet('PersonBaseInfo/findList',{
+					regionId:global.User_msg.regionId,
+					personTypeId:1
+				})
 				this.setState({listData:[
 						{name: '保洁员', size: 265, number: 6,navigation:'AllCleaner'},
 					]})
 				break;
 			case 'BaseInfo':
+				this.baseMsgGet('BaseInfo/findBaseInfoStatisticsByRegionId',{
+					regionId:global.User_msg.regionId
+				})
 				this.setState({listData:[
 						{name: '人口', size: 215, number: 6,navigation:'MsgList',queryUrl:'BaseInfo',headList:['名称','村名称','组名称']},
 					]})
 				break;
 			case 'ContractType':
+				this.baseMsgGet('Contract/findListByCTypeIdAndRegionId',{
+					regionId:global.User_msg.regionId,
+					contractTypeId:global.Cleaner_ContractType
+				})
 				this.setState({listData:[
 						{name: '保洁员合同', size: 265, number: 5,navigation:'MsgList',headList:['名称','村名称','组名称']},
 					]})

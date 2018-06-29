@@ -1,10 +1,13 @@
 
 export default {
 	token:'',
+	User_msg:'',
 	SUCCESS: 0, // 成功请求
 	ERROR: 1, // 错误请求
 	ILLEGAL_ARGUMENT: 2, // 参数错误
 	NEED_LOGIN: 10, // 需要重新登录
+	Cleaner_ContractType:2,
+	Normal_ContractType:3,
 	commonCss:{
 		borderColor:'#eeeeee',
 		mainColor:'#91e6bb',

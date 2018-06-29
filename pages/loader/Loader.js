@@ -18,13 +18,16 @@ import LinearGradient from 'react-native-linear-gradient';
 import {NavigationActions} from 'react-navigation'
 import loaderFun from './LoaderFun'
 import global from "../../utils/global/global";
-
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as types from '../../Redux/constans/loginType';
+import loginAction from '../../Redux/actions/loginAction'
 let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width, height} = dimensions.get('window')
 
 type Props = {};
-export default class Loader extends Component<Props> {
+class Loader extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -69,7 +72,7 @@ export default class Loader extends Component<Props> {
 						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/password.png')}/>
 						<TextInput
 							style={styles.textInput}
-							onChangeText={(password) => this.setState({password})}
+							onChangeText={(password) => store.dispatch(password)}
 							placeholder='请输入密码'
 							secureTextEntry={this.state.secureTextEntry}
 							underlineColorAndroid='transparent'
@@ -89,9 +92,9 @@ export default class Loader extends Component<Props> {
 					<TouchableOpacity
 						onPress={() => {
 							navigation.dispatch(resetAction)
-							// loaderFun.signIn(this.state).then(() => {
-							navigation.navigate('HomePage')
-							// })
+							loaderFun.signIn(this.state).then(() => {
+								navigation.navigate('HomePage')
+							})
 						}}>
 						<LinearGradient colors={['#70daad', '#8ae8b2', '#96efb4',]}
 														start={{x: 0, y: 0}}
@@ -184,3 +187,11 @@ const styles = StyleSheet.create({
 		marginTop: height * 0.1
 	}
 });
+
+export default connect(
+	state => ({
+		username:state.username,
+		password:state.password
+	}),
+	dispatch => bindActionCreators(types, dispatch)
+)(Loader);

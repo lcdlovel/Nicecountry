@@ -43,8 +43,10 @@ export default class HomePage extends Component<Props> {
 			newsType: ['美丽乡村', '优美环境', '特色产业', '乡村文明']
 		}
 	}
-
-	/*页面模块功能构建*/
+	componentWillMount(){
+		console.log(global.User_msg)
+	}
+	/**页面模块功能构建*/
 	_moduleConstrator(data) {
 		const {navigation} = this.props
 		return (
@@ -63,7 +65,7 @@ export default class HomePage extends Component<Props> {
 		)
 	}
 
-	/*新闻列表头部构建*/
+	/**新闻列表头部构建*/
 	_newListHeaderComponent() {
 		return (
 			<View style={styles.news_list}>
@@ -80,7 +82,7 @@ export default class HomePage extends Component<Props> {
 		)
 	}
 
-	/*新闻列表构建函数*/
+	/**新闻列表构建函数*/
 	_newListItem(data) {
 		return (
 			<View style={styles.news_list}>
@@ -100,7 +102,7 @@ export default class HomePage extends Component<Props> {
 		)
 	}
 
-	/*美丽乡村不同类型函数构建*/
+	/**美丽乡村不同类型函数构建*/
 	_newTypeList(data) {
 		return (
 			<View style={{marginTop: 8,width:width}}>
@@ -115,7 +117,7 @@ export default class HomePage extends Component<Props> {
 		)
 	}
 
-	/*不同新闻标题的信息*/
+	/**不同新闻标题的信息*/
 	_newTypeTitle(item, index) {
 		return (
 			<View key={item} style={styles.news_title_head}>
@@ -126,7 +128,7 @@ export default class HomePage extends Component<Props> {
 			</View>
 		)
 	}
-
+	/** 最下列中不同新闻列表的横向滚动事件*/
 	OnScroll(event) {
 		let offsetX = parseInt(event.nativeEvent.contentOffset.x)
 		let screenWidth = parseInt(width)
@@ -148,11 +150,11 @@ export default class HomePage extends Component<Props> {
 				<View style={styles.areaMsg}>
 					<View style={styles.hf_item}>
 						<Image source={require('../../assets/images/region.png')} style={styles.hf_icon}/>
-						<Text style={styles.hf_font}>当前区域:</Text>
+						<Text style={styles.hf_font}>当前区域:{global.User_msg.regionName}</Text>
 					</View>
 					<View style={styles.hf_item}>
 						<Image source={require('../../assets/images/news.png')} style={styles.hf_icon}/>
-						<Text>{1}</Text>
+						<Text style={styles.msg_num}>{1}</Text>
 					</View>
 				</View>
 				<ScrollView>
@@ -370,6 +372,20 @@ const styles = StyleSheet.create({
 	},
 	activeFont: {
 		color: '#000'
+	},
+	msg_num:{
+		paddingLeft:6,
+		paddingRight:6,
+		height: 10,
+		borderRadius:4,
+		backgroundColor:'#fd5b5b',
+		color:'#ffffff',
+		position:'absolute',
+		right:4,
+		top:-5,
+		fontSize:8,
+		textAlign:'center',
+		lineHeight:10
 	}
 });
 
