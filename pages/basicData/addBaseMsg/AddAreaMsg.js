@@ -15,93 +15,94 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import global from "../../../utils/global/global";
+import CrudApi from "../../../utils/request/crud";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width} = dimensions.get('window')
 type Props = {};
-const groupName = '';
+let areaData = new Map();
 export default class AddAreaMsg extends Component<Props> {
-	constructor(props)
-	{
+	constructor(props) {
 		super(props);
 		this.state = {
-			groupName:'',
-			orderNum:'',
-			remark:'',
+			groupName: '',
+			orderNum: '',
+			remark: '',
 		}
 	}
-	componentDidMount(){
-		this.props.navigation.setParams({requestData:this.state})
+
+	componentDidMount() {
+		this.props.navigation.setParams({requestData: this.state})
 	}
+
 	static navigationOptions = (props) => {
 		const {params} = props.navigation.state
 		return {
-			headerRight:(
+			headerRight: (
 				<TouchableOpacity
 					onPress={() => {
-						console.log('调用自身的title')
-						console.log(groupName)}
+						console.log(areaData)
+						}
 					}
 				>
-				<Text>发送</Text>
-			</TouchableOpacity>),
+					<Text>发送</Text>
+				</TouchableOpacity>),
 		}
 	}
 
 
-render()
-{
-	return (
-		<View style={styles.container}>
-			<View>
-				<View style={styles.fill_zu}>
-					<View style={styles.point}></View>
-					<Text style={styles.itemName}>组名称</Text>
+	render() {
+		return (
+			<View style={styles.container}>
+				<View>
+					<View style={styles.fill_zu}>
+						<View style={styles.point}></View>
+						<Text style={styles.itemName}>组名称</Text>
+					</View>
+					<View style={styles.input}>
+						<TextInput placeholder='请输入'
+											 placeholderTextColor='#9c9c9c'
+											 selectionColor='#9c9c9c'
+											 onChangeText={(text) => {
+												 areaData.set('groupName',text)
+											 }}
+											 style={styles.text_Input}/>
+					</View>
 				</View>
-				<View style={styles.input}>
-					<TextInput placeholder='请输入'
-										 placeholderTextColor='#9c9c9c'
-										 selectionColor='#9c9c9c'
-										 onChangeText={(text)=>{
-											 groupName = text
-										 }}
-										 style={styles.text_Input}/>
+				<View>
+					<View style={styles.fill_zu}>
+						<View style={styles.point}></View>
+						<Text style={styles.itemName}>序号</Text>
+					</View>
+					<View style={styles.input}>
+						<TextInput placeholder='请输入'
+											 placeholderTextColor='#9c9c9c'
+											 selectionColor='#9c9c9c'
+											 onChangeText={(text) => {
+												 areaData.set('orderNum',text)
+											 }}
+											 style={styles.text_Input}/>
+					</View>
+				</View>
+				<View>
+					<View style={styles.fill_zu}>
+						<View style={styles.point}></View>
+						<Text style={styles.itemName}>备注</Text>
+					</View>
+					<View style={styles.input}>
+						<TextInput placeholder='请输入'
+											 placeholderTextColor='#9c9c9c'
+											 selectionColor='#9c9c9c'
+											 onChangeText={(text) => {
+												 areaData.set('remark',text)
+											 }}
+											 style={styles.text_Input}/>
+					</View>
 				</View>
 			</View>
-			<View>
-				<View style={styles.fill_zu}>
-					<View style={styles.point}></View>
-					<Text style={styles.itemName}>序号</Text>
-				</View>
-				<View style={styles.input}>
-					<TextInput placeholder='请输入'
-										 placeholderTextColor='#9c9c9c'
-										 selectionColor='#9c9c9c'
-										 onChangeText={(text)=>{
-											 this.setState({orderNum:text})
-										 }}
-										 style={styles.text_Input}/>
-				</View>
-			</View>
-			<View>
-				<View style={styles.fill_zu}>
-					<View style={styles.point}></View>
-					<Text style={styles.itemName}>备注</Text>
-				</View>
-				<View style={styles.input}>
-					<TextInput placeholder='请输入'
-										 placeholderTextColor='#9c9c9c'
-										 selectionColor='#9c9c9c'
-										 onChangeText={(text)=>{
-											 this.setState({remark:text})
-										 }}
-										 style={styles.text_Input}/>
-				</View>
-			</View>
-		</View>
-	);
-}
+		);
+	}
 }
 
 const styles = StyleSheet.create({

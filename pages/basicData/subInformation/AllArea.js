@@ -30,7 +30,9 @@ export default class allArea extends Component<Props> {
 			text: '',
 		}
 	}
-
+	componentWillMount(){
+		const {url} = this.props.navigation.state.params
+	}
 	render() {
 		const {underNavigations} = this.props.navigation.state.params
 		const slideAnimation = new SlideAnimation({slideFrom: 'bottom',});

@@ -236,12 +236,14 @@ export const AppStackNavgator = createStackNavigator({
 	// 		header:null
 	// 	}
 	// },
-	// Loader:{
-	// 	screen:Loader,
-	// 	navigationOptions:{
-	// 		header:null
-	// 	}
-	// },
+	/**登录页面*/
+	Loader:{
+		screen:Loader,
+		navigationOptions:{
+			header:null
+		}
+	},
+	/**主页面*/
 	Home: {
 		screen: Home,
 		navigationOptions: {

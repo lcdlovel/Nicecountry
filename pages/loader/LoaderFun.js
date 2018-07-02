@@ -20,4 +20,23 @@ export default class loaderFun {
 			})
 		})
 	}
+	static addData(){
+		CrudApi.postInfo({
+			url:'PersonBaseInfo/addPersonBaseInfo',
+			data:{
+				personTypeId:1,
+				name:'love$l',
+				sex:1,
+				culturalLevel:'高中',
+				msg:'添加数据',
+				lowIncomeHousehold:true,
+				fiveGuaranteesHousehold:false,
+				difficultHousehold:true,
+				isVeterans:false,
+				other:false
+			}
+		}).then(res=>{
+			console.log(res)
+		})
+	}
 }

@@ -21,7 +21,7 @@ import global from "../../utils/global/global";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as types from '../../Redux/constans/loginType';
-import loginAction from '../../Redux/actions/loginAction'
+import login from '../../Redux/actions/loginAction'
 let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width, height} = dimensions.get('window')
@@ -72,7 +72,7 @@ class Loader extends Component<Props> {
 						<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/password.png')}/>
 						<TextInput
 							style={styles.textInput}
-							onChangeText={(password) => store.dispatch(password)}
+							onChangeText={(password) => this.setState({password: password})}
 							placeholder='请输入密码'
 							secureTextEntry={this.state.secureTextEntry}
 							underlineColorAndroid='transparent'
@@ -92,9 +92,10 @@ class Loader extends Component<Props> {
 					<TouchableOpacity
 						onPress={() => {
 							navigation.dispatch(resetAction)
-							loaderFun.signIn(this.state).then(() => {
-								navigation.navigate('HomePage')
-							})
+							loaderFun.addData()
+							// loaderFun.signIn(this.state).then(() => {
+							// 	navigation.navigate('HomePage')
+							// })
 						}}>
 						<LinearGradient colors={['#70daad', '#8ae8b2', '#96efb4',]}
 														start={{x: 0, y: 0}}
