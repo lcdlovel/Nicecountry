@@ -73,7 +73,7 @@ class Loader extends Component<Props> {
 						<TextInput
 							style={styles.textInput}
 							onChangeText={(password) => this.setState({password: password})}
-							placeholder='请输入密码'
+							placeholder = '请输入密码'
 							secureTextEntry={this.state.secureTextEntry}
 							underlineColorAndroid='transparent'
 							value={this.state.password}
@@ -92,18 +92,16 @@ class Loader extends Component<Props> {
 					<TouchableOpacity
 						onPress={() => {
 							navigation.dispatch(resetAction)
-							loaderFun.addData()
-							// loaderFun.signIn(this.state).then(() => {
-							// 	navigation.navigate('HomePage')
-							// })
+							// loaderFun.addData()
+							loaderFun.signIn(this.state).then(() => {
+								navigation.navigate('HomePage')
+							})
 						}}>
 						<LinearGradient colors={['#70daad', '#8ae8b2', '#96efb4',]}
 														start={{x: 0, y: 0}}
 														end={{x: 1, y: 0}}
 														style={styles.load_btn}>
-							<Text style={styles.load_btn_font}
-
-							>登录</Text>
+							<Text style={styles.load_btn_font}>登录</Text>
 						</LinearGradient>
 					</TouchableOpacity>
 					<Text style={{

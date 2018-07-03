@@ -20,6 +20,7 @@ import {
 
 import Banner2 from './banner/Banner2'
 import global from "../../utils/global/global";
+import loaderFun from "../loader/LoaderFun";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -152,10 +153,16 @@ export default class HomePage extends Component<Props> {
 						<Image source={require('../../assets/images/region.png')} style={styles.hf_icon}/>
 						<Text style={styles.hf_font}>当前区域:{global.User_msg.regionName}</Text>
 					</View>
+					<TouchableOpacity
+						onPress={()=>{
+							loaderFun.addData()
+						}}
+					>
 					<View style={styles.hf_item}>
 						<Image source={require('../../assets/images/news.png')} style={styles.hf_icon}/>
 						<Text style={styles.msg_num}>{1}</Text>
 					</View>
+					</TouchableOpacity>
 				</View>
 				<ScrollView>
 					{/*轮播图*/}

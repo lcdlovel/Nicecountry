@@ -15,7 +15,7 @@ import CreateMsg from '../pages/msgInformation/CreatMsg'
 import MsgSended from '../pages/msgInformation/MsgSended'
 import ReceviedChecked from '../pages/repeatCheck/SelfCheck/ReceivedCheck'
 import ConfirmedCheck from '../pages/repeatCheck/SelfCheck/ConfirmedCheck'
-import ReceivedCheck from '../pages/setUp/SetUp/RevisePassWord'
+import RevisePassWord from '../pages/setUp/SetUp/RevisePassWord'
 import QrCodeDown from '../pages/setUp/SetUp/QrCodeDown'
 import AllArea from '../pages/basicData/subInformation/AllArea'
 import WorkNewsList from '../pages/NewsList/WorkNewsList'
@@ -44,6 +44,7 @@ import queryTabData from "../pages/checkScore/RecoScore/queryTabData";
 import SelfRating from "../pages/checkScore/RecoScore/SelfRating";
 import Selfexamination from "../pages/checkScore/Selfexamination/Selfexamination";
 import OptRegion from "../pages/checkScore/Selfexamination/OptRegion";
+import MyMsg from "../pages/setUp/SetUp/MyMsg";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -200,6 +201,7 @@ export const CheckReceviedCheck = createMaterialTopTabNavigator({
 		inactiveTintColor: '#aaa',
 	}
 })
+
 export const ReceviedCheck = createMaterialTopTabNavigator({
 	ReceviedChecked: {
 		screen: ReceviedChecked,
@@ -237,12 +239,12 @@ export const AppStackNavgator = createStackNavigator({
 	// 	}
 	// },
 	/**登录页面*/
-	Loader:{
-		screen:Loader,
-		navigationOptions:{
-			header:null
-		}
-	},
+	// Loader:{
+	// 	screen:Loader,
+	// 	navigationOptions:{
+	// 		header:null
+	// 	}
+	// },
 	/**主页面*/
 	Home: {
 		screen: Home,
@@ -431,6 +433,11 @@ export const AppStackNavgator = createStackNavigator({
 					flex: 1,
 					textAlign: 'center'
 				},
+				headerRight:(
+					<TouchableOpacity>
+						<Text>发送</Text>
+					</TouchableOpacity>
+				),
 				headerStyle: {
 					backgroundColor: '#ffffff'
 				},
@@ -510,7 +517,6 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
-	/**/
 	/**保洁人员的信息下*/
 	AllCleaner: {
 		screen: AllCleaner,
@@ -909,57 +915,80 @@ export const AppStackNavgator = createStackNavigator({
 		}
 	},
 	/**设置下的三个选项*/
-	ReceivedCheck: {
-		screen: ReceivedCheck,
+		/**修改密码*/
+	RevisePassWord: {
+		screen: RevisePassWord,
 		navigationOptions: (props) => {
+			const {params} = props.navigation.state
 			return {
 				title: '修改密码',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#666666',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
 				},
 			}
 		}
 	},
+		/**二维码下载*/
 	QrCodeDown: {
 		screen: QrCodeDown,
 		navigationOptions: (props) => {
+			const {params} = props.navigation.state
 			return {
 				title: '二维码下载',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#666666',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
 				},
 			}
 		}
 	},
-	ReceviedCheck: {
-		screen: ReceviedCheck,
+		/**我的信息*/
+	MyMsg:{
+		screen: MyMsg,
 		navigationOptions: (props) => {
+			const {params} = props.navigation.state
 			return {
-				title: '自查任务',
+				title: '我的信息',
 				headerTitleStyle: {
-					color: '#ffffff',
+					color: '#666666',
 					fontSize: 15,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#2bc39a'
+					backgroundColor: '#ffffff'
 				},
 			}
 		}
 	},
+	// ReceviedCheck: {
+	// 	screen: ReceviedCheck,
+	// 	navigationOptions: (props) => {
+	// 		return {
+	// 			title: '自查任务',
+	// 			headerTitleStyle: {
+	// 				color: '#ffffff',
+	// 				fontSize: 15,
+	// 				flex: 1,
+	// 				textAlign: 'center'
+	// 			},
+	// 			headerStyle: {
+	// 				backgroundColor: '#2bc39a'
+	// 			},
+	// 		}
+	// 	}
+	// },
 	/**新闻列表组件*/
 	WorkNewsList: {
 		screen: WorkNewsList,

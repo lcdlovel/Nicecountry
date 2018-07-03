@@ -11,7 +11,7 @@ import {
 	Text,
 	View,
 	TextInput,
-	Image
+	Image,
 } from 'react-native';
 import global from "../../../utils/global/global";
 //获取屏幕信息
@@ -30,17 +30,16 @@ export default class AddManMsg extends Component<Props> {
 			<View style={styles.container}>
 				<View>
 					{/*类别行*/}
-					<View style={styles.fill_zu}>
-						<View style={styles.point}></View>
-						<Text style={styles.itemName}>类别</Text>
-					</View>
-					<View>
-						<View style={styles.chooseCase}>
-
-						</View>
-						<Text style={styles.perponType_name}>保洁员</Text>
-					</View>
-
+					{/*<View style={styles.fill_zu}>*/}
+						{/*<View style={styles.point}></View>*/}
+						{/*<Text style={styles.itemName}>类别</Text>*/}
+					{/*</View>*/}
+					{/*<View>*/}
+						{/*<View style={styles.chooseCase}>*/}
+						{/**/}
+						{/*</View>*/}
+						{/*<Text style={styles.perponType_name}>保洁员</Text>*/}
+					{/*</View>*/}
 					{/*姓名行*/}
 					<View style={styles.fill_zu}>
 						<View style={styles.point}></View>

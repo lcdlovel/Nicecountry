@@ -27,6 +27,7 @@ export default class loaderFun {
 				personTypeId:1,
 				name:'love$l',
 				sex:1,
+				birthday: Date(),
 				culturalLevel:'高中',
 				msg:'添加数据',
 				lowIncomeHousehold:true,

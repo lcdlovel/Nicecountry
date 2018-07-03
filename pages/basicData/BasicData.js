@@ -97,6 +97,7 @@ export default class BasicData extends Component<Props> {
 				}).then(res=>{
 					res.forEach((value)=>{
 						value['navigation'] = 'MsgList'
+						value['headList'] = ['名称','村名称','组名称']
 					})
 					this.setState({listData:res})
 				})

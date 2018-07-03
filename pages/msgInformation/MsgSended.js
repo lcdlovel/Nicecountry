@@ -11,7 +11,8 @@ import {
 	Text,
 	View,
 	Image,
-	FlatList
+	FlatList,
+	TouchableOpacity
 } from 'react-native';
 import global from "../../utils/global/global";
 //获取屏幕信息
@@ -24,16 +25,22 @@ export default class MsgSended extends Component<Props> {
 		super(props);
 		this.state = {
 			itemData:[
-				{name:'密码修改',pointColor:false},
-				{name:'二维码下载',pointColor:false},
-				{name:'我的信息',pointColor:true}
-
+				{name:'密码修改',pointColor:false,navigation:'RevisePassWord'},
+				{name:'二维码下载',pointColor:false,navigation:'QrCodeDown'},
+				{name:'我的信息',pointColor:true,navigation:'MyMsg'}
 			]
 		}
 	}
 
 	_rowItem(item) {
+		const {navigation} = this.props
 		return (
+			<TouchableOpacity
+				activeOpacity={0.8}
+				onPress={()=>{
+					navigation.navigate(item.navigation)
+				}}
+			>
 			<View style={styles.my_item}>
 				<View style={styles.my_item_left}>
 					<View style={[styles.my_item_point , item.pointColor?styles.pointColor:'']}>
@@ -42,10 +49,12 @@ export default class MsgSended extends Component<Props> {
 				</View>
 				<Image style={styles.my_item_arrow} source={require('../../assets/images/small-Return.png')}/>
 			</View>
+			</TouchableOpacity>
 		)
 	}
 
 	render() {
+		const {navigation} = this.props
 		return (
 			<View style={styles.container}>
 				<View style={styles.my_head}>
@@ -77,14 +86,20 @@ export default class MsgSended extends Component<Props> {
 						ItemSeparatorComponent={()=> <View style={styles.line}></View>}
 						renderItem={({item}) => this._rowItem(item)}
 					/>
-
+					<TouchableOpacity
+					activeOpacity={0.8}
+					onPress={()=>{
+						navigation.navigate('RevisePassWord')
+					}}
+					>
 					<View style={styles.my_item}>
 						<View style={styles.my_item_left}>
 							<View style={[styles.my_item_point,styles.none]}></View>
-							<Text style={styles.my_item_left}>密码修改</Text>
+							<Text style={styles.my_item_left}>退出登录</Text>
 						</View>
 						<Image style={[styles.my_item_arrow,styles.none]} source={require('../../assets/images/small-Return.png')}/>
 					</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 		);

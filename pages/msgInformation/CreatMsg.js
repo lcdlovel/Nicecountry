@@ -46,6 +46,7 @@ _itemconstroct(item){
 }
 	render() {
 		return (
+			<ScrollView>
 			<View style={styles.container}>
 				<View style={styles.rt_img}>
 					<Image resizeMode='cover'  source={require('../../assets/images/Report-backimg.jpg')} style={styles.rt_img}/>
@@ -54,6 +55,7 @@ _itemconstroct(item){
 					{this.state.itemData.map(item =>this._itemconstroct(item) )}
 				</View>
 			</View>
+			</ScrollView>
 		);
 	}
 }
