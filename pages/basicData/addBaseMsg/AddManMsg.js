@@ -12,8 +12,12 @@ import {
 	View,
 	TextInput,
 	Image,
+	ScrollView
 } from 'react-native';
 import global from "../../../utils/global/global";
+import DatePicker from 'react-native-datepicker'
+import Describe from '../../common/Describe'
+import PickPhoto from '../../common/PickPhoto'
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -22,11 +26,18 @@ type Props = {};
 export default class AddManMsg extends Component<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+			date:'',
+			describe:''
+		}
 	}
-
+	changeDescribe(val){
+		this.setState({describe:val})
+		console.log(this.state.describe)
+	}
 	render() {
 		return (
+			<ScrollView>
 			<View style={styles.container}>
 				<View>
 					{/*类别行*/}
@@ -56,13 +67,14 @@ export default class AddManMsg extends Component<Props> {
 					</View>
 					<View style={styles.sex}>
 						<View style={styles.sexItem}>
-							<Image/>
-							<Text>男</Text>
+							<Image source={require('../../../assets/icons/male.png')} style={styles.sex_icon}/>
+							<Text style={[styles.sex_name]}>男</Text>
 						</View>
 						<View style={styles.sexItem}>
-							<Image/>
-							<Text>女</Text>
+							<Image source={require('../../../assets/icons/female.png')} style={styles.sex_icon}/>
+							<Text style={[styles.sex_name]}>女</Text>
 						</View>
+						<Text>(点击字即可)</Text>
 					</View>
 
 					{/*出生日期行*/}
@@ -71,7 +83,28 @@ export default class AddManMsg extends Component<Props> {
 						<Text style={styles.itemName}>出生日期</Text>
 					</View>
 					<View style={styles.date_row}>
-
+						<DatePicker
+							style={{width: 80,height:30,marginBottom:0}}
+							date={this.state.date}
+							mode="date"
+							placeholder="请选择"
+							format="YYYY-MM-DD"
+							minDate="2016-05-01"
+							maxDate="2016-06-01"
+							confirmBtnText="Confirm"
+							cancelBtnText="Cancel"
+							customStyles={{
+								dateIcon: {
+									display:'none'
+								},
+								dateInput: {
+									borderWidth:0,
+									height:15
+								}
+								// ... You can check the source to find the other keys.
+							}}
+							onDateChange={(date) => {this.setState({date: date})}}
+						/>
 					</View>
 					{/*文化水平行*/}
 					<View style={styles.fill_zu}>
@@ -97,11 +130,14 @@ export default class AddManMsg extends Component<Props> {
 						<Text style={styles.itemName}>描述</Text>
 					</View>
 					<View style={styles.describe}>
-
+						<Describe changeDescribe={this.changeDescribe.bind(this)} fontLength={this.state.describe.length} maxLength={300}/>
 					</View>
-					<View style={styles.photo}></View>
+					<View style={styles.photo}>
+						<PickPhoto maxLength={4}/>
+					</View>
 				</View>
 			</View>
+			</ScrollView>
 		);
 	}
 }
@@ -128,10 +164,13 @@ const styles = StyleSheet.create({
 		flex:0,
 		flexDirection:'row',
 		// justifyContent:'center',
-		alignItems:'center'
+		alignItems:'center',
+		marginTop:8,
 	},
 	input:{
-		marginLeft:7
+		marginLeft:7,
+		borderBottomWidth:0.5,
+		borderColor:'#9c9c9c',
 	},
 	chooseCase:{
 		// width: 132,
@@ -146,19 +185,36 @@ const styles = StyleSheet.create({
 	},
 	sex:{
 		flex:0,
-		flexDirection:'row'
+		flexDirection:'row',
+		paddingLeft:16,
+		marginTop:10,
+		marginBottom:10
 	},
 	sexItem:{
 		flex:0,
-		flexDirection:'row'
+		flexDirection:'row',
+		marginRight:20,
+	},
+	sex_name:{
+		marginLeft:15
 	},
 	date_row:{
-
+		borderBottomWidth:1,
+		borderColor:'#9c9c9c',
+		marginLeft:10
 	},
 	describe:{
 
 	},
 	photo:{
 
+	},
+	sex_icon:{
+		width: 20,
+		height: 20
+	},
+	text_Input:{
+		paddingBottom:1,
+		paddingTop:1
 	}
 });

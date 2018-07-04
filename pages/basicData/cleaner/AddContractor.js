@@ -17,6 +17,7 @@ import {
 import Point from '../../common/Point'
 import ImgList from '../../common/ImgList'
 import global from "../../../utils/global/global";
+import {PickPhoto,Describe} from '../../common'
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -25,13 +26,18 @@ type Props = {};
 export default class AddContractor extends Component<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+			describe:''
+		}
 	}
-
+	changeDescribe(val){
+		this.setState({describe:val})
+		console.log(this.state.describe)
+	}
 	render() {
 		return (
-			<ScrollView>
-			<View style={styles.container}>
+
+			<ScrollView style={styles.container}>
 				<View style={styles.contractMsg}>
 					<Text style={styles.zuName}>熊庄村(熊庄组)熊庄组户数哈哈哈哈哈哈哈哈岂不是更方便</Text>
 					<Text style={styles.constractType}>分类:基础信息合同</Text>
@@ -47,25 +53,32 @@ export default class AddContractor extends Component<Props> {
 					<Point/>
 					<Text style={styles.name}>描述</Text>
 				</View>
-				<View style={styles.discribe}></View>
-				<View style={styles.pictrue}>
-					<View style={styles.two_choose}>
-						<View style={styles.choose_item}>
-							<Image resizeMode='contain' style={styles.img}
-										 source={require('../../../assets/report/Assessmentscale.png')}/>
-							<Text style={styles.font}>拍照</Text>
-						</View>
-						<View style={styles.choose_item}>
-							<Image resizeMode='contain' style={styles.img}
-										 source={require('../../../assets/report/Assessmentscale.png')}/>
-							<Text style={styles.font}>选择图片</Text>
-						</View>
-					</View>
+				<View style={styles.discribe}>
+					<Describe
+						changeDescribe={this.changeDescribe.bind(this)}
+						fontLength={this.state.describe.length}
+						maxLength={300}
+						customStyle={styles.describe}
+					/>
 				</View>
-				<Text style={styles.img_limit}>最多10张照片</Text>
-				<ImgList titleStyle={styles.title_style} imgsStyle={styles.imgs_style}
-								 url={require('../../../assets/News/201806141307.jpg')}/>
-			</View>
+				<PickPhoto maxLength={10}/>
+				{/*<View style={styles.pictrue}>*/}
+					{/*<View style={styles.two_choose}>*/}
+						{/*<View style={styles.choose_item}>*/}
+							{/*<Image resizeMode='contain' style={styles.img}*/}
+										 {/*source={require('../../../assets/report/Assessmentscale.png')}/>*/}
+							{/*<Text style={styles.font}>拍照</Text>*/}
+						{/*</View>*/}
+						{/*<View style={styles.choose_item}>*/}
+							{/*<Image resizeMode='contain' style={styles.img}*/}
+										 {/*source={require('../../../assets/report/Assessmentscale.png')}/>*/}
+							{/*<Text style={styles.font}>选择图片</Text>*/}
+						{/*</View>*/}
+					{/*</View>*/}
+				{/*</View>*/}
+				{/*<Text style={styles.img_limit}>最多10张照片</Text>*/}
+				{/*<ImgList titleStyle={styles.title_style} imgsStyle={styles.imgs_style}*/}
+								 {/*url={require('../../../assets/News/201806141307.jpg')}/>*/}
 			</ScrollView>
 		);
 	}

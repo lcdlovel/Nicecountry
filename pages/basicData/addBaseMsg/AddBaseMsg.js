@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Point from '../../common/Point'
 import global from "../../../utils/global/global";
+import Describe from '../../common/Describe'
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -22,7 +23,14 @@ type Props = {};
 export default class AddBaseMsg extends Component<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+			describe:''
+		}
+	}
+
+	changeDescribe(val){
+		this.setState({describe:val})
+		console.log(this.state.describe)
 	}
 
 	render() {
@@ -60,8 +68,13 @@ export default class AddBaseMsg extends Component<Props> {
 					<Point/>
 					<Text style={styles.row_name}>描述</Text>
 				</View>
-				<View style={styles.households_box}>
-					<View style={styles.remark_req}></View>
+				<View style={styles.describe_box}>
+					<Describe
+						changeDescribe={this.changeDescribe.bind(this)}
+						fontLength={this.state.describe.length}
+						maxLength={300}
+						customStyle={styles.describe}
+					/>
 				</View>
 			</View>
 		);
@@ -128,5 +141,12 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		borderWidth: 1,
 		borderColor: "#dddddd"
+	},
+	describe:{
+		width:0.95 * width
+	},
+	describe_box:{
+		flex:0,
+		alignItems:'center'
 	}
 });

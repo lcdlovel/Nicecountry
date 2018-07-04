@@ -30,6 +30,7 @@ type Props = {};
 
 export default class HomePage extends Component<Props> {
 	_flatList;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -44,9 +45,11 @@ export default class HomePage extends Component<Props> {
 			newsType: ['美丽乡村', '优美环境', '特色产业', '乡村文明']
 		}
 	}
-	componentWillMount(){
+
+	componentWillMount() {
 		console.log(global.User_msg)
 	}
+
 	/**页面模块功能构建*/
 	_moduleConstrator(data) {
 		const {navigation} = this.props
@@ -106,7 +109,7 @@ export default class HomePage extends Component<Props> {
 	/**美丽乡村不同类型函数构建*/
 	_newTypeList(data) {
 		return (
-			<View style={{marginTop: 8,width:width}}>
+			<View style={{marginTop: 8, width: width}}>
 				<FlatList
 					ItemSeparatorComponent={() => {
 						return (<View style={styles.item_separator}></View>)
@@ -121,27 +124,36 @@ export default class HomePage extends Component<Props> {
 	/**不同新闻标题的信息*/
 	_newTypeTitle(item, index) {
 		return (
-			<View key={item} style={styles.news_title_head}>
-				<Text style={[styles.news_typeTitle_item, this.state.Index == index ? styles.activeFont : '']}>
-					{item}
-				</Text>
-				<View style={[styles.underline, this.state.Index == index ? styles.active : '']}></View>
-			</View>
+			<TouchableOpacity
+				onPress={() => {
+					this._flatList.scrollToIndex({viewPosition: 0,index: index})
+				}}>
+				<View key={item} style={styles.news_title_head}>
+					<Text style={[styles.news_typeTitle_item, this.state.Index == index ? styles.activeFont : '']}>
+						{item}
+					</Text>
+					<View style={[styles.underline, this.state.Index == index ? styles.active : '']}></View>
+				</View>
+			</TouchableOpacity>
 		)
 	}
 	/** 最下列中不同新闻列表的横向滚动事件*/
 	OnScroll(event) {
 		let offsetX = parseInt(event.nativeEvent.contentOffset.x)
 		let screenWidth = parseInt(width)
-		if (offsetX >=3 * screenWidth) {
-			this.setState({Index: 3})
-		}else if (offsetX >= 2 * screenWidth) {
-			this.setState({Index: 2})
-		}else if (offsetX>=  screenWidth) {
-			this.setState({Index: 1})
-		}else {
-			this.setState({Index: 0})
-		}
+		offsetX >= 3 * screenWidth?this.setState({Index: 3}):
+			offsetX >= 2 * screenWidth?this.setState({Index: 2}):
+				offsetX >=  screenWidth?this.setState({Index: 1}):
+					this.setState({Index: 0})
+		// if (offsetX >=3 * screenWidth) {
+		// 	this.setState({Index: 3})
+		// }else if (offsetX >= 2 * screenWidth) {
+		// 	this.setState({Index: 2})
+		// }else if (offsetX>=  screenWidth) {
+		// 	this.setState({Index: 1})
+		// }else {
+		// 	this.setState({Index: 0})
+		// }
 	}
 	render() {
 		const {navigation} = this.props

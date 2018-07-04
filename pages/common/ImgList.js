@@ -25,9 +25,12 @@ export default class ImgList extends Component<Props> {
 			data:[0,1,2,3,4,5,6,7,8,9]
 		}
 	}
-
+	componentWillUpdate(){
+		console.log('图片列表')
+		console.log(this.props.imageList)
+	}
 	render() {
-		const {url} = this.props
+		const {imageList} = this.props
 		const {titleStyle,imgsStyle} = this.props
 		return (
 			<View style={styles.container}>
@@ -36,7 +39,7 @@ export default class ImgList extends Component<Props> {
 					<Text style={styles.header_text}>照片详情</Text>
 				</View>
 				<View style={[styles.imgs,imgsStyle]}>
-					{this.state.data.map(item => (<Image source={url} style={styles.example_img}/>))}
+					{imageList.map(item => (<Image source={item} style={styles.example_img}/>))}
 				</View>
 			</View>
 		);
