@@ -31,10 +31,11 @@ export default class OneCleanerMsg extends Component<Props> {
 
 	render() {
 		const {navigation} = this.props
+		const {personData} = this.props.navigation.state.params
 		return (
 			<ScrollView>
 				<View style={styles.container}>
-					<ShowDetailMsg></ShowDetailMsg>
+					<ShowDetailMsg detailMsg={personData}/>
 					<View style={styles.contract}>
 						<View style={styles.main_msg}>
 							<Image source={require('../../../assets/images/sign.png')} style={styles.sign}/>
@@ -43,7 +44,11 @@ export default class OneCleanerMsg extends Component<Props> {
 								<TouchableOpacity
 									activeOpacity={0.8}
 									onPress={() => {
-										navigation.navigate('ContractorList',{title:'合同列表', info: {headerList: ['名称', '村名称', '组名称']}})
+										navigation.navigate('ContractorList', {
+											title: '合同列表',
+											info: {headerList: ['名称', '村名称', '组名称']},
+											requestData: personData
+										})
 									}}
 								>
 									<View style={styles.msg_one}>
@@ -54,7 +59,7 @@ export default class OneCleanerMsg extends Component<Props> {
 								<TouchableOpacity
 									activeOpacity={0.8}
 									onPress={() => {
-										navigation.navigate('AddContractor',{title:this.props.navigation.state.params.title})
+										navigation.navigate('AddContractor', {title: this.props.navigation.state.params.title})
 									}}>
 									<View style={styles.msg_one}>
 										<Image source={require('../../../assets/report/Assessmentscale.png')} style={styles.msg_img}/>
@@ -68,23 +73,23 @@ export default class OneCleanerMsg extends Component<Props> {
 
 					</ShowExtraMsg>
 					{/*<View style={styles.contract_extra}>*/}
-						{/*<View style={styles.extraMsg}>*/}
+					{/*<View style={styles.extraMsg}>*/}
 
-						{/*</View>*/}
+					{/*</View>*/}
 					{/*</View>*/}
 				</View>
 			</ScrollView>
-	);
+		);
 	}
-	}
+}
 
-	const styles = StyleSheet.create({
-		container: {
+const styles = StyleSheet.create({
+	container: {
 		flex: 1,
 		backgroundColor: '#F5FCFF',
-		paddingBottom:20
+		paddingBottom: 20
 	},
-		main_msg: {
+	main_msg: {
 		width: 0.9 * width,
 		borderRadius: 6,
 		flex: 0,
@@ -97,65 +102,65 @@ export default class OneCleanerMsg extends Component<Props> {
 		// top: 20,
 		shadowColor: "rgba(0, 0, 0, 0.1)",
 		shadowOffset: {
-		width: 0,
-		height: 1
-	},
+			width: 0,
+			height: 1
+		},
 		shadowRadius: 10,
 		shadowOpacity: 1,
-		elevation:1,
+		elevation: 1,
 	},
-		sign: {
+	sign: {
 		width: 29,
 		height: 36,
 		position: 'absolute',
 		top: 0,
 		left: 15
 	},
-		contract:{
-		flex:0,
-		justifyContent:'center',
-		alignItems:'center',
+	contract: {
+		flex: 0,
+		justifyContent: 'center',
+		alignItems: 'center',
 		borderRadius: 7,
-		marginTop:15
+		marginTop: 15
 	},
-		contractMsg:{
-		flex:0,
-		width:0.9 * width,
-		flexDirection:'row',
-		justifyContent:'center',
+	contractMsg: {
+		flex: 0,
+		width: 0.9 * width,
+		flexDirection: 'row',
+		justifyContent: 'center',
 	},
-		msg_img:{
-		width:50,
-		height:40
+	msg_img: {
+		width: 50,
+		height: 40
 	},
-		msg_one:{
-		flex:0,
-		width:0.3 * width,
-		justifyContent:'center',
-		alignItems:'center'
+	msg_one: {
+		flex: 0,
+		width: 0.3 * width,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
-		extraMsg:{
+	extraMsg: {
 		width: 0.9 * width,
 		borderRadius: 6,
 		flex: 0,
-		height:100,
+		height: 100,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#ffffff',
 		shadowColor: "rgba(0, 0, 0, 0.1)",
 		shadowOffset: {
-		width: 0,
-		height: 1
-	},
+			width: 0,
+			height: 1
+		},
 		shadowRadius: 10,
 		shadowOpacity: 1,
-		elevation:1,
+		elevation: 1,
 	},
-		contract_extra:{
-		flex:0,
-		marginTop:15,
-		justifyContent:'center',
-		alignItems:'center',
-		height:100,
+	contract_extra: {
+		flex: 0,
+		marginTop: 15,
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 100,
 	}
-	});
+});

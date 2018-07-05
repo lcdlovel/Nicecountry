@@ -1,6 +1,7 @@
 import CrudApi from '../../utils/request/crud'
 import global from "../../utils/global/global";
 // const {navigation} = this.props
+const date = new Date()
 export default class loaderFun {
 	static signIn(data) {
 		const {username, password} = data
@@ -24,15 +25,16 @@ export default class loaderFun {
 		CrudApi.postInfo({
 			url:'PersonBaseInfo/addPersonBaseInfo',
 			data:{
+				regionId:global.User_msg.regionId,
 				personTypeId:1,
 				name:'love$l',
 				sex:1,
-				birthday: Date(),
+				birthday:Date.parse(date) ,
 				culturalLevel:'高中',
 				msg:'添加数据',
 				lowIncomeHousehold:true,
 				fiveGuaranteesHousehold:false,
-				difficultHousehold:true,
+				difficultHousehold:false,
 				isVeterans:false,
 				other:false
 			}

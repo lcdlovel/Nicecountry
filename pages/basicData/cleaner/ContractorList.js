@@ -14,6 +14,7 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import global from "../../../utils/global/global";
+import CrudApi from "../../../utils/request/crud";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -27,6 +28,20 @@ export default class ContractorList extends Component<Props> {
 			widthArr: [1 / 3 * width, 1 / 3 * width, 1 / 3 * width],
 			header: this.props.navigation.state.params.info.headerList,
 		}
+	}
+	componentWillMount(){
+		const {requestData} = this.props.navigation.state.params
+		console.log(requestData)
+		// CrudApi.getInfo({
+		// 	url:'Contract/findByPIdOrBIdAndCTypeId',
+		// 	data:{
+		// 		baseInfoId:requestData.id
+		// 	},
+		// 	callback:(res)=>{
+		// 		console.log('合同列表信息')
+		// 		console.log(res)
+		// 	}
+		// })
 	}
 	_headerColumn(item) {
 		return (

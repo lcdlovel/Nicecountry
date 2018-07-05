@@ -27,7 +27,7 @@ axios.interceptors.response.use(
       //     message = '请求错误'
       //   }
       // }
-     alert(message)
+     // alert(message)
       console.log(response.data)
       // 如果身份失效，则跳转到登陆界面
       // const {navigation} = this.props
@@ -44,7 +44,7 @@ axios.interceptors.response.use(
       (response.data.data.list === null ||
       response.data.data.list.length <= 0)) {
        let message =  '查询不到相关内容'
-			alert(message)
+			// alert(message)
       }
     return response
   },

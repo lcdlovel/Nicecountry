@@ -47,17 +47,18 @@ export default class Describe extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 0,
+		zIndex:-1,
 		alignItems: 'center',
 		height: 100,
 		backgroundColor: "#ffffff",
-		shadowColor: "rgba(0, 0, 0, 0.1)",
-		shadowOffset: {
-			width: 0,
-			height: 1
-		},
-		shadowRadius: 10,
-		shadowOpacity: 1,
-		elevation: 2,
+		// shadowColor: "rgba(0, 0, 0, 0.1)",
+		// shadowOffset: {
+		// 	width: 0,
+		// 	height: 1
+		// },
+		// shadowRadius: 10,
+		// shadowOpacity: 1,
+		// elevation: 2,
 		borderRadius: 7,
 		paddingBottom:15
 	},

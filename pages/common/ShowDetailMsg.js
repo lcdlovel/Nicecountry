@@ -24,19 +24,25 @@ export default class ShowDetailMsg extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			listData: [
-				{title: '村名称', content: '大马庄村代码村字多啊'},
-				{title: '组名称', content: '本村'},
-				{title: '报告人', content: '5sl001'},
-				{title: '姓名', content: '解百女'},
-				{title: '性别', content: '女'},
-				{title: '年龄', content: '61岁'},
-				{title: '文化水平', content: '小学'},
-				{title: '性质', content: '困难户'},
-			]
+			listData: ''
 		}
 	}
-
+componentWillMount(){
+		const {detailMsg} = this.props
+	console.log(detailMsg)
+		this.setState({
+			listData:[
+				{title: '村名称', content:detailMsg.villageName },
+				{title: '组名称', content: detailMsg.villageName},
+				{title: '报告人', content: detailMsg.reportUserId},
+				{title: '姓名', content: detailMsg.name},
+				{title: '性别', content: detailMsg.sex===1?'男':'女'},
+				{title: '年龄', content: detailMsg.age},
+				{title: '文化水平', content: detailMsg.culturalLevel},
+				{title: '性质', content: detailMsg.difficultHousehold?'困难户':detailMsg.fiveGuaranteesHousehold?'五保户':detailMsg.lowIncomeHousehold?'低保户':detailMsg.isVeterans?'退役军人':'其他'},
+			]
+		})
+}
 	_itemList(item) {
 		return (
 			<View style={styles.msg_item}>

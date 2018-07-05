@@ -81,9 +81,8 @@ export default class BasicData extends Component<Props> {
 				})
 				break;
 			case 'PersonBaseInfo':
-				this.baseMsgGet('PersonBaseInfo/findList',{
+				this.baseMsgGet('PersonBaseInfo/findStatisticsByPTypeId',{
 					regionId:global.User_msg.regionId,
-					personTypeId:1
 				}).then(res=>{
 					res.forEach((value)=>{
 						value['navigation'] = 'AllCleaner'

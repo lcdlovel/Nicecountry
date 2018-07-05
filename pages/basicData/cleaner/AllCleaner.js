@@ -24,6 +24,7 @@ export default class AllCleaner extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
+			requestData:'',
 			listData: [
 				{name: '男性', number: 1},
 				{name: '女性', number: 16},
@@ -50,6 +51,22 @@ export default class AllCleaner extends Component<Props> {
 			},
 			callback:(res)=>{
 				console.log(res)
+				this.setState({
+					listData:[
+						{name: '男性', number: res.data.male},
+						{name: '女性', number: res.data.female},
+						{name: '平均年龄', number:  res.data.averageAge}
+					],
+					listData2: [
+						{name: '低保户', number: res.data.lowIncomeHousehold},
+						{name: '五保户', number: res.data.fiveGuaranteesHousehold},
+						{name: '困难户', number: res.data.difficultHousehold},
+						{name: '退役军人', number: res.data.isVeterans},
+					],
+					listData3: [
+						{name: '其他', number: res.data.other},
+					]
+				})
 			}
 		})
 	}
@@ -75,7 +92,7 @@ export default class AllCleaner extends Component<Props> {
 				<TouchableOpacity
 					activeOpacity={0.8}
 					onPress={() => {
-						navigation.navigate('MsgList', {title: '保洁员信息', headList: ['姓名', '性别', '年龄']})
+						navigation.navigate('MsgList', {title: '保洁员信息', headList: ['姓名', '性别', '年龄'],requestUrl:'PersonBaseInfo/findListByPage'})
 					}}>
 					<View style={styles.header}>
 						<Text style={styles.header_item}>查看详情列表</Text>
