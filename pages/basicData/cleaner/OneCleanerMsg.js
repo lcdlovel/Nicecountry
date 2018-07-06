@@ -59,7 +59,7 @@ export default class OneCleanerMsg extends Component<Props> {
 								<TouchableOpacity
 									activeOpacity={0.8}
 									onPress={() => {
-										navigation.navigate('AddContractor', {title: this.props.navigation.state.params.title})
+										navigation.navigate('AddContractor', {title: this.props.navigation.state.params.title,showData:personData})
 									}}>
 									<View style={styles.msg_one}>
 										<Image source={require('../../../assets/report/Assessmentscale.png')} style={styles.msg_img}/>
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
 		flex: 0,
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginBottom:1,
 		backgroundColor: '#ffffff',
 		paddingTop: 20,
 		paddingBottom: 20,

@@ -35,12 +35,13 @@ export default class AddContractor extends Component<Props> {
 		console.log(this.state.describe)
 	}
 	render() {
+		const {showData} = this.props.navigation.state.params
 		return (
 
 			<ScrollView style={styles.container}>
 				<View style={styles.contractMsg}>
-					<Text style={styles.zuName}>熊庄村(熊庄组)熊庄组户数哈哈哈哈哈哈哈哈岂不是更方便</Text>
-					<Text style={styles.constractType}>分类:基础信息合同</Text>
+					<Text style={styles.zuName}>{showData.villageName+'('+showData.groupName+')'+showData.name}</Text>
+					<Text style={styles.constractType}>分类:{}</Text>
 				</View>
 				<View style={styles.title}>
 					<Point/>
@@ -61,7 +62,10 @@ export default class AddContractor extends Component<Props> {
 						customStyle={styles.describe}
 					/>
 				</View>
-				<PickPhoto maxLength={10}/>
+				<View style={{paddingLeft:10}}>
+					<PickPhoto maxLength={10}/>
+				</View>
+
 				{/*<View style={styles.pictrue}>*/}
 					{/*<View style={styles.two_choose}>*/}
 						{/*<View style={styles.choose_item}>*/}

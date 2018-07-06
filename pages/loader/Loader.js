@@ -80,13 +80,11 @@ class Loader extends Component<Props> {
 						/>
 						<TouchableOpacity
 							activeOpacity={0.8}
-							onPressIn={() => {
-								this.setState({secureTextEntry: false})
+							onPress={() => {
+								this.setState({secureTextEntry: !this.state.secureTextEntry})
 							}}
-							onPressOut={() => {
-								this.setState({secureTextEntry: true})
-							}}>
-							<Image style={styles.manIocn} resizeMode='contain' source={require('../../assets/images/display.png')}/>
+						>
+							<Image style={styles.manIocn} resizeMode='contain' source={this.state.secureTextEntry?require('../../assets/images/display.png'):require('../../assets/images/Donotdisplay.png')}/>
 						</TouchableOpacity>
 					</View>
 					<TouchableOpacity
@@ -141,7 +139,7 @@ const styles = StyleSheet.create({
 		flex: 0,
 		flexDirection: 'row',
 		alignItems: 'center',
-		width: 300,
+		// width: 300,
 		height: 50,
 		// borderRadius: 30,
 		borderBottomWidth: 0.5,

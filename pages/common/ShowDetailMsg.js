@@ -33,7 +33,7 @@ componentWillMount(){
 		this.setState({
 			listData:[
 				{title: '村名称', content:detailMsg.villageName },
-				{title: '组名称', content: detailMsg.villageName},
+				{title: '组名称', content: detailMsg.groupName},
 				{title: '报告人', content: detailMsg.reportUserId},
 				{title: '姓名', content: detailMsg.name},
 				{title: '性别', content: detailMsg.sex===1?'男':'女'},

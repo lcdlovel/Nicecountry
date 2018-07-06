@@ -27,21 +27,22 @@ export default class ContractorList extends Component<Props> {
 			tableHead: ['Head', 'Head2', 'Head3'],
 			widthArr: [1 / 3 * width, 1 / 3 * width, 1 / 3 * width],
 			header: this.props.navigation.state.params.info.headerList,
+			listData:''
 		}
 	}
 	componentWillMount(){
 		const {requestData} = this.props.navigation.state.params
-		console.log(requestData)
-		// CrudApi.getInfo({
-		// 	url:'Contract/findByPIdOrBIdAndCTypeId',
-		// 	data:{
-		// 		baseInfoId:requestData.id
-		// 	},
-		// 	callback:(res)=>{
-		// 		console.log('合同列表信息')
-		// 		console.log(res)
-		// 	}
-		// })
+		// console.log(requestData)
+		CrudApi.getInfo({
+			url:'Contract/findByPIdOrBId',
+			data:{
+				personId:requestData.id
+			},
+			callback:(res)=>{
+				console.log('合同列表信息')
+				console.log(res)
+			}
+		})
 	}
 	_headerColumn(item) {
 		return (
@@ -73,7 +74,6 @@ export default class ContractorList extends Component<Props> {
 				}}
 			>
 				<View style={styles.bd_tabContent}>
-					{}
 					<View style={styles.bd_tabItem}><Text>{item.name}</Text></View>
 					<View style={[styles.bd_tabItem]}><Text>{item.size}</Text></View>
 					<View style={styles.bd_tabItem}><Text>{item.number}</Text></View>
@@ -81,13 +81,12 @@ export default class ContractorList extends Component<Props> {
 			</TouchableOpacity>
 		)
 	}
+// {name:'解百女',size:'信服村',number:'不信服组',navigation:'Contractor'}
 	render() {
 		return (
 			<View style={styles.container}>
 				<FlatList
-					data={[
-						{name:'解百女',size:'信服村',number:'不信服组',navigation:'Contractor'}
-					]}
+					data={this.state.listData}
 					ListHeaderComponent={() => this._headRow()}
 					renderItem={({item}) => this._rowItem(item)}
 					ItemSeparatorComponent={() => <View style={styles.line}></View>}

@@ -15,6 +15,7 @@ export default {
 		fontColor:'#666666',
 		screenColor:'#fafafa'
 	},
+	uploadUrl:'http://192.168.0.128:9090/beautifulCountry-v2.0/File/upload',
 	changeUnix (unixTime) {
 		let date = new Date(unixTime)
 		let Y = ''

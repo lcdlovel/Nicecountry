@@ -14,7 +14,9 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import ImaList from '../common/ImgList'
+import global from "../../utils/global/global";
 var ImagePicker = require('react-native-image-picker');
+import axios from 'axios'
 var options = {
 	title: '请选择图片来源',
 	cancelButtonTitle:'取消',
@@ -34,6 +36,7 @@ let dimensions = require('Dimensions')
 let {width} = dimensions.get('window')
 type Props = {};
 let imageList = []
+let uploadImg = []
 export default class PickPhoto extends Component<Props> {
 	constructor(props) {
 		super(props);
@@ -43,7 +46,6 @@ export default class PickPhoto extends Component<Props> {
 		}
 	}
 	choosePic(response){
-			console.log('Response = ', response);
 			if (response.didCancel) {
 				console.log('用户取消了选择！');
 			}
@@ -57,9 +59,25 @@ export default class PickPhoto extends Component<Props> {
 				let source = { uri: response.uri };
 				imageList.push(source)
 				this.setState({imageList:imageList})
+				this.uploadImg(response)
 				// You can also display the image using data:
 				// let source = { uri: 'data:image/jpeg;base64,' + response.data };
 			}
+	}
+	uploadImg(request){
+		let formData = new FormData();
+		let file = {uri: request.uri, type: 'multipart/form-data', name: 'image.png'};
+
+		formData.append("pic",file);
+		console.log(formData)
+		fetch(global.uploadUrl, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'multipart/form-data;charset=utf-8',
+				'token': global.token
+			},
+			body: formData,
+		}).then((res)=>{res.json()}).then(res => console.log(res))
 	}
 	render() {
 		return (

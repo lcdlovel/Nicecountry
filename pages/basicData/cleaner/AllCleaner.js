@@ -96,8 +96,7 @@ export default class AllCleaner extends Component<Props> {
 					}}>
 					<View style={styles.header}>
 						<Text style={styles.header_item}>查看详情列表</Text>
-						<Image style={styles.img} source={require('../../../assets/images/small-Return.png')}/>
-						<Image style={styles.img} source={require('../../../assets/images/small-Return.png')}/>
+						<Image style={styles.img} source={require('../../../assets/images/go.png')}/>
 					</View>
 				</TouchableOpacity>
 				<View style={styles.ac_content}>
