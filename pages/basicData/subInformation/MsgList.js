@@ -29,7 +29,8 @@ export default class MsgList extends Component<Props> {
 			headList: this.props.navigation.state.params.headList,
 			queryUrl: '',
 			listData:'',
-			navigation:''
+			navigation:'',
+			DataType:''
 		}
 	}
 
@@ -46,16 +47,43 @@ export default class MsgList extends Component<Props> {
 	}
 
 	componentWillMount() {
-		let {requestUrl} = this.props.navigation.state.params
+		let {requestUrl,customData} = this.props.navigation.state.params
+		console.log('MsgList',customData)
 		switch (requestUrl){
+			/**人员基础信息*/
 			case 'PersonBaseInfo/findListByPage':
 				this.setState({navigation:'OneCleanerMsg'})
+				this.setState({DataType:'personData'})
 				this.dataRequest(requestUrl,{
 					regionId:global.User_msg.regionId,
 					personTypeId:1
 				}).then((res)=>{
 					this.setState({listData:res.data.list})
 				})
+				break;
+			/**普通基础信息*/
+			case 'BaseInfo/findBaseInfoByBaseInfoType':
+				this.dataRequest(requestUrl,{
+					regionId:global.User_msg.regionId,
+					baseInfoTypeId:customData.baseInfoType,
+				}).then(res=>{
+					this.setState({listData:res.data.list})
+				})
+				this.setState({navigation:'OneCleanerMsg'})
+				this.setState({DataType:'baseInfo'})
+			break;
+			/**合同基础信息*/
+			case 'Contract/findListByCTypeIdAndRegionId':
+				// this.setState({navigation:'OneCleanerMsg'})
+				this.dataRequest(requestUrl,{
+					regionId:global.User_msg.regionId,
+					contractTypeId:customData.contractTypeId
+				}).then((res)=>{
+					this.setState({listData:res.data})
+					this.setState({navigation:'OneCleanerMsg'})
+					this.setState({DataType:'contract'})
+				})
+				break
 		}
 	}
 
@@ -76,13 +104,18 @@ export default class MsgList extends Component<Props> {
 				key={item.name}
 				activeOpacity={0.8}
 				onPress={() => {
-					navigation.navigate(this.state.navigation, {title: item.name, personData:item,})
+					navigation.navigate(this.state.navigation,
+						{
+							title: this.state.DataType === 'contract'?item.personBaseInfoName:item.name,
+							personData:item,
+							DataType:this.state.DataType
+						})
 				}}
 			>
 				<View style={styles.bd_tabContent}>
-					<View style={styles.bd_tabItem}><Text>{item.name}</Text></View>
-					<View style={styles.bd_tabItem}><Text>{item.sex ===1?'男':'女'}</Text></View>
-					<View style={styles.bd_tabItem}><Text>{item.age}</Text></View>
+					<View style={styles.bd_tabItem}><Text>{this.state.DataType === 'contract'?item.personBaseInfoName:item.name}</Text></View>
+					<View style={styles.bd_tabItem}><Text>{item.sex?item.sex ===1?'男':'女':''}</Text></View>
+					<View style={styles.bd_tabItem}><Text>{item.age?item.age:item.regionName?item.regionName:item.villageName}</Text></View>
 				</View>
 			</TouchableOpacity>
 		)
@@ -102,7 +135,7 @@ export default class MsgList extends Component<Props> {
 				}}/>
 				<FlatList
 					data={this.state.listData}
-					extraData={this.state.navigation}
+					extraData={this.state}
 					ListHeaderComponent={() => this._headRow()}
 					renderItem={({item}) => this._rowItem(item)}
 					ItemSeparatorComponent={() => <View style={styles.line}></View>}

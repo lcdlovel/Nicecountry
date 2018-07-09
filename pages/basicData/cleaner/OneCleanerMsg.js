@@ -31,16 +31,16 @@ export default class OneCleanerMsg extends Component<Props> {
 
 	render() {
 		const {navigation} = this.props
-		const {personData} = this.props.navigation.state.params
+		const {personData,DataType} = this.props.navigation.state.params
 		return (
-			<ScrollView>
-				<View style={styles.container}>
-					<ShowDetailMsg detailMsg={personData}/>
-					<View style={styles.contract}>
+			<ScrollView style={styles.container}>
+				<View>
+					<ShowDetailMsg detailMsg={personData} DataType={DataType}/>
+					<View style={[styles.contract,DataType === 'baseInfo'?styles.none:'']}>
 						<View style={styles.main_msg}>
 							<Image source={require('../../../assets/images/sign.png')} style={styles.sign}/>
 
-							<View style={styles.contractMsg}>
+							<View style={[styles.contractMsg]}>
 								<TouchableOpacity
 									activeOpacity={0.8}
 									onPress={() => {
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#F5FCFF',
+		// minHeight:height,
 		paddingBottom: 20
 	},
 	main_msg: {
@@ -163,5 +164,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: 100,
+	},
+	none:{
+		display:'none'
 	}
 });

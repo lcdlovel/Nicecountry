@@ -17,6 +17,8 @@ import {
 import {baseUrl} from "../../../utils/request/url";
 import PopupDialog, {SlideAnimation} from 'react-native-popup-dialog';
 import YgInput from '../../common/YgInput'
+import CrudApi from "../../../utils/request/crud";
+import global from "../../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -28,11 +30,24 @@ export default class allArea extends Component<Props> {
 		super(props);
 		this.state = {
 			text: '',
+			listData:[]
 		}
 	}
 	componentWillMount(){
-		const {url} = this.props.navigation.state.params
+		const {customData} = this.props.navigation.state.params
+		CrudApi.getInfo({
+			url:'Region/findByRegionIdOrCategoryId',
+			data:{
+				'regionId':global.User_msg.regionId,
+				'regionCategoryId':customData.regionCategoryId,
+			},
+			callback:(res)=>{
+				console.log(res.data)
+				this.setState({listData:res.data})
+			}
+		})
 	}
+
 	render() {
 		const {underNavigations} = this.props.navigation.state.params
 		const slideAnimation = new SlideAnimation({slideFrom: 'bottom',});
@@ -46,16 +61,16 @@ export default class allArea extends Component<Props> {
 				<View>
 					<FlatList
 						ListFooterComponent={() => (<View style={{height: 1, backgroundColor: '#dcdbdb'}}/>)}
-						ItemSeparatorComponent={() => (<View style={{height: 0.5, backgroundColor: '#dcdbdb'}}/>)}
-						data={[{key: '海港区'}, {key: '高港区'}]}
+						ItemSeparatorComponent={() => (<View style={{height: 1, backgroundColor: '#dcdbdb'}}/>)}
+						data={this.state.listData}
 						renderItem={
 							({item}) =>
-								<Text key={item.key}
+								<Text key={item.name}
 											style={styles.item_text}
 											onPress={() => {
 												underNavigations?navigation.navigate(underNavigations.first):this.popupDialog.show();
 											}}
-								>{item.key}</Text>}
+								>{item.name}</Text>}
 					/>
 				</View>
 				<PopupDialog

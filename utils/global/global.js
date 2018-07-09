@@ -1,22 +1,24 @@
-
-
 export default {
-	token:'',
-	User_msg:'',
+	token: '',
+	User_msg: '',
 	SUCCESS: 0, // 成功请求
 	ERROR: 1, // 错误请求
 	ILLEGAL_ARGUMENT: 2, // 参数错误
 	NEED_LOGIN: 10, // 需要重新登录
-	Cleaner_ContractType:2,
-	Normal_ContractType:3,
-	commonCss:{
-		borderColor:'#eeeeee',
-		mainColor:'#91e6bb',
-		fontColor:'#666666',
-		screenColor:'#fafafa'
+	Cleaner_ContractType: 2,
+	Normal_ContractType: 3,
+	commonCss: {
+		borderColor: '#eeeeee',
+		mainColor: '#91e6bb',
+		fontColor: '#666666',
+		screenColor: '#fafafa'
 	},
-	uploadUrl:'http://192.168.0.128:9090/beautifulCountry-v2.0/File/upload',
-	changeUnix (unixTime) {
+
+	uploadUrl: 'http://192.168.0.128:9090/beautifulCountry-v2.0/File/upload',
+
+
+	/**方法*/
+	changeUnix(unixTime) {
 		let date = new Date(unixTime)
 		let Y = ''
 		let M = ''
@@ -37,7 +39,7 @@ export default {
 	 * @param Time
 	 * @returns {string|*}
 	 */
-	elementDropT (Time) {
+	elementDropT(Time) {
 		let d = new Date(Time)
 		let year = d.getFullYear()
 		let month = d.getMonth() + 1
@@ -54,25 +56,51 @@ export default {
 		Time = time
 		return Time
 	},
+	mapToJson(strMap) {
+		let obj = Object.create(null);
+		for (let [k, v] of strMap) {
+			obj[k] = v;
+		}
+		return JSON.stringify(obj);
+	}
 }
 
-{/*<TouchableHighlight activeOpacity={0.8} style={styles.basic_type} key={item.name}>*/}
-{/*<View>*/}
-{/*<Image source={item.url} style={styles.basic_img}/>*/}
-{/*<View style={styles.basic_line}></View>*/}
-{/*<Text>{item.name}</Text>*/}
-{/*</View>*/}
-{/*</TouchableHighlight>*/}
+{/*<TouchableHighlight activeOpacity={0.8} style={styles.basic_type} key={item.name}>*/
+}
+{/*<View>*/
+}
+{/*<Image source={item.url} style={styles.basic_img}/>*/
+}
+{/*<View style={styles.basic_line}></View>*/
+}
+{/*<Text>{item.name}</Text>*/
+}
+{/*</View>*/
+}
+{/*</TouchableHighlight>*/
+}
 
-{/*<View style={styles.bd_tabItem}>*/}
-{/*<View style={styles.point}></View>*/}
-{/*<Text>名称</Text>*/}
-{/*</View>*/}
-{/*<View style={styles.bd_tabItem}>*/}
-{/*<View style={styles.point}></View>*/}
-{/*<Text>尺寸</Text>*/}
-{/*</View>*/}
-{/*<View style={styles.bd_tabItem}>*/}
-{/*<View style={styles.point}></View>*/}
-{/*<Text>数量</Text>*/}
-{/*</View>*/}
+{/*<View style={styles.bd_tabItem}>*/
+}
+{/*<View style={styles.point}></View>*/
+}
+{/*<Text>名称</Text>*/
+}
+{/*</View>*/
+}
+{/*<View style={styles.bd_tabItem}>*/
+}
+{/*<View style={styles.point}></View>*/
+}
+{/*<Text>尺寸</Text>*/
+}
+{/*</View>*/
+}
+{/*<View style={styles.bd_tabItem}>*/
+}
+{/*<View style={styles.point}></View>*/
+}
+{/*<Text>数量</Text>*/
+}
+{/*</View>*/
+}

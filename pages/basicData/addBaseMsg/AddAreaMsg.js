@@ -21,7 +21,9 @@ let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width} = dimensions.get('window')
 type Props = {};
-let areaData = new Map();
+
+let areaData = new Map()
+.set('regionCategoryId',7);
 export default class AddAreaMsg extends Component<Props> {
 	constructor(props) {
 		super(props);
@@ -37,12 +39,26 @@ export default class AddAreaMsg extends Component<Props> {
 	}
 
 	static navigationOptions = (props) => {
+		const {navigation} = props
 		const {params} = props.navigation.state
 		return {
 			headerRight: (
 				<TouchableOpacity
 					onPress={() => {
-						console.log(areaData)
+						CrudApi.postInfo({
+							url:'Region/add',
+							data:{
+								name:areaData.get('groupName'),
+								parentId:global.User_msg.regionId,
+								regionCategoryId:areaData.get('regionCategoryId'),
+								seq:areaData.get('orderNum'),
+								remark:areaData.get('remark')
+							},
+							callback:(res)=>{
+								alert(res.msg)
+								navigation.goBack(null)
+							}
+						})
 						}
 					}
 				>

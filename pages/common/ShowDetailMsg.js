@@ -27,22 +27,57 @@ export default class ShowDetailMsg extends Component<Props> {
 			listData: ''
 		}
 	}
-componentWillMount(){
-		const {detailMsg} = this.props
-	console.log(detailMsg)
-		this.setState({
-			listData:[
-				{title: '村名称', content:detailMsg.villageName },
-				{title: '组名称', content: detailMsg.groupName},
-				{title: '报告人', content: detailMsg.reportUserId},
-				{title: '姓名', content: detailMsg.name},
-				{title: '性别', content: detailMsg.sex===1?'男':'女'},
-				{title: '年龄', content: detailMsg.age},
-				{title: '文化水平', content: detailMsg.culturalLevel},
-				{title: '性质', content: detailMsg.difficultHousehold?'困难户':detailMsg.fiveGuaranteesHousehold?'五保户':detailMsg.lowIncomeHousehold?'低保户':detailMsg.isVeterans?'退役军人':'其他'},
-			]
-		})
-}
+
+	componentWillMount() {
+		const {detailMsg, DataType} = this.props
+		console.log(detailMsg)
+		DataType === 'personData' ?
+			this.setState({
+				listData: [
+					{title: '区域名称', content: detailMsg.villageName},
+					{title: '上报人', content: detailMsg.reportUserName},
+					{title: '姓名', content: detailMsg.name},
+					{title: '性别', content: detailMsg.sex === 1 ? '男' : '女'},
+					{title: '年龄', content: detailMsg.age},
+					{title: '文化水平', content: detailMsg.culturalLevel},
+					{
+						title: '性质',
+						content: detailMsg.difficultHousehold ? '困难户' : detailMsg.fiveGuaranteesHousehold ? '五保户' : detailMsg.lowIncomeHousehold ? '低保户' : detailMsg.isVeterans ? '退役军人' : '其他'
+					},
+				]
+			}) : DataType === 'contract' ?
+			this.setState({
+				listData: [
+					{title: '区域名称', content: detailMsg.regionName},
+					{title: '上报人', content: detailMsg.reportUserName},
+					{title: '合同名称', content: detailMsg.name},
+					{title: '类别', content: {name: detailMsg.name,},}
+				]
+			}) : DataType === 'baseInfo' ?
+				this.setState({
+					listData: [
+						{title: '区域名称', content: detailMsg.villageName},
+						{title: '上报人', content: detailMsg.reportUserName},
+						{title: '类别', content: {name: detailMsg.name, count: '10户'}},
+					]
+				}) : ''
+	}
+
+	_typeSpecial(item) {
+		if (item.title === '类别') {
+			return (
+				<View style={styles.type_num}>
+					<Text style={styles.item_content}>{item.content.name}</Text>
+					<Text style={styles.item_content}>{item.content.count?('('+item.content.count+')'):''}</Text>
+				</View>
+			)
+		} else {
+			return (
+				<Text style={styles.item_content}>{item.content}</Text>
+			)
+		}
+	}
+
 	_itemList(item) {
 		return (
 			<View style={styles.msg_item}>
@@ -50,7 +85,9 @@ componentWillMount(){
 					<View style={styles.circle_dot}></View>
 					<Text style={styles.item_title}>{item.title}</Text>
 				</View>
-				<View><Text style={styles.item_content}>{item.content}</Text></View>
+				<View>
+					{this._typeSpecial(item)}
+				</View>
 			</View>
 		)
 	}
@@ -77,7 +114,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
-		paddingBottom:10,
+		paddingBottom: 10,
 	},
 	bac_head: {
 		width: width,
@@ -108,7 +145,7 @@ const styles = StyleSheet.create({
 		},
 		shadowRadius: 10,
 		shadowOpacity: 1,
-		elevation:1,
+		elevation: 1,
 	},
 	circle_dot: {
 		width: 7,
@@ -138,6 +175,10 @@ const styles = StyleSheet.create({
 		fontWeight: '100',
 		color: "#0c0c0c",
 		marginLeft: 17,
-		marginTop: 5
+		marginTop: 5,
+	},
+	type_num:{
+		flex:0,
+		flexDirection:'row',
 	}
 });

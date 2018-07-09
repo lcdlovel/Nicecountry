@@ -35,7 +35,7 @@ axios.interceptors.response.use(
       //   // TODO: 实现跳转逻辑
       //   navigation.navigate()
       // }
-      // return
+      return response
     }
 
     // 如果有list，则检查是否长度为0

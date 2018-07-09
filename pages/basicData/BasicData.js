@@ -43,13 +43,19 @@ export default class BasicData extends Component<Props> {
 				key={item.name}
 				activeOpacity={0.8}
 				onPress={() => {
-					navigation.navigate(item.navigation, {title:item.name ,url: item.queryUrl,headList:item.headList})
+					navigation.navigate(item.navigation,
+						{
+							title:item.name ,
+							customData: item,
+							headList:item.headList,
+							requestUrl:item.requestUrl,
+						})
 				}}
 			>
 				<View style={styles.bd_tabContent}>
-					<View style={styles.bd_tabItem}><Text>{item.name}</Text></View>
-					<View style={[styles.bd_tabItem,isHaveSize?'':styles.isHave]}><Text>{item.size + item.size_unit}</Text></View>
-					<View style={styles.bd_tabItem}><Text>{item.count + item.count_unit}</Text></View>
+					<View style={styles.bd_tabItem}><Text style={{textAlign:'center'}}>{item.name}</Text></View>
+					<View style={[styles.bd_tabItem,isHaveSize?'':styles.isHave]}><Text style={{textAlign:'center'}}>{item.size ===null?'':(item.size + item.size_unit)}</Text></View>
+					<View style={styles.bd_tabItem}><Text style={{textAlign:'center'}}>{item.count===null?'':(item.count + item.count_unit)}</Text></View>
 				</View>
 			</TouchableOpacity>
 		)
@@ -94,20 +100,23 @@ export default class BasicData extends Component<Props> {
 				this.baseMsgGet('BaseInfo/findBaseInfoStatisticsByRegionId',{
 					regionId:global.User_msg.regionId
 				}).then(res=>{
+					console.log(res)
 					res.forEach((value)=>{
 						value['navigation'] = 'MsgList'
-						value['headList'] = ['名称','村名称','组名称']
+						value['requestUrl'] = 'BaseInfo/findBaseInfoByBaseInfoType'
+						value['headList'] = ['名称','区域名称']
 					})
 					this.setState({listData:res})
 				})
 				break;
 			case 'ContractType':
-				this.baseMsgGet('Contract/findListByCTypeIdAndRegionId',{
+				this.baseMsgGet('Contract/findStatisticsByCTypeId',{
 					regionId:global.User_msg.regionId,
-					contractTypeId:global.Cleaner_ContractType
 				}).then(res=>{
 					res.forEach((value)=>{
 						value['navigation'] = 'MsgList'
+						value['requestUrl'] = 'Contract/findListByCTypeIdAndRegionId'
+						value['headList'] = ['名称','区域名称']
 					})
 					this.setState({listData:res})
 				})

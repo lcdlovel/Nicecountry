@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
 		justifyContent:'center',
 		alignItems:'center',
 		height:100,
+		marginBottom:1
 	},
 	extraMsg:{
 		width: 0.9 * width,

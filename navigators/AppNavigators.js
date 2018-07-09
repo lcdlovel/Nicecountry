@@ -433,11 +433,6 @@ export const AppStackNavgator = createStackNavigator({
 					flex: 1,
 					textAlign: 'center'
 				},
-				headerRight:(
-					<TouchableOpacity>
-						<Text>发送</Text>
-					</TouchableOpacity>
-				),
 				headerStyle: {
 					backgroundColor: '#ffffff'
 				},
