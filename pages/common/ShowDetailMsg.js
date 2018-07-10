@@ -24,7 +24,7 @@ export default class ShowDetailMsg extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			listData: ''
+			listData: []
 		}
 	}
 

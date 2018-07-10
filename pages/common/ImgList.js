@@ -31,12 +31,12 @@ export default class ImgList extends Component<Props> {
 	}
 	render() {
 		const {imageList} = this.props
-		const {titleStyle,imgsStyle} = this.props
+		const {titleStyle,imgsStyle,imgsName} = this.props
 		return (
 			<View style={styles.container}>
 				<View style={[styles.item_header,titleStyle]}>
 					<Point pointColor={styles.pointColor}/>
-					<Text style={styles.header_text}>照片详情</Text>
+					<Text style={styles.header_text}>{imgsName?imgsName:'照片详情'}</Text>
 				</View>
 				<View style={[styles.imgs,imgsStyle]}>
 					{imageList.map(item => (<Image source={item} style={styles.example_img}/>))}

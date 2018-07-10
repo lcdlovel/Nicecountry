@@ -27,7 +27,7 @@ export default class Check extends Component<Props> {
 	}
 	jumpRouter(route){
 		const {navigation} = this.props
-		navigation.navigate(route)
+		navigation.navigate(route,{fromCheck:'checkTask'})
 	}
 	_rowconstrutor(imgSource,name,router){
 		return(

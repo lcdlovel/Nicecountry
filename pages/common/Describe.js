@@ -37,7 +37,7 @@ export default class Describe extends Component<Props> {
 									 // value={this.state.value}
 				/>
 				<View style={styles.font_limit}>
-					<Text style={styles.limit_font}>{this.props.fontLength}/300字</Text>
+					<Text style={styles.limit_font}>{this.props.fontLength}/{this.props.maxLength}字</Text>
 				</View>
 			</View>
 		);

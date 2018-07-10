@@ -29,8 +29,8 @@ export default class TaskDetail extends Component<Props> {
 		return (
 			<ScrollView>
 			<View style={styles.container}>
-				<ShowDetailMsg/>
-				<ImgList url={require('../../assets/News/201806141307.jpg')}/>
+				<ShowDetailMsg />
+				{/*<ImgList url={require('../../assets/News/201806141307.jpg')}/>*/}
 			</View>
 			</ScrollView>
 		);

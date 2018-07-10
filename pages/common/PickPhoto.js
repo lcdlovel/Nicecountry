@@ -81,7 +81,7 @@ export default class PickPhoto extends Component<Props> {
 	}
 	render() {
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container,this.props.positionStyle]}>
 				<View style={styles.pictrue}>
 					<View style={styles.two_choose}>
 						<TouchableOpacity

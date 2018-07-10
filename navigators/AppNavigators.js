@@ -45,6 +45,7 @@ import SelfRating from "../pages/checkScore/RecoScore/SelfRating";
 import Selfexamination from "../pages/checkScore/Selfexamination/Selfexamination";
 import OptRegion from "../pages/checkScore/Selfexamination/OptRegion";
 import MyMsg from "../pages/setUp/SetUp/MyMsg";
+import AffirmTask from "../pages/repeatCheck/SelfCheck/AffirmTask";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -187,6 +188,12 @@ export const CheckReceviedCheck = createMaterialTopTabNavigator({
 			tabBarLabel: '已回复',
 		}
 	},
+	AffirmTask:{
+		screen: AffirmTask,
+		navigationOptions: {
+			tabBarLabel: '已确定',
+		}
+	}
 }, {
 	tabBarPosition: 'top',
 	swipeEnabled: false,
@@ -286,15 +293,6 @@ export const AppStackNavgator = createStackNavigator({
 				headerStyle: {
 					backgroundColor: '#ffffff'
 				},
-				headerRight: (
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={() => {
-							navigation.navigate('AddTaskImg')
-						}}>
-						<Text>确认</Text>
-					</TouchableOpacity>
-				)
 			}
 		}
 	},
@@ -314,16 +312,6 @@ export const AppStackNavgator = createStackNavigator({
 				headerStyle: {
 					backgroundColor: '#ffffff'
 				},
-				headerRight: (
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={() => {
-							// navigation.navigate('AddTextArea')
-							console.log(navigation)
-						}}>
-						<Text>添加</Text>
-					</TouchableOpacity>
-				)
 			}
 		}
 	},

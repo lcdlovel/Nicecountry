@@ -12,6 +12,8 @@ import {
 	View,
 	TouchableOpacity
 } from 'react-native';
+import { NavigationActions, NavigationState } from "react-navigation";
+import CrudApi from "../../../utils/request/crud";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -21,6 +23,38 @@ export default class ReceivedCheck extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {}
+	}
+	getTaskData(url,data){
+		return new Promise(resolve => {
+			CrudApi.getInfo({
+				url:url,
+				data:data,
+				callback:(res)=>{
+					resolve(res)
+				}
+			})
+		})
+	}
+	componentWillMount(){
+		const {fromCheck} = this.props.navigation.state.params
+		switch (fromCheck){
+			case 'checkTask':
+				this.getTaskData('CheckInfo/findCheckInfo',{
+					confirmState:0,
+					sendOrReceive:0
+				}).then(res=>{
+					console.log(res)
+				})
+				break;
+			case  'SelfCheckTask':
+				this.getTaskData('CheckInfoSelf/findCheckInfo',{
+					confirmState:0,
+					sendOrReceive:0
+				}).then(res=>{
+					console.log(res)
+				})
+				break
+		}
 	}
  _contentConstractor(){
 		const {navigation} = this.props

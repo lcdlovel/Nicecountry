@@ -12,6 +12,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
+import CrudApi from "../../../utils/request/crud";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -22,7 +23,38 @@ export default class ConfirmedCheck extends Component<Props> {
     super(props);
     this.state = {}
   }
-
+	getTaskData(url,data){
+		return new Promise(resolve => {
+			CrudApi.getInfo({
+				url:url,
+				data:data,
+				callback:(res)=>{
+					resolve(res)
+				}
+			})
+		})
+	}
+	componentWillMount(){
+		const {fromCheck} = this.props.navigation.state
+		switch (fromCheck){
+			case 'checkTask':
+				this.getTaskData('CheckInfo/findCheckInfo',{
+					confirmState:1,
+					sendOrReceive:0
+				}).then(res=>{
+					console.log(res)
+				})
+				break;
+			case  'SelfCheckTask':
+				this.getTaskData('CheckInfoSelf/findCheckInfo',{
+					confirmState:2,
+					sendOrReceive:0
+				}).then(res=>{
+					console.log(res)
+				})
+        break
+		}
+	}
   _contentConstractor() {
     const {navigation} = this.props
     return (

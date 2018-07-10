@@ -13,30 +13,51 @@ import {
 	TextInput,
 	Image,
 	ScrollView,
-	TouchableOpacity
+	TouchableOpacity,
+	FlatList
 } from 'react-native';
 import global from "../../../utils/global/global";
 import PopupDialog, {SlideAnimation} from 'react-native-popup-dialog';
 import DatePicker from 'react-native-datepicker'
 import {ListDialog, Describe, PickPhoto} from '../../common'
+import CrudApi from "../../../utils/request/crud";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width} = dimensions.get('window')
 type Props = {};
+let ManMsg = new Map()
 export default class AddManMsg extends Component<Props> {
 	ListPopupDialog;
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			date: '',
-			describe: ''
+			describe: '',
+			listData: [],
+			Group: '', //所属组
+			name:'',//姓名
+			sexChoose:true,//性别选择
 		}
 	}
 
 	changeDescribe(val) {
 		this.setState({describe: val})
 		console.log(this.state.describe)
+	}
+
+	componentWillMount() {
+		CrudApi.getInfo({
+			url: 'Region/getAllByAdmin',
+			data: {
+				type: 'check'
+			},
+			callback: (res) => {
+				this.setState({listData: res.data[0].regionTreeVoLst})
+				console.log(res)
+			}
+		})
 	}
 
 	render() {
@@ -69,7 +90,7 @@ export default class AddManMsg extends Component<Props> {
 								}}
 							>
 								<View style={{height: 25, width: width}}>
-									<Text>请选择</Text>
+									<Text>{this.state.Group ===''?'请选择':this.state.Group}</Text>
 								</View>
 							</TouchableOpacity>
 						</View>
@@ -82,6 +103,11 @@ export default class AddManMsg extends Component<Props> {
 						</View>
 						<View style={styles.input}>
 							<TextInput placeholder='请输入' placeholderTextColor='#9c9c9c' selectionColor='#9c9c9c'
+												 onChangeText={(text)=>{
+												 	this.setState({name:text})
+													 ManMsg.set('name',text)
+												 }}
+												 value={this.state.name}
 												 style={styles.text_Input}/>
 						</View>
 
@@ -93,11 +119,23 @@ export default class AddManMsg extends Component<Props> {
 						<View style={styles.sex}>
 							<View style={styles.sexItem}>
 								<Image source={require('../../../assets/icons/male.png')} style={styles.sex_icon}/>
-								<Text style={[styles.sex_name]}>男</Text>
+								<Text
+									style={[styles.sex_name,this.state.sexChoose?styles.sex_choose:'']}
+									onPress={()=>{
+										this.setState({sexChoose:!this.state.sexChoose})
+										this.state.sexChoose?ManMsg.set('sex','男'):ManMsg.set('sex','女')
+									}}
+								>男</Text>
 							</View>
 							<View style={styles.sexItem}>
 								<Image source={require('../../../assets/icons/female.png')} style={styles.sex_icon}/>
-								<Text style={[styles.sex_name]}>女</Text>
+								<Text
+									style={[styles.sex_name,!this.state.sexChoose?styles.sex_choose:'']}
+									onPress={()=>{
+										this.setState({sexChoose:!this.state.sexChoose})
+										this.state.sexChoose?ManMsg.set('sex','男'):ManMsg.set('sex','女')
+									}}
+								>女</Text>
 							</View>
 							<Text>(点击字即可)</Text>
 						</View>
@@ -173,15 +211,24 @@ export default class AddManMsg extends Component<Props> {
 					}}
 					dialogAnimation={slideAnimation}
 					width={0.7}
-					height={0.7}
 				>
 					<View>
-						<Text>哈哈哈哈哈</Text>
-						{/*<FlatList*/}
-						{/*data={[{key: '海港区'}, {key: '高港区'}]}*/}
-						{/*renderItem={({item}) => <Text key={item.key} style={styles.item_text}*/}
-						{/*onPress={() => this.ListPopupDialog.hide()}>{item.key}</Text>}*/}
-						{/*/>*/}
+						<FlatList
+							data={this.state.listData}
+							ListHeaderComponent={() => (<View style={{height: 0, backgroundColor: '#dcdbdb', marginTop: 5}}/>)}
+							ListFooterComponent={() => (<View style={{height: 0, backgroundColor: '#dcdbdb', marginBottom: 5}}/>)}
+							ItemSeparatorComponent={() => (<View style={{height: 1, backgroundColor: '#dcdbdb'}}/>)}
+							renderItem={({item}) =>
+								<Text key={item.name}
+											style={styles.item_text}
+											onPress={() => {
+												this.ListPopupDialog.dismiss()
+												this.setState({Group:item.name})
+												ManMsg.set({regionId:item.id})
+												console.log(item.name)
+											}
+											}>{item.name}</Text>}
+						/>
 					</View>
 				</PopupDialog>
 			</ScrollView>
@@ -192,8 +239,8 @@ export default class AddManMsg extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginTop:15,
-		marginLeft:15,
+		marginTop: 15,
+		marginLeft: 15,
 		backgroundColor: '#F5FCFF',
 	},
 	itemName: {
@@ -259,5 +306,14 @@ const styles = StyleSheet.create({
 	text_Input: {
 		paddingBottom: 1,
 		paddingTop: 1
+	},
+	item_text: {
+		height: 40,
+		lineHeight: 40,
+		fontSize: 16,
+		paddingLeft: 20
+	},
+	sex_choose:{
+		color:global.commonCss.mainColor
 	}
 });

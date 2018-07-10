@@ -21,10 +21,19 @@ export default class TaskContent extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isFocused: false
+			isFocused: false,
+			index:''
 		}
 	}
-
+	componentWillMount(){
+		// console.log(this.props.isAllChoose)
+	}
+	componentWillReceiveProps(nextProps){
+		// console.log(nextProps)
+		if (this.props.isAllChoose === nextProps.Index){
+			this.setState({isFocused:!this.state.isFocused})
+		}
+	}
 	render() {
 		return (
 			<View>
@@ -34,6 +43,9 @@ export default class TaskContent extends Component<Props> {
 														this.setState(previousState => {
 															return {isFocused: !previousState.isFocused};
 														})
+														if(this.state.isFocused == true){
+															this.props.noAllChoose(this.props.isAllChoose)
+														}
 													}}
 				>
 					<Text style={this.state.isFocused ? styles.focused_font : styles.font}>{this.props.content}</Text>
@@ -46,7 +58,7 @@ export default class TaskContent extends Component<Props> {
 const styles = StyleSheet.create({
 	focused: {
 		flex: 0,
-		borderRadius: 13,
+		borderRadius: 5,
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderColor: "#2bc39a",
@@ -59,7 +71,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 0,
-		borderRadius: 13,
+		borderRadius: 5,
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderColor: "#8a8f8e",
