@@ -11,7 +11,8 @@ import {
 	Text,
 	View,
 	FlatList,
-	ScrollView
+	ScrollView,
+	TouchableOpacity
 } from 'react-native';
 import YgInput from '../../common/YgInput'
 import global from "../../../utils/global/global";
@@ -30,7 +31,20 @@ export default class AddTextArea extends Component<Props> {
 			Group:''
 		}
 	}
-
+static navigationOptions=(props)=>{
+	const {navigation} = props
+	const {params} = navigation.state
+		return {
+			headerRight: (
+				<TouchableOpacity
+					activeOpacity={0.8}
+					onPress={() => {
+					}}>
+					<Text>{params.fromCheck ==='SelfCheckTask'?'':'发送'}</Text>
+				</TouchableOpacity>
+			)
+		}
+}
 	componentWillMount() {
 		CrudApi.getInfo({
 			url: 'Region/getAllByAdmin',
@@ -42,13 +56,18 @@ export default class AddTextArea extends Component<Props> {
 			}
 		})
 	}
-
+	searchArea(text){
+		console.log(text)
+	}
 	render() {
+		const {params} = this.props.navigation.state
+		const {navigation} = this.props
 		return (
 			<View style={styles.container}>
-				<View style={{height:100}}>
-					<YgInput/>
-					<View style={styles.check_Column}>
+					<View style={{height:60}}>
+						<YgInput Search={this.searchArea}/>
+					</View>
+					<View style={[styles.check_Column,params.fromCheck ==='SelfCheckTask'?styles.none:'']}>
 						<View style={styles.check_item}>
 							<View style={styles.check_box}></View>
 							<Text>全选</Text>
@@ -58,9 +77,7 @@ export default class AddTextArea extends Component<Props> {
 							<Text>反选</Text>
 						</View>
 					</View>
-				</View>
-
-				<View style={{paddingBottom:20}}>
+				<View style={{paddingBottom:params.fromCheck ==='SelfCheckTask'?60:100}}>
 						<FlatList
 							ListFooterComponent={() => (<View style={{height: 1, backgroundColor: '#dcdbdb'}}/>)}
 							ItemSeparatorComponent={() => (<View style={{height: 1, backgroundColor: '#dcdbdb'}}/>)}
@@ -68,13 +85,14 @@ export default class AddTextArea extends Component<Props> {
 							renderItem={
 								({item}) =>
 									<View style={styles.item_style}>
-										<View style={[styles.check_box, styles.item_check_box]}></View>
-										<Text key={item.name}
-													style={styles.item_text}
-													onPress={(item) => {
+										<View style={[styles.check_box, styles.item_check_box,params.fromCheck ==='SelfCheckTask'?styles.none:'']}></View>
+										<TouchableOpacity key={item.name}
+													onPress={() => {
 														this.setState({Group:item.name})
+														params.fromCheck ==='SelfCheckTask'?navigation.navigate('TaskCreate',{fromCheck:params.fromCheck}):''
 													}}
-										>{item.name}</Text>
+										>
+											<Text style={[styles.item_text,params.fromCheck ==='SelfCheckTask'?styles.padding:'']}>{item.name}</Text></TouchableOpacity>
 									</View>
 							}
 						/>
@@ -131,5 +149,11 @@ const styles = StyleSheet.create({
 	},
 	item_check_box: {
 		marginRight: 6
+	},
+	none:{
+		display:'none'
+	},
+	padding:{
+		paddingLeft:15
 	}
 });

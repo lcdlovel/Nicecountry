@@ -46,7 +46,8 @@ export default class TaskCreate extends Component<Props> {
 		}
 	}
 static navigationOptions = (props)=>{
-		const {navigation} = props
+	const {navigation} = props
+	const {params} = navigation.state
 		return{
 			headerRight:(
 				<TouchableOpacity
@@ -54,7 +55,7 @@ static navigationOptions = (props)=>{
 					onPress={()=>{
 						addData.set('regionId',global.User_msg.regionId)
 						console.log(addData)
-						navigation.navigate('AddTaskImg')
+						navigation.navigate(params.fromCheck ==='SelfCheckTask'?'SelfCheckTask':'AddTaskImg')
 					}}
 				>
 					<Text style={{color:global.commonCss.mainColor}}>确认</Text>

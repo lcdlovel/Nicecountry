@@ -58,7 +58,7 @@ export default class PickPhoto extends Component<Props> {
 			else {
 				let source = { uri: response.uri };
 				imageList.push(source)
-				this.setState({imageList:imageList})
+				this.setState({imageList:[...this.state.imageList,source]})
 				this.uploadImg(response)
 				// You can also display the image using data:
 				// let source = { uri: 'data:image/jpeg;base64,' + response.data };
@@ -126,7 +126,7 @@ export default class PickPhoto extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: global.commonCss.screenColor,
 		paddingBottom:20
 	},
 	pictrue: {

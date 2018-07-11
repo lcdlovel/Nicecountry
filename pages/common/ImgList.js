@@ -13,6 +13,7 @@ import {
 	Image
 } from 'react-native';
 import Point from '../common/Point'
+import global from "../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -49,7 +50,7 @@ export default class ImgList extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 0,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: global.commonCss.screenColor,
 		alignItems:'center',
 	},
 	item_header:{

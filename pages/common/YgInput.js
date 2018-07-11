@@ -11,7 +11,8 @@ import {
 	Text,
 	View,
 	TextInput,
-	Image
+	Image,
+	TouchableOpacity
 } from 'react-native';
 import global from "../../utils/global/global";
 //获取屏幕信息
@@ -22,7 +23,9 @@ type Props = {};
 export default class YgInput extends Component<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+			value:''
+		}
 	}
 
 	render() {
@@ -32,11 +35,22 @@ export default class YgInput extends Component<Props> {
 				<View style={[styles.search]}>
 					<View style={styles.text_Input}>
 						<TextInput placeholder='搜索' style={styles.search_input} underlineColorAndroid='transparent'
-											 onChangeText={onChangeText}/>
+											 onChangeText={(text)=>{
+											 	this.setState({value:text})
+											 }}
+											value={this.state.value}
+						/>
 					</View>
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={()=>{
+							this.props.Search(this.state.value)
+						}}
+					>
 					<View style={styles.search_img}>
 						<Image source={require('../../assets/images/search.png')} style={styles.search_info}/>
 					</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 		);

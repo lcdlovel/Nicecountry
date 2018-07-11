@@ -46,6 +46,8 @@ import Selfexamination from "../pages/checkScore/Selfexamination/Selfexamination
 import OptRegion from "../pages/checkScore/Selfexamination/OptRegion";
 import MyMsg from "../pages/setUp/SetUp/MyMsg";
 import AffirmTask from "../pages/repeatCheck/SelfCheck/AffirmTask";
+import SelfCheckTask from "../pages/repeatCheck/taskCreate/SelfCheckTask";
+import SelfCheckTaskConfirm from "../pages/repeatCheck/SelfCheck/SelfCheckTaskConfirm";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -217,9 +219,9 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 		}
 	},
 	ConfirmedCheck: {
-		screen: ConfirmedCheck,
+		screen: SelfCheckTaskConfirm,
 		navigationOptions: {
-			tabBarLabel: '已接受',
+			tabBarLabel: '已确定',
 		}
 	},
 }, {
@@ -246,12 +248,12 @@ export const AppStackNavgator = createStackNavigator({
 	// 	}
 	// },
 	/**登录页面*/
-	Loader:{
-		screen:Loader,
-		navigationOptions:{
-			header:null
-		}
-	},
+	// Loader:{
+	// 	screen:Loader,
+	// 	navigationOptions:{
+	// 		header:null
+	// 	}
+	// },
 	/**主页面*/
 	Home: {
 		screen: Home,
@@ -331,15 +333,6 @@ export const AppStackNavgator = createStackNavigator({
 				headerStyle: {
 					backgroundColor: '#ffffff'
 				},
-				headerRight: (
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={() => {
-							console.log(this.state)
-						}}>
-						<Text>发送</Text>
-					</TouchableOpacity>
-				)
 			}
 		}
 
@@ -652,6 +645,25 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+	/**自查任务下的已接受任务*/
+	ReceviedCheck: {
+		screen: ReceviedCheck,
+		navigationOptions: (props) => {
+			return {
+				title: '已接受任务',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+
 	/**任务详情*/
 	TaskDetail: {
 		screen: TaskDetail,
@@ -665,17 +677,6 @@ export const AppStackNavgator = createStackNavigator({
 					flex: 1,
 					textAlign: 'center'
 				},
-				headerRight: (
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={() => {
-							navigation.navigate('ReplyInformation')
-						}
-						}
-					>
-						<Text>回复</Text>
-					</TouchableOpacity>
-				),
 				headerStyle: {
 					backgroundColor: '#ffffff'
 				},
@@ -695,22 +696,33 @@ export const AppStackNavgator = createStackNavigator({
 					flex: 1,
 					textAlign: 'center'
 				},
-				headerRight: (
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={
-							navigation.navigate('')
-						}
-					>
-						<Text>发送</Text>
-					</TouchableOpacity>
-				),
 				headerStyle: {
 					backgroundColor: '#ffffff'
 				},
 			}
 		}
 	},
+	/**填写自查任务*/
+	SelfCheckTask:{
+		screen: SelfCheckTask,
+		navigationOptions: (props) => {
+			const {navigation} = props
+			return {
+				title: '填写自查任务',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+
+
 
 	/**考核评分*/
 	CheckScore: {

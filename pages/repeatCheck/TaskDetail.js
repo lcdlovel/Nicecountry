@@ -10,10 +10,12 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	ScrollView
+	ScrollView,
+	TouchableOpacity
 } from 'react-native';
 import ShowDetailMsg from '../common/ShowDetailMsg'
 import ImgList from "../common/ImgList";
+import global from "../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -24,7 +26,25 @@ export default class TaskDetail extends Component<Props> {
 		super(props);
 		this.state = {}
 	}
-
+	componentWillMount(){
+	}
+	static navigationOptions = (props)=>{
+		const {navigation}=props
+		const {params} = navigation.state
+		// console.log(type)
+		return{
+			headerRight:(
+		<TouchableOpacity
+			activeOpacity={0.8}
+			onPress={() => {
+				navigation.navigate('ReplyInformation')
+				console.log(navigation)
+			}}>
+			<Text style={{color:global.commonCss.mainColor}}>{params.type === 'received'?'回复':''}</Text>
+		</TouchableOpacity>
+			)
+		}
+	}
 	render() {
 		return (
 			<ScrollView>

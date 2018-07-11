@@ -37,7 +37,7 @@ export default class AddTaskImg extends Component<Props> {
 				<TouchableOpacity
 					activeOpacity={0.8}
 					onPress={() => {
-						navigation.navigate('AddTextArea')
+						navigation.navigate('AddTextArea',{fromCheck:''})
 						console.log(navigation)
 					}}>
 					<Text style={{color:global.commonCss.mainColor}}>添加</Text>

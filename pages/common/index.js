@@ -9,7 +9,7 @@ import TaskContent from './TaskContent'
 import UselessTextInput from './UselessTextInput'
 import YgButton from './YgButton'
 import YgInput from './YgInput'
-
+import SubHeadTitle from './SubHeadTitle'
 
 
 
@@ -24,5 +24,6 @@ export  {
 	TaskContent,
 	UselessTextInput,
 	YgButton,
-	YgInput
+	YgInput,
+	SubHeadTitle
 }

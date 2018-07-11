@@ -25,16 +25,16 @@ export default class Check extends Component<Props> {
 		super(props);
 		this.state = {}
 	}
-	jumpRouter(route){
+	jumpRouter(route,type){
 		const {navigation} = this.props
-		navigation.navigate(route,{fromCheck:'checkTask'})
+		navigation.navigate(route,{fromCheck:type})
 	}
-	_rowconstrutor(imgSource,name,router){
+	_rowconstrutor(imgSource,name,router,type){
 		return(
 			<TouchableOpacity
 				activeOpacity={0.8}
 				onPress={() => {
-					this.jumpRouter(router)
+					this.jumpRouter(router,type)
 				}}>
 			<View style={styles.ck_row}>
 				<View style={styles.ck_item}>
@@ -49,8 +49,8 @@ export default class Check extends Component<Props> {
 		return (
 			<View style={styles.container}>
 				{this._rowconstrutor(require('../../assets/images/found.png'),'创建任务','TaskCreate')}
-				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受任务','CheckReceviedCheck')}
-				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已统计任务')}
+				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受任务','CheckReceviedCheck','checkTaskReceived')}
+				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已发送任务','CheckReceviedCheck','checkTaskSended')}
 			</View>
 		);
 	}

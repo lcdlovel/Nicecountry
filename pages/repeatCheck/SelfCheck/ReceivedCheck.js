@@ -38,7 +38,17 @@ export default class ReceivedCheck extends Component<Props> {
 	componentWillMount(){
 		const {fromCheck} = this.props.navigation.state.params
 		switch (fromCheck){
-			case 'checkTask':
+			/**检查任务已接受任务中的已接受*/
+			case 'checkTaskReceived':
+				this.getTaskData('CheckInfo/findCheckInfo',{
+					confirmState:0,
+					sendOrReceive:0
+				}).then(res=>{
+					console.log(res)
+				})
+				break;
+			/**检查任务中已发送任务中的已接受*/
+			case 'checkTaskSended':
 				this.getTaskData('CheckInfo/findCheckInfo',{
 					confirmState:0,
 					sendOrReceive:0
@@ -75,7 +85,11 @@ export default class ReceivedCheck extends Component<Props> {
 					<Text style={styles.rc_Itemfont}>村办公室院内未清理</Text>
 				</View>
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
-					<TouchableOpacity activeOpacity={0.8} onPress={()=>{navigation.navigate('TaskDetail')}} style={styles.rc_confirm}>
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={()=>{navigation.navigate('TaskDetail',{type:'received'})}}
+						style={styles.rc_confirm}
+					>
 						<Text style={{fontSize:15,color:'#4ECBFC'}}>查看及回复</Text>
 					</TouchableOpacity>
 				</View>

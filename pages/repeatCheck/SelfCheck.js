@@ -24,13 +24,13 @@ export default class SelfCheck extends Component<Props> {
 		super(props);
 		this.state = {}
 	}
-	_rowconstrutor(imgSource,name,click){
+	_rowconstrutor(imgSource,name,routeName){
 		const {navigation} = this.props
 		return(
 			<TouchableOpacity
 				activeOpacity={0.8}
 				onPress={() => {
-					navigation.navigate(click,{fromCheck:'SelfCheckTask'})
+					navigation.navigate(routeName,{fromCheck:'SelfCheckTask'})
 				}}>
 				<View style={styles.ck_row}>
 					<View style={styles.ck_item}>
@@ -40,13 +40,14 @@ export default class SelfCheck extends Component<Props> {
 				</View>
 			</TouchableOpacity>
 		)
+
 	}
 	render() {
 		return (
 			<View style={styles.container}>
-				{this._rowconstrutor(require('../../assets/images/received.png'),'填写自查','ReceviedCheck')}
+				{this._rowconstrutor(require('../../assets/images/received.png'),'填写自查','AddTextArea')}
 				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受自查','ReceviedCheck')}
-				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已统计任务')}
+				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已发送自查','ReceviedCheck')}
 			</View>
 		);
 	}
