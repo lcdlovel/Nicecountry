@@ -10,7 +10,8 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TouchableOpacity
+	TouchableOpacity,
+	ScrollView
 } from 'react-native';
 import { NavigationActions, NavigationState } from "react-navigation";
 import CrudApi from "../../../utils/request/crud";
@@ -22,7 +23,9 @@ type Props = {};
 export default class ReceivedCheck extends Component<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+			listData:[]
+		}
 	}
 	getTaskData(url,data){
 		return new Promise(resolve => {
@@ -44,7 +47,9 @@ export default class ReceivedCheck extends Component<Props> {
 					confirmState:0,
 					sendOrReceive:0
 				}).then(res=>{
-					console.log(res)
+					this.setState({listData:res.data.list},()=>{
+						console.log(this.state.listData)
+					})
 				})
 				break;
 			/**检查任务中已发送任务中的已接受*/
@@ -53,7 +58,9 @@ export default class ReceivedCheck extends Component<Props> {
 					confirmState:0,
 					sendOrReceive:0
 				}).then(res=>{
-					console.log(res)
+					this.setState({listData:res.data.list},()=>{
+						console.log(this.state.listData)
+					})
 				})
 				break;
 			case  'SelfCheckTask':
@@ -61,28 +68,28 @@ export default class ReceivedCheck extends Component<Props> {
 					confirmState:0,
 					sendOrReceive:0
 				}).then(res=>{
-					console.log(res)
+					this.setState({listData:res.data.list},()=>{
+						console.log(this.state.listData)
+					})
 				})
 				break
 		}
 	}
- _contentConstractor(){
+ _contentConstractor(item){
 		const {navigation} = this.props
 		return(
 			<View style={styles.rc_content}>
 				<View style={[styles.rc_conItem,styles.rc_content_first]}>
 					<View>
-						<Text style={styles.rc_Itemfont}>江苏省泰州市泰兴</Text>
-						<Text style={styles.rc_Itemfont}>市滨江镇</Text>
-						<Text style={styles.rc_Itemfont}>古兰村</Text>
+						<Text style={styles.rc_Itemfont}>{item.sendRegionName}</Text>
 					</View>
 					<View style={styles.rc_ItemBottom}>
-						<Text style={styles.rc_bottomFont}>2018-06-05</Text>
-						<Text style={styles.rc_bottomFont}>17:03:02</Text>
+						<Text style={styles.rc_bottomFont}>{item.createTime.slice(0,10)}</Text>
+						<Text style={styles.rc_bottomFont}>{item.createTime.slice(-1,-8)}</Text>
 					</View>
 				</View>
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
-					<Text style={styles.rc_Itemfont}>村办公室院内未清理</Text>
+					<Text style={styles.rc_Itemfont}>{item.theme}</Text>
 				</View>
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
 					<TouchableOpacity
@@ -104,8 +111,9 @@ export default class ReceivedCheck extends Component<Props> {
 						<Text>发送地区名称</Text>
 						<Text style={{marginLeft:30}}>主题</Text>
 					</View>
-					{this._contentConstractor()}
-					{this._contentConstractor()}
+					<ScrollView>
+					{ this.state.listData.map(item => this._contentConstractor(item))}
+					</ScrollView>
 				</View>
 			</View>
 		);

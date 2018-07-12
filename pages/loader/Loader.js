@@ -91,7 +91,10 @@ class Loader extends Component<Props> {
 						onPress={() => {
 							navigation.dispatch(resetAction)
 							// loaderFun.addData()
-							loaderFun.signIn(this.state).then(() => {
+							loaderFun.signIn(this.state).then((res) => {
+								if(res.status === 1){
+									alert(res.data)
+								}
 								navigation.navigate('HomePage')
 							})
 						}}>

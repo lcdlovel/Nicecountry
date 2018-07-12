@@ -21,7 +21,9 @@ type Props = {};
 export default class ConfirmedCheck extends Component<Props> {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+			listData:[]
+		}
   }
 	getTaskData(url,data){
 		return new Promise(resolve => {
@@ -35,27 +37,32 @@ export default class ConfirmedCheck extends Component<Props> {
 		})
 	}
 	componentWillMount(){
-		const {fromCheck} = this.props.navigation.state
+		const {fromCheck} = this.props.navigation.state.params
 		switch (fromCheck){
-			case 'checkTask':
+			case 'checkTaskReceived':
 				this.getTaskData('CheckInfo/findCheckInfo',{
 					confirmState:1,
 					sendOrReceive:0
 				}).then(res=>{
-					console.log(res)
+					console.log('求取已回复值',res.data.list)
+					this.setState({listData:res.data.list},()=>{
+						console.log(this.state.listData)
+					})
 				})
 				break;
-			case  'SelfCheckTask':
+			case  'checkTaskSended':
 				this.getTaskData('CheckInfoSelf/findCheckInfo',{
 					confirmState:2,
 					sendOrReceive:0
 				}).then(res=>{
-					console.log(res)
+					this.setState({listData:res.data.list},()=>{
+						console.log(this.state.listData)
+					})
 				})
         break
 		}
 	}
-  _contentConstractor() {
+  _contentConstractor(item) {
     const {navigation} = this.props
     return (
       <TouchableOpacity
@@ -69,17 +76,15 @@ export default class ConfirmedCheck extends Component<Props> {
         <View style={styles.rc_content}>
           <View style={[styles.rc_conItem, styles.rc_content_first]}>
             <View>
-              <Text style={styles.rc_Itemfont}>江苏省泰州市泰兴</Text>
-              <Text style={styles.rc_Itemfont}>市滨江镇</Text>
-              <Text style={styles.rc_Itemfont}>古兰村</Text>
+							<Text style={styles.rc_Itemfont}>{item.sendRegionName}</Text>
             </View>
             <View style={styles.rc_ItemBottom}>
-              <Text style={styles.rc_bottomFont}>2018-06-05</Text>
-              <Text style={styles.rc_bottomFont}>17:03:02</Text>
+							<Text style={styles.rc_bottomFont}>{item.createTime.slice(0,10)}</Text>
+							<Text style={styles.rc_bottomFont}>{item.createTime.slice(11)}</Text>
             </View>
           </View>
           <View style={[styles.rc_itemOther, styles.rc_content_last]}>
-            <Text style={styles.rc_Itemfont}>村办公室院内未清理，请去处理这些这些重要东西</Text>
+						<Text style={styles.rc_Itemfont}>{item.theme}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -94,8 +99,7 @@ export default class ConfirmedCheck extends Component<Props> {
             <Text>发送地区名称</Text>
             <Text style={{marginLeft: 30}}>主题</Text>
           </View>
-          {this._contentConstractor()}
-          {this._contentConstractor()}
+          {this.state.listData.map(item => this._contentConstractor(item))}
         </View>
       </View>
     );

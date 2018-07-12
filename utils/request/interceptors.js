@@ -28,7 +28,7 @@ axios.interceptors.response.use(
       //   }
       // }
      // alert(message)
-      console.log(response.data)
+     //  console.log(response.data)
       // 如果身份失效，则跳转到登陆界面
       // const {navigation} = this.props
       // if (response.data.status === Golbals.NEED_LOGIN) {

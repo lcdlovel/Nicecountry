@@ -42,7 +42,8 @@ export default class TaskCreate extends Component<Props> {
 			],
 			Index:'',
 			parentIndex:'',
-			isAll:false
+			isAll:[...false],
+			isChoosed:[...false]
 		}
 	}
 static navigationOptions = (props)=>{
@@ -68,9 +69,22 @@ static navigationOptions = (props)=>{
 			<TaskContent
 				content={taskType}
 				isAllChoose={index}
+				isAll={this.state.isAll[index]}
+				Choosed={this.ChooseOne.bind(this)}
 				Index={this.state.Index}
-				noAllChoose={this.noAllChoose.bind(this)}></TaskContent>
+				noAllChoose={this.noAllChoose.bind(this)}
+			></TaskContent>
 		)
+	}
+	ChooseOne(item,index){
+		// let arr=this.state.isAll
+		console.log(item)
+		console.log(index)
+		if (typeof (index) !=='undefined'){
+			let arr = this.state.isChoosed
+			arr[index] = true
+			// this.setState({isChoosed:arr})
+		}
 	}
 	/**去掉全选*/
 	noAllChoose(index){
@@ -88,10 +102,14 @@ static navigationOptions = (props)=>{
 					<Text>{task.taskName}</Text>
 					<TouchableOpacity
 						onPress={()=>{
+							console.log('图片是否显示',this.state.isChoosed)
+							let arr = this.state.isAll
+							arr[index] = !arr[index]
 							this.setState({Index:index})
-							this.setState({isAll:!this.state.isAll})
+							this.setState({isAll:arr},(()=>{
+							}))
 						}}
-						style={[styles.check_box,this.state.Index === index && this.state.isAll?styles.choose:'']}
+						style={[styles.check_box, this.state.isAll[index] && !this.state.isChoosed[index]?styles.choose:'']}
 					>
 						<Image resizeMode='contain' style={[styles.check_box_img]} />
 					</TouchableOpacity>
@@ -119,7 +137,6 @@ static navigationOptions = (props)=>{
 						<View style={styles.circle_dot}></View>
 						<Text>其它</Text>
 						<TouchableOpacity
-
 							style={styles.check_box}
 						>
 							<Image resizeMode='contain' style={[styles.check_box_img]}/>

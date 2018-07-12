@@ -31,7 +31,8 @@ export default class TaskContent extends Component<Props> {
 	componentWillReceiveProps(nextProps){
 		// console.log(nextProps)
 		if (this.props.isAllChoose === nextProps.Index){
-			this.setState({isFocused:!this.state.isFocused})
+			this.setState({isFocused:nextProps.isAll})
+			nextProps.isAll?this.props.Choosed(this.props.content):this.props.Choosed('')
 		}
 	}
 	render() {
@@ -40,12 +41,10 @@ export default class TaskContent extends Component<Props> {
 				<TouchableOpacity activeOpacity={1}
 													style={this.state.isFocused ? styles.focused : styles.container}
 													onPress={() => {
-														this.setState(previousState => {
-															return {isFocused: !previousState.isFocused};
-														})
-														if(this.state.isFocused == true){
-															this.props.noAllChoose(this.props.isAllChoose)
-														}
+																this.setState({isFocused:!this.state.isFocused},()=>{
+																	this.state.isFocused?this.props.Choosed(this.props.content):this.props.Choosed('',this.props.Index)
+																})
+
 													}}
 				>
 					<Text style={this.state.isFocused ? styles.focused_font : styles.font}>{this.props.content}</Text>

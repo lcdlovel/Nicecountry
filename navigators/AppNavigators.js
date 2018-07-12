@@ -178,18 +178,20 @@ export const MessageInformation = createMaterialTopTabNavigator({
 })
 /**检查任务下已接受任务*/
 export const CheckReceviedCheck = createMaterialTopTabNavigator({
-	ReceviedChecked: {
-		screen: ReceviedChecked,
-		navigationOptions: {
-			tabBarLabel: '待处理',
-		}
-	},
 	ConfirmedCheck: {
 		screen: ConfirmedCheck,
 		navigationOptions: {
 			tabBarLabel: '已回复',
 		}
 	},
+
+	ReceviedChecked: {
+		screen: ReceviedChecked,
+		navigationOptions: {
+			tabBarLabel: '待处理',
+		}
+	},
+
 	AffirmTask:{
 		screen: AffirmTask,
 		navigationOptions: {
@@ -248,12 +250,12 @@ export const AppStackNavgator = createStackNavigator({
 	// 	}
 	// },
 	/**登录页面*/
-	// Loader:{
-	// 	screen:Loader,
-	// 	navigationOptions:{
-	// 		header:null
-	// 	}
-	// },
+	Loader:{
+		screen:Loader,
+		navigationOptions:{
+			header:null
+		}
+	},
 	/**主页面*/
 	Home: {
 		screen: Home,
