@@ -48,6 +48,7 @@ import MyMsg from "../pages/setUp/SetUp/MyMsg";
 import AffirmTask from "../pages/repeatCheck/SelfCheck/AffirmTask";
 import SelfCheckTask from "../pages/repeatCheck/taskCreate/SelfCheckTask";
 import SelfCheckTaskConfirm from "../pages/repeatCheck/SelfCheck/SelfCheckTaskConfirm";
+import HeadAppear from "../pages/msgInformation/HeadAppear";
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -514,6 +515,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+	/**保洁人员的增加*/
 	AddCleaner: {
 		screen: AddCleaner,
 		navigationOptions: (props) => {
@@ -533,8 +535,7 @@ export const AppStackNavgator = createStackNavigator({
 		}
 	},
 	/**人员基础信息*/
-	MsgList:
-		{
+	MsgList: {
 			screen: MsgList,
 			navigationOptions: (props) => {
 				const {params} = props.navigation.state
@@ -552,8 +553,7 @@ export const AppStackNavgator = createStackNavigator({
 				}
 			}
 		},
-	OneCleanerMsg:
-		{
+	OneCleanerMsg: {
 			screen: OneCleanerMsg,
 			navigationOptions: (props) => {
 				const {params} = props.navigation.state
@@ -572,8 +572,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		},
 	/**人员的合同列表*/
-	ContractorList:
-		{
+	ContractorList: {
 			screen: ContractorList,
 			navigationOptions: (props) => {
 				const {params} = props.navigation.state
@@ -633,8 +632,9 @@ export const AppStackNavgator = createStackNavigator({
 	CheckReceviedCheck: {
 		screen: CheckReceviedCheck,
 		navigationOptions: (props) => {
+			const {params} = props.navigation.state
 			return {
-				title: '已接受任务',
+				title: params.title,
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: 15,
@@ -969,6 +969,26 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+	/**修改头像*/
+	HeadAppear:{
+		screen:HeadAppear,
+		navigationOptions: (props) => {
+			const {params} = props.navigation.state
+			return {
+				title: '头像',
+				headerTitleStyle: {
+					color: '#666666',
+					fontSize: 15,
+					flex: 1,
+					textAlign: 'center'
+				},
+				headerStyle: {
+					backgroundColor: '#ffffff'
+				},
+			}
+		}
+	},
+
 	// ReceviedCheck: {
 	// 	screen: ReceviedCheck,
 	// 	navigationOptions: (props) => {

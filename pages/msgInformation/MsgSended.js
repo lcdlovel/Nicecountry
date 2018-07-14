@@ -24,10 +24,10 @@ export default class MsgSended extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			itemData:[
-				{name:'密码修改',pointColor:false,navigation:'RevisePassWord'},
-				{name:'二维码下载',pointColor:false,navigation:'QrCodeDown'},
-				{name:'我的信息',pointColor:true,navigation:'MyMsg'}
+			itemData: [
+				{name: '密码修改', pointColor: false, navigation: 'RevisePassWord'},
+				{name: '二维码下载', pointColor: false, navigation: 'QrCodeDown'},
+				{name: '我的信息', pointColor: true, navigation: 'MyMsg'}
 			]
 		}
 	}
@@ -37,20 +37,24 @@ export default class MsgSended extends Component<Props> {
 		return (
 			<TouchableOpacity
 				activeOpacity={0.8}
-				onPress={()=>{
+				onPress={() => {
 					navigation.navigate(item.navigation)
 				}}
 			>
-			<View style={styles.my_item}>
-				<View style={styles.my_item_left}>
-					<View style={[styles.my_item_point , item.pointColor?styles.pointColor:'']}>
+				<View style={styles.my_item}>
+					<View style={styles.my_item_left}>
+						<View style={[styles.my_item_point, item.pointColor ? styles.pointColor : '']}>
+						</View>
+						<Text style={styles.my_item_left}>{item.name}</Text>
 					</View>
-					<Text style={styles.my_item_left}>{item.name}</Text>
+					<Image style={styles.my_item_arrow} source={require('../../assets/images/small-Return.png')}/>
 				</View>
-				<Image style={styles.my_item_arrow} source={require('../../assets/images/small-Return.png')}/>
-			</View>
 			</TouchableOpacity>
 		)
+	}
+
+	componentWillMount() {
+		console.log(global.User_msg)
 	}
 
 	render() {
@@ -62,11 +66,23 @@ export default class MsgSended extends Component<Props> {
 				</View>
 				<View style={styles.my_msg}>
 					<View>
-						<Image style={styles.my_head_img} source={require('../../assets/images/mainImg.png')}/>
-						<Text style={{fontSize: 17, color: "#0c0c0c"}}>王小豆</Text>
-						<Text style={{fontSize: 15, marginTop: 5, marginBottom: 25}}>南京市栖霞区鸿运家园保洁员</Text>
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={()=>{
+								navigation.navigate('HeadAppear',{})
+							}}
+						>
+							<Image style={styles.my_head_img} source={require('../../assets/images/mainImg.png')}/>
+						</TouchableOpacity>
+						<Text style={{fontSize: 17, color: "#0c0c0c"}}>{global.User_msg.name}</Text>
+						<Text style={{fontSize: 15, marginTop: 5, marginBottom: 25}}>{global.User_msg.regionName}</Text>
 					</View>
-					<View style={styles.my_head_right}>
+					<TouchableOpacity
+						style={styles.my_head_right}
+						onPress={()=>{
+							navigation.navigate()
+						}}
+					>
 						<View style={{paddingLeft: 15}}>
 							<View style={styles.my_img}>
 								<Image style={{width: 18, height: 18,}} source={require('../../assets/images/edit.png')}/>
@@ -75,7 +91,7 @@ export default class MsgSended extends Component<Props> {
 						<View>
 							<Text>编辑资料</Text>
 						</View>
-					</View>
+					</TouchableOpacity>
 				</View>
 				<View style={{height: 30, backgroundColor: '#ffffff'}}>
 				</View>
@@ -83,22 +99,23 @@ export default class MsgSended extends Component<Props> {
 
 					<FlatList
 						data={this.state.itemData}
-						ItemSeparatorComponent={()=> <View style={styles.line}></View>}
+						ItemSeparatorComponent={() => <View style={styles.line}></View>}
 						renderItem={({item}) => this._rowItem(item)}
 					/>
 					<TouchableOpacity
-					activeOpacity={0.8}
-					onPress={()=>{
-						navigation.navigate('RevisePassWord')
-					}}
+						activeOpacity={0.8}
+						onPress={() => {
+							navigation.navigate('RevisePassWord')
+						}}
 					>
-					<View style={styles.my_item}>
-						<View style={styles.my_item_left}>
-							<View style={[styles.my_item_point,styles.none]}></View>
-							<Text style={styles.my_item_left}>退出登录</Text>
+						<View style={styles.my_item}>
+							<View style={styles.my_item_left}>
+								<View style={[styles.my_item_point, styles.none]}></View>
+								<Text style={styles.my_item_left}>退出登录</Text>
+							</View>
+							<Image style={[styles.my_item_arrow, styles.none]}
+										 source={require('../../assets/images/small-Return.png')}/>
 						</View>
-						<Image style={[styles.my_item_arrow,styles.none]} source={require('../../assets/images/small-Return.png')}/>
-					</View>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -174,14 +191,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	pointColor:{
-		backgroundColor:'#f26b6a'
+	pointColor: {
+		backgroundColor: '#f26b6a'
 	},
-	line:{
-		height:1,
-		backgroundColor:global.commonCss.borderColor
+	line: {
+		height: 1,
+		backgroundColor: global.commonCss.borderColor
 	},
-	none:{
-		opacity:0
+	none: {
+		opacity: 0
 	}
 });

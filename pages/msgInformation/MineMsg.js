@@ -11,13 +11,12 @@ import {
 	Text,
 	View
 } from 'react-native';
-import global from "../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
 let {width} = dimensions.get('window')
 type Props = {};
-export default class MsgInformation extends Component<Props> {
+export default class MineMsg extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {}
@@ -26,7 +25,7 @@ export default class MsgInformation extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text>已创建</Text>
+				<Text>开始我的联系</Text>
 			</View>
 		);
 	}
@@ -35,6 +34,8 @@ export default class MsgInformation extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: global.commonCss.screenColor,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#F5FCFF',
 	}
 });

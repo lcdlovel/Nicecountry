@@ -13,6 +13,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import CrudApi from "../../../utils/request/crud";
+import global from "../../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -42,7 +43,7 @@ export default class ConfirmedCheck extends Component<Props> {
 			case 'checkTaskReceived':
 				this.getTaskData('CheckInfo/findCheckInfo',{
 					confirmState:1,
-					sendOrReceive:0
+					sendOrReceive:1
 				}).then(res=>{
 					console.log('求取已回复值',res.data.list)
 					this.setState({listData:res.data.list},()=>{
@@ -51,8 +52,8 @@ export default class ConfirmedCheck extends Component<Props> {
 				})
 				break;
 			case  'checkTaskSended':
-				this.getTaskData('CheckInfoSelf/findCheckInfo',{
-					confirmState:2,
+				this.getTaskData('CheckInfo/findCheckInfo',{
+					confirmState:1,
 					sendOrReceive:0
 				}).then(res=>{
 					this.setState({listData:res.data.list},()=>{
@@ -69,7 +70,7 @@ export default class ConfirmedCheck extends Component<Props> {
         activeOpacity={0.8}
         onPress={
           ()=>{
-            navigation.navigate('TaskDetail')
+            navigation.navigate('TaskDetail',{data:item,DataType:'confirmedCheck'})
           }
         }
       >
@@ -80,12 +81,25 @@ export default class ConfirmedCheck extends Component<Props> {
             </View>
             <View style={styles.rc_ItemBottom}>
 							<Text style={styles.rc_bottomFont}>{item.createTime.slice(0,10)}</Text>
-							<Text style={styles.rc_bottomFont}>{item.createTime.slice(11)}</Text>
+							<Text style={styles.rc_bottomFont}>{item.createTime.slice(11,-2)}</Text>
             </View>
           </View>
           <View style={[styles.rc_itemOther, styles.rc_content_last]}>
 						<Text style={styles.rc_Itemfont}>{item.theme}</Text>
           </View>
+					<View style={[styles.rc_item_last, styles.rc_content_last]}>
+						<Text style={[styles.rc_Itemfont,styles.del_font]} onPress={()=>{
+							CrudApi.postInfo({
+								url:'CheckInfo/deleteCheckInfo',
+								data:{
+									checkInfoId:item.id
+								},
+								callback:(res)=>{
+									console.log(res)
+								}
+							})
+						}}>{'删除'}</Text>
+					</View>
         </View>
       </TouchableOpacity>
     )
@@ -155,6 +169,14 @@ const styles = StyleSheet.create({
     borderRadius: 4
   },
   rc_itemOther: {
-    width: 0.7 * width
-  }
+    width: 0.4 * width
+  },
+	rc_item_last:{
+  	width:0.2 * width,
+	},
+	del_font:{
+		width:0.2 * width,
+  	color:global.commonCss.mainColor,
+		textAlign:'right',
+	}
 });

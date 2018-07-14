@@ -25,20 +25,20 @@ export default class Check extends Component<Props> {
 		super(props);
 		this.state = {}
 	}
-	jumpRouter(route,type){
+	jumpRouter(route,name,type){
 		const {navigation} = this.props
-		navigation.navigate(route,{fromCheck:type})
+		navigation.navigate(route,{fromCheck:type,title:name})
 	}
 	_rowconstrutor(imgSource,name,router,type){
 		return(
 			<TouchableOpacity
 				activeOpacity={0.8}
 				onPress={() => {
-					this.jumpRouter(router,type)
+					this.jumpRouter(router,name,type)
 				}}>
 			<View style={styles.ck_row}>
 				<View style={styles.ck_item}>
-					<Image style={styles.ck_png} source={require('../../assets/images/Receivedtask.png')}/>
+					<Image style={styles.ck_png} source={imgSource}/>
 				</View>
 				<Text style={styles.ck_font}>{name}</Text>
 			</View>
@@ -48,9 +48,9 @@ export default class Check extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				{this._rowconstrutor(require('../../assets/images/found.png'),'创建任务','TaskCreate')}
-				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受任务','CheckReceviedCheck','checkTaskReceived')}
-				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已发送任务','CheckReceviedCheck','checkTaskSended')}
+				{this._rowconstrutor(require('../../assets/images/Createatask.png'),'创建任务','TaskCreate')}
+				{this._rowconstrutor(require('../../assets/images/Receivedtask.png'),'已接受任务','CheckReceviedCheck','checkTaskReceived')}
+				{this._rowconstrutor(require('../../assets/images/Senttask.png'),'已发送任务','CheckReceviedCheck','checkTaskSended')}
 			</View>
 		);
 	}

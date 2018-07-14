@@ -27,6 +27,7 @@ export default class TaskDetail extends Component<Props> {
 		this.state = {}
 	}
 	componentWillMount(){
+		console.log(this.props.navigation.state.params.data.fileURLList)
 	}
 	static navigationOptions = (props)=>{
 		const {navigation}=props
@@ -46,11 +47,12 @@ export default class TaskDetail extends Component<Props> {
 		}
 	}
 	render() {
+		const {params} = this.props.navigation.state
 		return (
-			<ScrollView>
-			<View style={styles.container}>
-				<ShowDetailMsg />
-				{/*<ImgList url={require('../../assets/News/201806141307.jpg')}/>*/}
+			<ScrollView style={styles.container}>
+			<View >
+				<ShowDetailMsg detailMsg={params.data} DataType={params.DataType}/>
+				<ImgList imageList={params.data.fileURLList}/>
 			</View>
 			</ScrollView>
 		);
@@ -60,7 +62,7 @@ export default class TaskDetail extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: global.commonCss.screenColor,
 	},
 
 });

@@ -42,6 +42,16 @@ export default class AffirmTask extends Component<Props> {
 			case 'checkTaskReceived':
 				this.getTaskData('CheckInfo/findCheckInfo',{
 					confirmState:2,
+					sendOrReceive:1
+				}).then(res=>{
+					this.setState({listData:res.data.list},()=>{
+						console.log(this.state.listData)
+					})
+				})
+				break;
+			case 'checkTaskSended':
+				this.getTaskData('CheckInfo/findCheckInfo',{
+					confirmState:2,
 					sendOrReceive:0
 				}).then(res=>{
 					this.setState({listData:res.data.list},()=>{
@@ -79,7 +89,7 @@ export default class AffirmTask extends Component<Props> {
 						</View>
 						<View style={styles.rc_ItemBottom}>
 							<Text style={styles.rc_bottomFont}>{item.createTime.slice(0,10)}</Text>
-							<Text style={styles.rc_bottomFont}>{item.createTime.slice(-1,-8)}</Text>
+							<Text style={styles.rc_bottomFont}>{item.createTime.slice(11,-2)}</Text>
 						</View>
 					</View>
 					<View style={[styles.rc_itemOther, styles.rc_content_last]}>

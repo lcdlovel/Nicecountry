@@ -45,9 +45,9 @@ export default class SelfCheck extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				{this._rowconstrutor(require('../../assets/images/received.png'),'填写自查','AddTextArea')}
-				{this._rowconstrutor(require('../../assets/images/received.png'),'已接受自查','ReceviedCheck')}
-				{this._rowconstrutor(require('../../assets/images/statistics.png'),'已发送自查','ReceviedCheck')}
+				{this._rowconstrutor(require('../../assets/images/Createatask.png'),'填写自查','AddTextArea')}
+				{this._rowconstrutor(require('../../assets/images/Receivedtask.png'),'已接受自查','ReceviedCheck')}
+				{this._rowconstrutor(require('../../assets/images/Senttask.png'),'已发送自查','ReceviedCheck')}
 			</View>
 		);
 	}

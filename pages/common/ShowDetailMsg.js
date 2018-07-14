@@ -30,7 +30,7 @@ export default class ShowDetailMsg extends Component<Props> {
 
 	componentWillMount() {
 		const {detailMsg, DataType} = this.props
-		console.log(detailMsg)
+		console.log(detailMsg,DataType)
 		DataType === 'personData' ?
 			this.setState({
 				listData: [
@@ -60,7 +60,21 @@ export default class ShowDetailMsg extends Component<Props> {
 						{title: '上报人', content: detailMsg.reportUserName},
 						{title: '类别', content: {name: detailMsg.name, count: '10户'}},
 					]
-				}) : ''
+				}) : DataType === 'confirmedCheck'?
+					this.setState({
+						listData:[
+							{title:'名称',content: detailMsg.theme},
+							{title:'时间',content:detailMsg.createTime},
+							{title:'待处理内容',content:detailMsg.info},
+							{title:'回复内容',content:detailMsg.replyInfo}
+						]
+					}):DataType === 'ReceivedCheck'?
+						this.setState({
+							listData:[
+								{title:'名称',content: detailMsg.theme},
+								{title:'时间',content:detailMsg.createTime},
+								{title:'内容',content:detailMsg.info}
+							]}):''
 	}
 
 	_typeSpecial(item) {

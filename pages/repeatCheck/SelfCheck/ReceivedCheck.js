@@ -45,7 +45,7 @@ export default class ReceivedCheck extends Component<Props> {
 			case 'checkTaskReceived':
 				this.getTaskData('CheckInfo/findCheckInfo',{
 					confirmState:0,
-					sendOrReceive:0
+					sendOrReceive:1
 				}).then(res=>{
 					this.setState({listData:res.data.list},()=>{
 						console.log(this.state.listData)
@@ -58,6 +58,7 @@ export default class ReceivedCheck extends Component<Props> {
 					confirmState:0,
 					sendOrReceive:0
 				}).then(res=>{
+					console.log(res)
 					this.setState({listData:res.data.list},()=>{
 						console.log(this.state.listData)
 					})
@@ -85,7 +86,7 @@ export default class ReceivedCheck extends Component<Props> {
 					</View>
 					<View style={styles.rc_ItemBottom}>
 						<Text style={styles.rc_bottomFont}>{item.createTime.slice(0,10)}</Text>
-						<Text style={styles.rc_bottomFont}>{item.createTime.slice(-1,-8)}</Text>
+						<Text style={styles.rc_bottomFont}>{item.createTime.slice(11,-2)}</Text>
 					</View>
 				</View>
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
@@ -94,7 +95,7 @@ export default class ReceivedCheck extends Component<Props> {
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
 					<TouchableOpacity
 						activeOpacity={0.8}
-						onPress={()=>{navigation.navigate('TaskDetail',{type:'received'})}}
+						onPress={()=>{navigation.navigate('TaskDetail',{type:'received',DataType:'ReceivedCheck'})}}
 						style={styles.rc_confirm}
 					>
 						<Text style={{fontSize:15,color:'#4ECBFC'}}>查看及回复</Text>
