@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 //引用插件
 import Swiper from 'react-native-swiper';
+import global from "../../../utils/global/global";
 // 取得屏幕的宽高Dimensions
 const {width, height} = Dimensions.get('window');
 export default class Banner2 extends Component {
@@ -23,10 +24,10 @@ export default class Banner2 extends Component {
 	// 轮播图
 	render() {
 		return (
-			<View style={{height:180}}>
+			<View style={styles.hf_ban}>
 				<Swiper
 					style={styles.wrpaper}
-					height={240}
+					height={global.ScreenUtil.autoHeight(174)}
 					showsButtons={false}
 					removeClippedSubviews={false} //这个很主要啊，解决白屏问题
 					autoplay={true}
@@ -55,7 +56,7 @@ export default class Banner2 extends Component {
 const styles = StyleSheet.create({
 	hf_ban:{
 		width:width,
-		height:240
+		height:global.ScreenUtil.autoHeight(174)
 	},
 	wrpaper: {
 		flex:0,

@@ -1,3 +1,16 @@
+import {
+    PixelRatio,
+    Dimensions,
+    Platform
+} from 'react-native';
+import ScreenUtil from './ScreenUtil'
+
+ let screenW = Dimensions.get('window').width;
+ let screenH = Dimensions.get('window').height;
+// iPhoneX
+const X_WIDTH = 375;
+const X_HEIGHT = 812;
+
 export default {
 	token: '',
 	User_msg: '',
@@ -5,17 +18,31 @@ export default {
 	ERROR: 1, // 错误请求
 	ILLEGAL_ARGUMENT: 2, // 参数错误
 	NEED_LOGIN: 10, // 需要重新登录
+    ScreenUtil:ScreenUtil, //屏幕适配
 	Cleaner_ContractType: 2,
 	Normal_ContractType: 3,
 	commonCss: {
+        fontFamily: "Helvetica",
 		borderColor: '#eeeeee',
 		mainColor: '#91e6bb',
 		fontColor: '#666666',
-		screenColor: '#fafafa'
+		screenColor: '#fafafa',
+		mainFontSize:18,
 	},
 
 	uploadUrl: 'http://192.168.0.128:9090/beautifulCountry-v2.0/File/upload',
 
+    /**
+	 * 判断是不是iponeX
+     * @returns {boolean}
+     */
+    isIphoneX() {
+        return (
+            Platform.OS === 'ios' &&
+            ((screenH === X_HEIGHT && screenW === X_WIDTH) ||
+                (screenH === X_WIDTH && screenW === X_HEIGHT))
+        )
+    },
 
 	/**方法*/
 	changeUnix(unixTime) {

@@ -105,13 +105,7 @@ class Loader extends Component<Props> {
 							<Text style={styles.load_btn_font}>登录</Text>
 						</LinearGradient>
 					</TouchableOpacity>
-					<Text style={{
-						fontFamily: 'Helvetica',
-						fontWeight: '100',
-						fontSize: 10,
-						textAlign: 'center',
-						marginTop: 10
-					}}>已阅读并同意《美丽乡村协议》!</Text>
+					<Text style={styles.protocal}>已阅读并同意《美丽乡村协议》!</Text>
 				</View>
 			</View>
 		);
@@ -170,7 +164,7 @@ const styles = StyleSheet.create({
 	},
 	//登陆按钮
 	load_btn_font: {
-		fontFamily: "Helvetica",
+		fontFamily: global.commonCss.fontFamily,
 		fontSize: 27,
 		color: "#ffffff"
 	},
@@ -185,7 +179,15 @@ const styles = StyleSheet.create({
 	},
 	ygbtn: {
 		marginTop: height * 0.1
-	}
+	},
+	protocol: {
+        fontFamily: global.commonCss.fontFamily,
+        fontWeight: '100',
+        fontSize: 10,
+        textAlign: 'center',
+        marginTop: 10
+
+    }
 });
 
 export default connect(

@@ -79,7 +79,7 @@ export default class HomePage extends Component<Props> {
 						<Text>新闻动态</Text>
 					</View>
 					<View>
-						<Text>查看更多</Text>
+						<Text style={styles.check_more}>查看更多</Text>
 					</View>
 				</View>
 			</View>
@@ -232,19 +232,24 @@ export default class HomePage extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+    /**
+	 * 主页面
+     */
 	container: {
 		flex: 1,
 		alignItems: 'center',
+        paddingTop:global.isIphoneX?35:0,
+        backgroundColor:global.commonCss.screenColor
 	},
 	areaMsg: {
 		flex: 0,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		paddingLeft: 20,
-		paddingRight: 20,
+		paddingLeft: global.ScreenUtil.autoWidth(20),
+		paddingRight: global.ScreenUtil.autoWidth(20),
 		alignItems: 'center',
 		width: width,
-		height: 50,
+		height: global.ScreenUtil.autoHeight(44),
 		backgroundColor: "#ffffff",
 		shadowColor: "rgba(94, 108, 104, 0.27)",
 		shadowOffset: {
@@ -270,8 +275,6 @@ const styles = StyleSheet.create({
 	},
 	hf_fun: {
 		width: width,
-		borderTopColor: '#d3d7d6',
-		borderTopWidth: 6,
 		paddingTop: 10,
 		paddingBottom: 10,
 		flex: 0,
@@ -405,6 +408,10 @@ const styles = StyleSheet.create({
 		fontSize:8,
 		textAlign:'center',
 		lineHeight:10
+	},
+
+    check_more:{
+		// fontSize:
 	}
 });
 

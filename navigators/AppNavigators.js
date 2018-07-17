@@ -98,8 +98,9 @@ export const Home = createMaterialTopTabNavigator({
 	tabBarOptions: {
 		showIcon: true,
 		style: {
-			height: 50,
-			backgroundColor: '#FFF'
+			height: global.isIphoneX()?60:50,
+			backgroundColor: '#FFF',
+			paddingBottom:global.isIphoneX()?15:0,
 		},
 		labelStyle: {
 			color: global.commonCss.fontColor,
@@ -244,19 +245,13 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 
 
 export const AppStackNavgator = createStackNavigator({
-	// StartUp: {
-	// 	screen:StartUp,
+	/**登录页面*/
+	// Loader:{
+	// 	screen:Loader,
 	// 	navigationOptions:{
 	// 		header:null
 	// 	}
 	// },
-	/**登录页面*/
-	Loader:{
-		screen:Loader,
-		navigationOptions:{
-			header:null
-		}
-	},
 	/**主页面*/
 	Home: {
 		screen: Home,
