@@ -195,3 +195,4 @@ export default connect(
 	}),
 	dispatch => bindActionCreators(types, dispatch)
 )(Loader);
+
