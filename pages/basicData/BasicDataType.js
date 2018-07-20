@@ -26,6 +26,9 @@ export default class BasicDataType extends Component<Props> {
 		this.state = {}
 	}
 
+    /**
+	 * 各区域模块 构造函数
+     */
 	_dataListItem(item) {
 		const {navigation} = this.props
 		return (
@@ -124,6 +127,9 @@ const styles = StyleSheet.create({
 		width: width,
 		height: 0.3 * height
 	},
+    /**
+	 * 各个模块的总样式
+     */
 	basic_type: {
 		width: 0.45 * width,
 		marginRight: 5,
@@ -135,14 +141,14 @@ const styles = StyleSheet.create({
 		height: 150,
 		backgroundColor: '#ffffff',
 		borderRadius: 10,
-		shadowOffset: {width: 0, height: 5},
+		shadowOffset: {width: 0, height: 2},
 		shadowOpacity: 0.5,
 		shadowRadius: 5,
 		shadowColor: 'gray',
-		elevation: 4,
+		// elevation: 4,
 	},
 	basic_module: {
-		flex: 0,
+		flex: 1,
 		marginTop: 7,
 		justifyContent: 'center',
 		alignItems: 'center',

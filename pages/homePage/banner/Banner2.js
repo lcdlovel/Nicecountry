@@ -27,7 +27,7 @@ export default class Banner2 extends Component {
 			<View style={styles.hf_ban}>
 				<Swiper
 					style={styles.wrpaper}
-					height={global.ScreenUtil.autoHeight(174)}
+					height={global.ScreenUtil.hTd(350)}
 					showsButtons={false}
 					removeClippedSubviews={false} //这个很主要啊，解决白屏问题
 					autoplay={true}
@@ -56,7 +56,7 @@ export default class Banner2 extends Component {
 const styles = StyleSheet.create({
 	hf_ban:{
 		width:width,
-		height:global.ScreenUtil.autoHeight(174)
+		height:global.ScreenUtil.hTd(350)
 	},
 	wrpaper: {
 		flex:0,

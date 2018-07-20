@@ -24,10 +24,15 @@ export default {
 	commonCss: {
         fontFamily: "Helvetica",
 		borderColor: '#eeeeee',
-		mainColor: '#91e6bb',
+		mainColor: 'rgb(112,218,173)',
 		fontColor: '#666666',
 		screenColor: '#fafafa',
-		mainFontSize:18,
+		mainFontSize:16,
+		primaryFontSize:18,
+		titleFontSize:15,
+		navigationFontSize:20,
+		lineColor:'#ddd',
+		lineWidth:ScreenUtil.hTd(0.5)
 	},
 
 	uploadUrl: 'http://192.168.0.128:9090/beautifulCountry-v2.0/File/upload',

@@ -76,7 +76,7 @@ export default class HomePage extends Component<Props> {
 				<View style={styles.news_list_header}>
 					<View style={styles.news_title}>
 						<View style={styles.circleDot}></View>
-						<Text>新闻动态</Text>
+						<Text style={styles.new_head_title}>新闻动态</Text>
 					</View>
 					<View>
 						<Text style={styles.check_more}>查看更多</Text>
@@ -89,15 +89,15 @@ export default class HomePage extends Component<Props> {
 	/**新闻列表构建函数*/
 	_newListItem(data) {
 		return (
-			<View style={styles.news_list}>
+			<View style={[styles.news_list,styles.new_item]}>
 				<View style={styles.new_list} key={data.title}>
 					<Image source={require('../../assets/News/201806141307.jpg')} resizeMode='cover' style={styles.newImg}/>
 					<View style={styles.new_content}>
-						<Text>{data.title}</Text>
+						<Text style={styles.new_title}>{data.title}</Text>
 						<View style={styles.new_time}>
 							<Image source={require('../../assets/images/time.png')} resizeMode='cover'
 										 style={styles.new_timePng}/>
-							<Text>{data.time}</Text>
+							<Text style={styles.news_date}>{data.time}</Text>
 						</View>
 					</View>
 				</View>
@@ -145,26 +145,25 @@ export default class HomePage extends Component<Props> {
 			offsetX >= 2 * screenWidth?this.setState({Index: 2}):
 				offsetX >=  screenWidth?this.setState({Index: 1}):
 					this.setState({Index: 0})
-		// if (offsetX >=3 * screenWidth) {
-		// 	this.setState({Index: 3})
-		// }else if (offsetX >= 2 * screenWidth) {
-		// 	this.setState({Index: 2})
-		// }else if (offsetX>=  screenWidth) {
-		// 	this.setState({Index: 1})
-		// }else {
-		// 	this.setState({Index: 0})
-		// }
 	}
 	render() {
 		const {navigation} = this.props
 		return (
 			<View style={styles.container}>
-				{/*中间信息*/}
+
+				{/**中间信息区域和信息通知*/}
+
 				<View style={styles.areaMsg}>
+
+					{/***区域**/}
+
 					<View style={styles.hf_item}>
 						<Image source={require('../../assets/images/region.png')} style={styles.hf_icon}/>
 						<Text style={styles.hf_font}>当前区域:{global.User_msg.regionName}</Text>
 					</View>
+
+                    {/***信息通知*/}
+
 					<TouchableOpacity
 						onPress={()=>{
 							loaderFun.addData()
@@ -177,13 +176,19 @@ export default class HomePage extends Component<Props> {
 					</TouchableOpacity>
 				</View>
 				<ScrollView>
-					{/*轮播图*/}
+
+					{/**轮播图*/}
+
 					<Banner2/>
-					{/*显示有哪些功能模块*/}
+
+					{/***显示有哪些功能模块*/}
+
 					<View style={styles.hf_fun}>
 						{this.state.modules.map(item => this._moduleConstrator(item))}
 					</View>
-					{/*新闻列表*/}
+
+					{/**新闻列表*/}
+
 					<View style={{marginTop: 8}}>
 						<FlatList
 							ListHeaderComponent={this._newListHeaderComponent()}
@@ -194,15 +199,18 @@ export default class HomePage extends Component<Props> {
 							renderItem={({item}) => this._newListItem(item)}
 						/>
 					</View>
+
+					{/**美丽乡村*/}
+
 					<View style={{marginTop: 8}}>
 						<View style={styles.news_list}>
 							<View style={styles.news_list_header}>
 								<View style={styles.news_title}>
 									<View style={styles.circleDot}></View>
-									<Text>美丽乡村</Text>
+									<Text style={styles.new_head_title}>美丽乡村</Text>
 								</View>
 								<View>
-									<Text>查看更多</Text>
+									<Text style={styles.check_more}>查看更多</Text>
 								</View>
 							</View>
 						</View>
@@ -212,8 +220,7 @@ export default class HomePage extends Component<Props> {
 						<FlatList
 							ref={(flatList)=>this._flatList = flatList}
 							data={[
-								[{title: '市委书记韩立明专程赴高港调研', time: '2018-06-11'},
-								{title: '委书记韩立明专程赴高港调研', time: '2018-07-11'}],
+								[{title: '市委书记韩立明专程赴高港调研', time: '2018-06-11'}, {title: '委书记韩立明专程赴高港调研', time: '2018-07-11'}],
 								[{title: '书记韩立明专程赴高港调研', time: '2018-07-11'}],
 								[{title: '委记韩立明专程赴高港调研', time: '2018-07-11'}],
 								[{title: '委韩立明专程赴高港调研', time: '2018-07-11'}]
@@ -233,23 +240,26 @@ export default class HomePage extends Component<Props> {
 
 const styles = StyleSheet.create({
     /**
-	 * 主页面
+	 * 主页面最外框
      */
 	container: {
 		flex: 1,
 		alignItems: 'center',
-        paddingTop:global.isIphoneX?35:0,
+        paddingTop:global.isIphoneX?global.ScreenUtil.hTd(50):0,
         backgroundColor:global.commonCss.screenColor
 	},
+    /**
+	 * 顶部区域信息  和  信息通知
+     */
 	areaMsg: {
 		flex: 0,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		paddingLeft: global.ScreenUtil.autoWidth(20),
-		paddingRight: global.ScreenUtil.autoWidth(20),
+		paddingLeft: global.ScreenUtil.pTd(20),
+		paddingRight: global.ScreenUtil.pTd(20),
 		alignItems: 'center',
 		width: width,
-		height: global.ScreenUtil.autoHeight(44),
+		height: global.ScreenUtil.hTd(88),
 		backgroundColor: "#ffffff",
 		shadowColor: "rgba(94, 108, 104, 0.27)",
 		shadowOffset: {
@@ -259,6 +269,9 @@ const styles = StyleSheet.create({
 		shadowRadius: 0,
 		shadowOpacity: 1
 	},
+    /**
+	 * 顶部区域信息  和  信息通知 两模块
+     */
 	hf_item: {
 		flex: 0,
 		justifyContent: 'center',
@@ -266,13 +279,16 @@ const styles = StyleSheet.create({
 		flexDirection: 'row'
 	},
 	hf_font: {
-		fontSize: 15,
+		fontSize: global.commonCss.mainFontSize,
 	},
 	hf_icon: {
-		marginRight: 10,
-		width: 18,
-		height: 18,
+		marginRight: global.ScreenUtil.pTd(35),
+		width: global.ScreenUtil.pTd(global.isIphoneX()?50:37),
+		height: global.ScreenUtil.hTd(global.isIphoneX()?42:37),
 	},
+    /**
+	 * 导航图下方的功能模块总的样式
+     */
 	hf_fun: {
 		width: width,
 		paddingTop: 10,
@@ -282,19 +298,24 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flexWrap: 'wrap'
 	},
+    /**
+	 * 各个功能模块
+     */
 	hf_funicon: {
-		width: 47,
-		height: 47,
+		width: global.ScreenUtil.pTd(global.isIphoneX()?120:100),
+		height: global.ScreenUtil.pTd(global.isIphoneX()?120:100),
 	},
+
 	fun_item: {
-		marginTop: 8,
+		marginTop: global.ScreenUtil.hTd(26),
+		marginBottom:global.ScreenUtil.hTd(26),
 		width: 1 / 4 * width,
 		flex: 0,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	fun_font: {
-		fontSize: 14,
+		fontSize: global.commonCss.mainFontSize,
 		marginTop: 3,
 		textAlign: 'center',
 		color: "#364a51"
@@ -305,12 +326,34 @@ const styles = StyleSheet.create({
 	setUp: {
 		paddingRight: 10
 	},
+    /**
+	 * 新闻列表头部标题
+     */
+    new_head_title:{
+		fontSize:global.commonCss.primaryFontSize
+	},
+    /**
+	 * 新闻列表中一个项目的总样式
+     */
 	news_list: {
 		backgroundColor: '#ffffff',
 		width: width,
 		flex: 0,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+    /**
+	 * 单个新闻的新闻标题的字体大小
+     */
+    new_title:{
+		fontSize:global.commonCss.titleFontSize,
+		width:global.ScreenUtil.pTd(290)
+	},
+    /**
+	 * 单个信息的整体样式
+     */
+    new_item:{
+		height:global.ScreenUtil.hTd(300)
 	},
 	news_list_header: {
 		width: 0.9 * width,
@@ -329,31 +372,57 @@ const styles = StyleSheet.create({
 		flex: 0,
 		flexDirection: 'row'
 	},
+    /**
+	 * 单个新闻的图片
+     */
 	newImg: {
 		width: 0.45 * width,
-		height: 100,
+		height: global.ScreenUtil.hTd(180),
 		borderRadius: 10
 	},
+    /**
+	 * 单个新闻的内容
+     */
 	new_content: {
-		width: 0.35 * width,
+		// width: 0.35 * width,
 		marginLeft: 8,
-		height: 100,
+        height: global.ScreenUtil.hTd(180),
 		flex: 0,
 	},
+    /**
+	 * 单个新闻 的 时间
+     */
 	new_time: {
 		flex: 0,
 		flexDirection: 'row',
+		alignItems:'center',
 		marginTop: 10
 	},
+    /**
+	 * 新闻时间图片
+     */
 	new_timePng: {
-		width: 20,
-		height: 20
+		width: global.ScreenUtil.pTd(global.isIphoneX()?30:26),
+		height: global.ScreenUtil.hTd(26)
 	},
+    /**
+	 * 新闻时间
+     */
+    news_date:{
+    	fontSize:global.commonCss.titleFontSize,
+		marginLeft:global.ScreenUtil.pTd(20)
+	},
+    /**
+	 * 新闻中间空隙
+     */
 	item_separator: {
 		height: 6,
 		width: width,
 		backgroundColor: '#fafafa'
 	},
+    /**
+	 * 美丽乡村的新闻类型的标题
+     */
 	newTypeTitle: {
 		flex: 0,
 		height: 40,
@@ -362,9 +431,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		backgroundColor: '#ffffff'
 	},
+    /**
+     * 美丽乡村的新闻类型的标题
+     */
 	news_typeTitle_item: {
-		fontSize: 12
+		fontSize: global.commonCss.titleFontSize
 	},
+    /**
+	 * 美丽乡村的新闻类型的标题的下划线
+     */
 	underline: {
 		height: 5,
 		width: 13,
@@ -372,16 +447,25 @@ const styles = StyleSheet.create({
 		marginTop: 4,
 		backgroundColor: '#ffffff'
 	},
+    /**
+	 * 美丽乡村类型标题总样式
+     */
 	news_title_head: {
 		flex: 0,
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
+    /**
+	 * 新闻总标题的样式
+     */
 	news_title: {
 		flex: 0,
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
+    /**
+	 * 点的样式
+     */
 	circleDot: {
 		width: 8,
 		height: 8,
@@ -389,12 +473,21 @@ const styles = StyleSheet.create({
 		marginRight: 10,
 		backgroundColor: global.commonCss.mainColor
 	},
+    /**
+	 * 标题下划线是否被选中
+     */
 	active: {
 		backgroundColor: global.commonCss.mainColor
 	},
+    /**
+	 * 标题字体是否被选中
+     */
 	activeFont: {
 		color: '#000'
 	},
+    /**
+	 * 信息通知信息数目
+     */
 	msg_num:{
 		paddingLeft:6,
 		paddingRight:6,
@@ -409,9 +502,11 @@ const styles = StyleSheet.create({
 		textAlign:'center',
 		lineHeight:10
 	},
-
+    /**
+	 * 查看更多 字体显示
+     */
     check_more:{
-		// fontSize:
+		fontSize:global.commonCss.mainFontSize
 	}
 });
 
