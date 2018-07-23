@@ -53,9 +53,9 @@ export default class BasicData extends Component<Props> {
 				}}
 			>
 				<View style={styles.bd_tabContent}>
-					<View style={styles.bd_tabItem}><Text style={{textAlign:'center'}}>{item.name}</Text></View>
-					<View style={[styles.bd_tabItem,isHaveSize?'':styles.isHave]}><Text style={{textAlign:'center'}}>{item.size ===null?'':(item.size + item.size_unit)}</Text></View>
-					<View style={styles.bd_tabItem}><Text style={{textAlign:'center'}}>{item.count===null?'':(item.count + item.count_unit)}</Text></View>
+					<View style={styles.bd_tabItem}><Text style={styles.bd_content}>{item.name}</Text></View>
+					<View style={[styles.bd_tabItem,isHaveSize?'':styles.isHave]}><Text style={styles.bd_content}>{item.size ===null?'':(item.size + item.size_unit)}</Text></View>
+					<View style={styles.bd_tabItem}><Text style={styles.bd_content}>{item.count===null?'':(item.count + item.count_unit)}</Text></View>
 				</View>
 			</TouchableOpacity>
 		)
@@ -127,7 +127,7 @@ export default class BasicData extends Component<Props> {
 		return (
 			<View style={styles.bd_tabItem} key={item}>
 				<View style={styles.point}></View>
-				<Text>{item}</Text>
+				<Text style={styles.bd_title_name}>{item}</Text>
 			</View>
 		)
 	}
@@ -240,5 +240,19 @@ const styles = StyleSheet.create({
 	},
 	isHave:{
 		opacity:0
+	},
+    /**
+	 * 头部分类的字体
+     */
+    bd_title_name:{
+        textAlign:'center',
+        fontSize:global.commonCss.primaryFontSize
+    },
+    /**
+	 * 内容的字体
+     */
+    bd_content:{
+    	textAlign:'center',
+		fontSize:global.commonCss.mainFontSize
 	}
 });

@@ -49,12 +49,12 @@ axios.interceptors.response.use(
     return response
   },
   (error) => {
-    alert(error.response.status)
+    // alert(error.response.status)
     if (error.response) {
       switch (error.response.status) {
         case 401: {
 					let message =  '请求失败,请检查用户权限 ! (401)'
-					alert(message)
+					// alert(message)
         } break;
       }
     }

@@ -12,6 +12,7 @@ import {
 	View,
 	TextInput,
 	Button,
+    Alert,
 	TouchableOpacity
 } from 'react-native';
 import global from "../../../utils/global/global";
@@ -37,7 +38,9 @@ export default class AddAreaMsg extends Component<Props> {
 	componentDidMount() {
 		this.props.navigation.setParams({requestData: this.state})
 	}
-
+    /**
+     *顶部左边按钮
+     */
 	static navigationOptions = (props) => {
 		const {navigation} = props
 		const {params} = props.navigation.state
@@ -56,13 +59,14 @@ export default class AddAreaMsg extends Component<Props> {
 							},
 							callback:(res)=>{
 								alert(res.msg)
+                        Alert.alert('添加完成')
 								navigation.goBack(null)
 							}
 						})
 						}
 					}
 				>
-					<Text>发送</Text>
+					<Text style={global.commonCss.confirm_btn}>确认</Text>
 				</TouchableOpacity>),
 		}
 	}
@@ -134,6 +138,14 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		backgroundColor: global.commonCss.mainColor
 	},
+    /**
+	 * 确认按钮
+     */
+    confirm_btn:{
+    	fontSize:global.commonCss.confirmBtnFontSize,
+		color:global.commonCss.mainColor,
+		right:global.ScreenUtil.pTd(32)
+	},
 	fill_zu: {
 		flex: 0,
 		flexDirection: 'row',
@@ -149,6 +161,9 @@ const styles = StyleSheet.create({
 		marginLeft: 7
 	},
 	text_Input: {
-		borderColor: '#9c9c9c'
+		borderColor: '#9c9c9c',
+		height:global.ScreenUtil.hTd(80),
+		fontSize:global.commonCss.textInputSize,
+		paddingLeft:7
 	}
 });

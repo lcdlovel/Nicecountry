@@ -133,11 +133,13 @@ const styles = StyleSheet.create({
 		width: width
 	},
 	two_choose: {
-		width: 0.6 * width,
-		marginTop: 15,
+		width: global.ScreenUtil.pTd(460),
 		height: 80,
 		backgroundColor: '#ffffff',
-		borderRadius: 10,
+        borderRadius: 3,
+        borderStyle: "dashed",
+        borderWidth: 1,
+        borderColor: "#dddddd",
 		flex: 0,
 		flexDirection: 'row',
 		justifyContent: 'center',
@@ -172,7 +174,8 @@ const styles = StyleSheet.create({
 	},
 	limit_font:{
 		fontSize: 12,
-		color: "#9c9c9c"
+		color: "#9c9c9c",
+		marginLeft:global.ScreenUtil.pTd(25)
 	},
 	limit:{
 		marginTop:2

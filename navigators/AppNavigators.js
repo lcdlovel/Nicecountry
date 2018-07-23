@@ -54,6 +54,19 @@ const styles = StyleSheet.create({
 	Icon: {
 		width: 25,
 		height: 25
+	},
+    /**
+	 * 添加按钮
+     */
+    add_icon:{
+		width:global.ScreenUtil.pTd(40),
+		height:global.ScreenUtil.hTd(40)
+	},
+    /**
+	 * 按钮隐藏
+     */
+    none:{
+		display:'none'
 	}
 })
 
@@ -267,7 +280,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '检查自查',
 				headerTitleStyle: {
 					color: '#545454',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -286,7 +299,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '创建任务',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -305,7 +318,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '创建任务',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -324,7 +337,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '选择区域',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -343,7 +356,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '基础信息',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -359,17 +372,28 @@ export const AppStackNavgator = createStackNavigator({
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			const {navigation} = props
+			const isAbleAdd = (()=>{
+				return true
+                // if (global.User_msg.role === 0){
+					// return true
+                // } else if (global.User_msg.role === 1) {
+                //     if ( global.User_msg.regionCategoryId === 6 ){
+                //     	return true
+					// }else return false
+                // }else return false
+			})()
 			return {
 				title: params.title ? params.title : '没找到name',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
 				headerStyle: {
-					backgroundColor: '#ffffff'
+					backgroundColor: '#ffffff',
 				},
+
 				headerRight: (
 					<TouchableOpacity
 						activeOpacity={0.8}
@@ -392,8 +416,10 @@ export const AppStackNavgator = createStackNavigator({
 							}
 							navigation.navigate(address,)
 						}}
+						style={{position:'absolute',
+                            right:global.ScreenUtil.pTd(32)}}
 					>
-						<Text style={{fontSize: 25, color: '#000'}}>+</Text>
+						<Image source={require('../assets/icons/add.png')} style={[styles.add_icon,isAbleAdd?'':styles.none]}/>
 					</TouchableOpacity>
 				)
 			}
@@ -408,7 +434,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '添加组信息',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -423,10 +449,10 @@ export const AppStackNavgator = createStackNavigator({
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
-				title: '添加人员信息',
+				title: '添加人员基础信息',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -444,7 +470,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '添加基础信息',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -462,7 +488,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '添加合同信息',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -481,7 +507,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: params.title ? params.title : '没找到name',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -500,7 +526,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '保洁员汇总',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -519,7 +545,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: params.title ? params.title : '没找到name',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -538,7 +564,7 @@ export const AppStackNavgator = createStackNavigator({
 					title: params.title ? params.title : params.name ? params.name : '没找到name',
 					headerTitleStyle: {
 						color: '#666666',
-						fontSize: 15,
+						fontSize: global.commonCss.navigationFontSize,
 						flex: 1,
 						textAlign: 'center'
 					},
@@ -556,7 +582,7 @@ export const AppStackNavgator = createStackNavigator({
 					title: params.title ? params.title : '没找到name',
 					headerTitleStyle: {
 						color: '#666666',
-						fontSize: 15,
+						fontSize: global.commonCss.navigationFontSize,
 						flex: 1,
 						textAlign: 'center'
 					},
@@ -575,7 +601,7 @@ export const AppStackNavgator = createStackNavigator({
 					title: params.title ? params.title : '没找到name',
 					headerTitleStyle: {
 						color: '#666666',
-						fontSize: 15,
+						fontSize: global.commonCss.navigationFontSize,
 						flex: 1,
 						textAlign: 'center'
 					},
@@ -594,7 +620,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: params.title ? params.title : '没找到name',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -613,7 +639,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '添加合同(' + params.title ? params.title : '没找到name' + ')',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -632,7 +658,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: params.title,
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -650,7 +676,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '已接受任务',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -670,7 +696,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '查看详情',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -689,7 +715,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '回复检查信息',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -708,7 +734,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '填写自查任务',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -729,7 +755,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '考核评分表',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -747,7 +773,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '考核评分表',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -766,7 +792,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: params.title ? params.title : '没找到name',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -785,7 +811,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '编辑',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -804,7 +830,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '查看表评分',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -823,7 +849,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '查看表评分',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -842,7 +868,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '自查评分表',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -861,7 +887,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '选择区域',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -878,7 +904,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '文件通知',
 				headerTitleStyle: {
 					color: '#ffffff',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -896,7 +922,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '设置',
 				headerTitleStyle: {
 					color: '#ffffff',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -916,7 +942,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '修改密码',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -935,7 +961,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '二维码下载',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -954,7 +980,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '我的信息',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -973,7 +999,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '头像',
 				headerTitleStyle: {
 					color: '#666666',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},
@@ -1009,7 +1035,7 @@ export const AppStackNavgator = createStackNavigator({
 				title: '工作动态',
 				headerTitleStyle: {
 					color: '#ffffff',
-					fontSize: 15,
+					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
 					textAlign: 'center'
 				},

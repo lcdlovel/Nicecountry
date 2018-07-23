@@ -52,7 +52,7 @@ export default class BasicDataType extends Component<Props> {
 
 	_separator() {
 		return (
-			<View style={{height: 5}}></View>
+			<View style={{height: global.ScreenUtil.hTd(10)}}></View>
 		)
 	}
 
@@ -64,6 +64,7 @@ export default class BasicDataType extends Component<Props> {
 				</View>
 				<View style={styles.basic_module}>
 					<FlatList
+						style={styles.flat_list}
 						ItemSeparatorComponent={this._separator}
 						data={[
 							{
@@ -121,56 +122,86 @@ export default class BasicDataType extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fafafa',
+		backgroundColor: global.commonCss.screenColor,
 	},
+    /**
+	 * 上方图片样式
+     */
 	basic_top: {
 		width: width,
-		height: 0.3 * height
+		height: global.ScreenUtil.hTd(415)
 	},
     /**
 	 * 各个模块的总样式
      */
 	basic_type: {
-		width: 0.45 * width,
-		marginRight: 5,
-		marginTop: 6,
-		marginBottom: 6,
+		width: global.ScreenUtil.pTd(343),
+		marginRight: global.ScreenUtil.pTd(10),
+		// marginTop: 6,
+		// marginBottom: 6,
 		flex: 0,
 		justifyContent: 'center',
 		alignItems: 'center',
-		height: 150,
-		backgroundColor: '#ffffff',
+		height: global.ScreenUtil.hTd(278),
+		backgroundColor: global.commonCss.screenColor,
 		borderRadius: 10,
-		shadowOffset: {width: 0, height: 2},
-		shadowOpacity: 0.5,
-		shadowRadius: 5,
-		shadowColor: 'gray',
+        shadowColor: "rgba(68, 65, 65, 0.2)",
+        shadowOffset: {
+            width: 0,
+            height: 0
+        },
+        shadowRadius: 12,
+        shadowOpacity: 1
 		// elevation: 4,
 	},
+    /**
+	 * 列表的整体样式
+     */
 	basic_module: {
 		flex: 1,
-		marginTop: 7,
-		justifyContent: 'center',
-		alignItems: 'center',
-
+		// paddingTop: 7,
+		// justifyContent: 'center',
+		// alignItems: 'center',
 	},
+    /**
+	 * 模块内的线的样式
+     */
 	basic_line: {
-		width: 0.3 * width,
+		width: global.ScreenUtil.pTd(283),
 		height: 2,
 		backgroundColor: global.commonCss.borderColor,
-		marginTop: 15
+		marginTop: global.ScreenUtil.hTd(43),
+		marginBottom:global.ScreenUtil.hTd(26)
 	},
+    /**
+	 * 模块内的图片样式
+     */
 	basic_img: {
-		width: 50,
-		height: 50,
+		width: global.ScreenUtil.pTd(global.isIphoneX()?120:100),
+		height: global.ScreenUtil.hTd(100),
 	},
+    /**
+	 * 模块名称样式（文字）
+     */
 	basic_font: {
 		textAlign: 'center',
-		marginTop: 10
+		fontSize:global.commonCss.primaryFontSize
 	},
+    /**
+	 * 各模块的样式
+     */
 	basic_imgModule: {
 		flex: 0,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+    /**
+	 * 整个列表的样式
+     */
+    flat_list:{
+    	paddingTop:global.ScreenUtil.hTd(20),
+		paddingLeft:global.ScreenUtil.pTd(17),
+        paddingRight:global.ScreenUtil.pTd(27)
+
 	}
 });

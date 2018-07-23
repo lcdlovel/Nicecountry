@@ -1,7 +1,7 @@
 import {
     PixelRatio,
     Dimensions,
-    Platform
+    Platform,StyleSheet
 } from 'react-native';
 import ScreenUtil from './ScreenUtil'
 
@@ -10,7 +10,16 @@ import ScreenUtil from './ScreenUtil'
 // iPhoneX
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
-
+const styles = StyleSheet.create({
+    /**
+	 * 页面顶部右边按钮信息
+     */
+    confirm_btn:{
+        fontSize:18,
+        color:'rgb(112,218,173)',
+        right:ScreenUtil.pTd(32)
+    },
+})
 export default {
 	token: '',
 	User_msg: '',
@@ -29,10 +38,13 @@ export default {
 		screenColor: '#fafafa',
 		mainFontSize:16,
 		primaryFontSize:18,
+		confirmBtnFontSize:18,
 		titleFontSize:15,
+        textInputSize:15,
 		navigationFontSize:20,
 		lineColor:'#ddd',
-		lineWidth:ScreenUtil.hTd(0.5)
+		lineWidth:ScreenUtil.hTd(0.5),
+        confirm_btn:styles.confirm_btn,
 	},
 
 	uploadUrl: 'http://192.168.0.128:9090/beautifulCountry-v2.0/File/upload',
