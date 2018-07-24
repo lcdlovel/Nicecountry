@@ -4,6 +4,7 @@
  * @flow
  */
 
+//TODO::键盘挡住输入框
 import React, {Component} from 'react';
 import {
     Platform,
@@ -27,46 +28,40 @@ export default class Describe extends Component<Props> {
             value: ''
         }
     }
-
-    _reset() {
-
-        this.refs.scrollView.scrollTo({y: 0});
-
-    }
-
-    _onFocus(refName) {
-        setTimeout(() => {
-            let scrollResponder = this.refs.scrollView.getScrollResponder();
-            scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
-                ReactNative.findNodeHandle(this.refs[refName]), 0, true);
-
-        }, 100);
-    }
+    //
+    // _reset() {
+    //
+    //     this.refs.scrollView.scrollTo({y: 0});
+    //
+    // }
+    //
+    // _onFocus(refName) {
+    //     setTimeout(() => {
+    //         let scrollResponder = this.refs.scrollView.getScrollResponder();
+    //         scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+    //             ReactNative.findNodeHandle(this.refs[refName]), 0, true);
+    //
+    //     }, 100);
+    // }
 
     render() {
         return (
-            <ScrollView
-                ref="scrollView"
-                style={{flex: 1}}
-            >
             <View style={[styles.container, this.props.customStyle]}>
                 <TextInput
                     ref='textInput'
                     onChangeText={this.props.changeDescribe}
                     style={[styles.describe, this.props.textInputStyle]}
                     multiline={true}
-                    underlineColorAndroid='transparent'
                     maxLength={this.props.maxLength}
                     placeholder='请输入'
-                    onBlur={this._reset.bind(this)}
-                    onFocus={this._onFocus.bind(this,'textInput')}
+                    // onBlur={this._reset.bind(this)}
+                    // onFocus={this._onFocus.bind(this,'textInput')}
                     // value={this.state.value}
                 />
                 <View style={styles.font_limit}>
                     <Text style={styles.limit_font}>{this.props.fontLength}/{this.props.maxLength}字!</Text>
                 </View>
             </View>
-            </ScrollView>
         );
     }
 }

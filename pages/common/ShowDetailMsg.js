@@ -167,10 +167,13 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		backgroundColor: "#f5d44f"
 	},
+    /**
+	 * 行数据样式
+     */
 	msg_item: {
 		width: 0.6 * width,
 		flex: 0,
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
 	},
 	item_column: {
 		flex: 0,
@@ -178,18 +181,22 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 5
 	},
+    /**
+	 * 行数据名称
+     */
 	item_title: {
 		marginLeft: 8,
-		fontSize: 15,
+		fontSize: 16,
 		fontWeight: '400',
 		color: "#0c0c0c",
 	},
 	item_content: {
-		fontSize: 14,
+		fontSize: 15,
 		fontWeight: '100',
 		color: "#0c0c0c",
 		marginLeft: 17,
-		marginTop: 5,
+        marginTop:global.ScreenUtil.hTd(15),
+        marginBottom:global.ScreenUtil.hTd(15)
 	},
 	type_num:{
 		flex:0,

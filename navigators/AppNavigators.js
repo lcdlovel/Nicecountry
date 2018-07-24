@@ -49,6 +49,7 @@ import AffirmTask from "../pages/repeatCheck/SelfCheck/AffirmTask";
 import SelfCheckTask from "../pages/repeatCheck/taskCreate/SelfCheckTask";
 import SelfCheckTaskConfirm from "../pages/repeatCheck/SelfCheck/SelfCheckTaskConfirm";
 import HeadAppear from "../pages/msgInformation/HeadAppear";
+import AddContractorMsg from '../pages/basicData/addBaseMsg/AddContractorMsg'
 
 const styles = StyleSheet.create({
 	Icon: {
@@ -259,12 +260,12 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 
 export const AppStackNavgator = createStackNavigator({
 	/**登录页面*/
-	// Loader:{
-	// 	screen:Loader,
-	// 	navigationOptions:{
-	// 		header:null
-	// 	}
-	// },
+	Loader:{
+		screen:Loader,
+		navigationOptions:{
+			header:null
+		}
+	},
 	/**主页面*/
 	Home: {
 		screen: Home,
@@ -414,7 +415,7 @@ export const AppStackNavgator = createStackNavigator({
 									break;
 
 							}
-							navigation.navigate(address,)
+							navigation.navigate(address)
 						}}
 						style={{position:'absolute',
                             right:global.ScreenUtil.pTd(32)}}
@@ -481,7 +482,7 @@ export const AppStackNavgator = createStackNavigator({
 		}
 	},
 	AddContractorMsg: {
-		screen: AddContractor,
+		screen: AddContractorMsg,
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
@@ -636,7 +637,7 @@ export const AppStackNavgator = createStackNavigator({
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
-				title: '添加合同(' + params.title ? params.title : '没找到name' + ')',
+				title: '添加合同(' + params.title ?params.title: '' + ')',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,

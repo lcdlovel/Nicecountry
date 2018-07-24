@@ -34,13 +34,16 @@ export default class AddContractor extends Component<Props> {
 		this.setState({describe:val})
 		console.log(this.state.describe)
 	}
+    componentWillMount(){
+		console.log(this.props.navigation.state.params)
+	}
 	render() {
 		const {showData} = this.props.navigation.state.params
 		return (
 
 			<ScrollView style={styles.container}>
 				<View style={styles.contractMsg}>
-					<Text style={styles.zuName}>{showData.villageName+'('+showData.groupName+')'+showData.name}</Text>
+					<Text style={styles.zuName}>{showData.villageName+'('+showData.regionName+')'+showData.name}</Text>
 					<Text style={styles.constractType}>分类:{}</Text>
 				</View>
 				<View style={styles.title}>
@@ -91,7 +94,7 @@ export default class AddContractor extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: global.commonCss.screenColor,
 		paddingBottom:20
 	},
 	zuName: {

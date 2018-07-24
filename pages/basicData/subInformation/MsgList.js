@@ -79,7 +79,8 @@ export default class MsgList extends Component<Props> {
 					regionId:global.User_msg.regionId,
 					contractTypeId:customData.contractTypeId
 				}).then((res)=>{
-					this.setState({listData:res.data})
+					console.log(res)
+					this.setState({listData:res.data.list})
 					this.setState({navigation:'OneCleanerMsg'})
 					this.setState({DataType:'contract'})
 				})
@@ -91,7 +92,7 @@ export default class MsgList extends Component<Props> {
 		return (
 			<View>
 				<View style={styles.bd_tabHead}>
-					{this.state.headList.map(item => (<View style={styles.bd_tabItem}><Text>{item}</Text></View>))}
+					{this.state.headList.map(item => (<View style={styles.bd_tabItem}><Text style={styles.font_head}>{item}</Text></View>))}
 				</View>
 			</View>
 		)
@@ -113,9 +114,9 @@ export default class MsgList extends Component<Props> {
 				}}
 			>
 				<View style={styles.bd_tabContent}>
-					<View style={styles.bd_tabItem}><Text>{this.state.DataType === 'contract'?item.personBaseInfoName:item.name}</Text></View>
-					<View style={styles.bd_tabItem}><Text>{item.sex?item.sex ===1?'男':'女':''}</Text></View>
-					<View style={styles.bd_tabItem}><Text>{item.age?item.age:item.regionName?item.regionName:item.villageName}</Text></View>
+					<View style={styles.bd_tabItem}><Text style={styles.font}>{this.state.DataType === 'contract'?item.personBaseInfoName:item.name}</Text></View>
+					<View style={styles.bd_tabItem}><Text style={styles.font}>{item.sex?item.sex ===1?'男':'女':''}</Text></View>
+					<View style={styles.bd_tabItem}><Text style={styles.font}>{item.age?item.age:item.regionName?item.regionName:item.villageName}</Text></View>
 				</View>
 			</TouchableOpacity>
 		)
@@ -151,6 +152,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F5FCFF',
 	},
 	center: {},
+    /**
+	 * 列表行一行外框样式
+     */
 	bd_tabContent: {
 		flex: 0,
 		flexDirection: 'row',
@@ -160,10 +164,16 @@ const styles = StyleSheet.create({
 		// borderBottomWidth: 1,
 		// borderBottomColor: '#E7E6E1'
 	},
+    /**
+	 * 列表行与行之间的分隔线
+     */
 	line: {
 		height: 1,
 		backgroundColor: global.commonCss.borderColor
 	},
+    /**
+	 * 列表一行的总样式
+     */
 	bd_tabItem: {
 		width: 1 / 3 * width,
 		flex: 0,
@@ -171,6 +181,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
+    /**
+	 * 列表头部的样式
+     */
 	bd_tabHead: {
 		flex: 0,
 		flexDirection: 'row',
@@ -184,7 +197,18 @@ const styles = StyleSheet.create({
 			height: 1
 		},
 		shadowRadius: 15,
-		shadowOpacity: 1,
-		elevation: 4,
+		shadowOpacity: 1
 	},
+    /**
+	 * 列表内的的字体
+     */
+    font:{
+		fontSize:15
+	},
+    /**
+	 * 头部的字体
+     */
+    font_head:{
+    	fontSize:18
+	}
 });

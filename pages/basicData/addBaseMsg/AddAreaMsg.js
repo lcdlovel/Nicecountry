@@ -152,18 +152,30 @@ const styles = StyleSheet.create({
 		// justifyContent:'center',
 		alignItems: 'center'
 	},
+    /**
+	 * 名称
+     */
 	itemName: {
 		marginLeft: 7,
 		fontSize: 17,
 		color: "#0c0c0c"
 	},
+    /**
+	 * 输入框总样
+     */
 	input: {
-		marginLeft: 7
+		marginLeft: 7,
+
 	},
 	text_Input: {
-		borderColor: '#9c9c9c',
-		height:global.ScreenUtil.hTd(80),
+		// height:global.ScreenUtil.hTd(80),
 		fontSize:global.commonCss.textInputSize,
-		paddingLeft:7
+		marginLeft:7,
+		paddingBottom:global.ScreenUtil.hTd(10),
+        width: global.ScreenUtil.pTd(664),
+        borderBottomWidth: global.ScreenUtil.hTd(0.5),
+        borderColor: '#9c9c9c',
+		marginTop:global.ScreenUtil.hTd(30),
+		marginBottom:global.ScreenUtil.hTd(25)
 	}
 });

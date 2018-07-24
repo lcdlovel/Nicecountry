@@ -77,7 +77,7 @@ export default class PickPhoto extends Component<Props> {
 				'token': global.token
 			},
 			body: formData,
-		}).then((res)=>{res.json()}).then(res => console.log(res))
+		}).then(res=>{ return res.json()}).then(res => this.props.getPictrue(res.data))
 	}
 	render() {
 		return (

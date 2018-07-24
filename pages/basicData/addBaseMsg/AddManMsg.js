@@ -30,6 +30,7 @@ let ManMsg = new Map()
 export default class AddManMsg extends Component<Props> {
     ListPopupDialog;
     cultureListDialog;
+    PersonTypeList;
 
     constructor(props) {
         super(props);
@@ -47,7 +48,8 @@ export default class AddManMsg extends Component<Props> {
                 {name: '高中'},
                 {name: '专科'},
                 {name: '本科'},],
-            cultrue: ''
+            cultrue: '',
+            perponTypeList: [],
         }
     }
 
@@ -83,11 +85,25 @@ export default class AddManMsg extends Component<Props> {
         }
     }
 
+    /**
+     * 获取描述信息
+     */
     changeDescribe(val) {
         this.setState({describe: val})
         console.log(this.state.describe)
     }
 
+    /**
+     * 获取选择的图片信息
+     */
+    getPictrue(val) {
+
+        ManMsg.set()
+    }
+
+    /**
+     * 组件创建之前
+     */
     componentWillMount() {
         CrudApi.getInfo({
             url: 'Region/getAllByAdmin',
@@ -99,6 +115,12 @@ export default class AddManMsg extends Component<Props> {
                 console.log(res)
             }
         })
+        CrudApi.getInfo({
+            url: 'PersonTypeList',
+            callback: (res)=>{
+                this.setState({perponTypeList:res.data.list})
+            }
+        })
     }
 
     render() {
@@ -107,17 +129,24 @@ export default class AddManMsg extends Component<Props> {
             <ScrollView style={{backgroundColor: global.commonCss.screenColor,}}>
                 <View style={styles.container}>
                     <View>
-                        {/*类别行*/}
+                        {/**类别行*/}
                         <View style={styles.fill_zu}>
                             <View style={styles.point}></View>
                             <Text style={styles.itemName}>类别</Text>
                         </View>
                         <View>
-                            <View style={styles.chooseCase}>
-                                <Text style={styles.chooseCase_font}>请选择</Text>
-                                <Image style={styles.chooseCase_img}
-                                       source={require('../../../assets/icons/Pleasechoose.png')}/>
-                            </View>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.PersonTypeList.show()
+                                }}
+                            >
+                                <View style={styles.chooseCase}>
+                                    <Text style={styles.chooseCase_font}>请选择</Text>
+                                    <Image style={styles.chooseCase_img}
+                                           source={require('../../../assets/icons/Pleasechoose.png')}/>
+                                </View>
+                            </TouchableOpacity>
+
                             <Text style={styles.perponType_name}>保洁员</Text>
                         </View>
 
@@ -282,14 +311,43 @@ export default class AddManMsg extends Component<Props> {
                         </View>
                         {/**拍照行*/}
                         <View style={styles.photo}>
-                            <PickPhoto maxLength={4}/>
+                            <PickPhoto maxLength={4} getPictrue={this.getPictrue.bind(this)}/>
                         </View>
                     </View>
                 </View>
-                {/**选择组的对话框*/}
+                {/**人员类别对话框*/}
                 <PopupDialog
                     ref={(popupDialog) => {
                         this.ListPopupDialog = popupDialog;
+                    }}
+                    dialogAnimation={slideAnimation}
+                    width={0.3}
+                >
+                    <View>
+                        <FlatList
+                            data={this.state.perponTypeList}
+                            ListHeaderComponent={() => (
+                                <View style={{height: 0, backgroundColor: '#dcdbdb', marginTop: 5}}/>)}
+                            ListFooterComponent={() => (
+                                <View style={{height: 0, backgroundColor: '#dcdbdb', marginBottom: 5}}/>)}
+                            ItemSeparatorComponent={() => (<View style={{height: 1, backgroundColor: '#dcdbdb'}}/>)}
+                            renderItem={({item}) =>
+                                <Text key={item.name}
+                                      style={styles.item_text}
+                                      onPress={() => {
+                                          this.ListPopupDialog.dismiss()
+                                          this.setState({Group: item.name})
+                                          ManMsg.set({regionId: item.id})
+                                          console.log(item.name)
+                                      }
+                                      }>{item.name}</Text>}
+                        />
+                    </View>
+                </PopupDialog>
+                {/**选择组的对话框*/}
+                <PopupDialog
+                    ref={(popupDialog) => {
+                        this.PersonTypeList = popupDialog;
                     }}
                     dialogAnimation={slideAnimation}
                     width={0.7}
@@ -306,7 +364,7 @@ export default class AddManMsg extends Component<Props> {
                                 <Text key={item.name}
                                       style={styles.item_text}
                                       onPress={() => {
-                                          this.ListPopupDialog.dismiss()
+                                          this.PersonTypeList.dismiss()
                                           this.setState({Group: item.name})
                                           ManMsg.set({regionId: item.id})
                                           console.log(item.name)
@@ -436,7 +494,7 @@ const styles = StyleSheet.create({
     chooseCase_font: {
         fontSize: 16,
         color: "#9c9c9c",
-        marginRight:global.ScreenUtil.pTd(40)
+        marginRight: global.ScreenUtil.pTd(40)
     },
     /**
      * 选择框的加号

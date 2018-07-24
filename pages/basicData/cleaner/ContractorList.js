@@ -48,7 +48,7 @@ export default class ContractorList extends Component<Props> {
 		return (
 			<View style={styles.bd_tabItem} key={item}>
 				<View style={styles.point}></View>
-				<Text>{item}</Text>
+				<Text style={{fontSize:18}}>{item}</Text>
 			</View>
 		)
 	}
@@ -138,9 +138,12 @@ const styles = StyleSheet.create({
 		height: 1,
 		backgroundColor: global.commonCss.borderColor
 	},
+    /**
+	 * 合同列表头部的名称
+     */
 	bd_headbtot: {
 		height: 5,
-		backgroundColor: '#f3f3f3'
+		backgroundColor: '#f3f3f3',
 	},
 	isHave:{
 		opacity:0

@@ -53,7 +53,7 @@ export default class OneCleanerMsg extends Component<Props> {
 								>
 									<View style={styles.msg_one}>
 										<Image source={require('../../../assets/report/Assessmentscale.png')} style={styles.msg_img}/>
-										<Text>查看</Text>
+										<Text style={styles.constractOpa}>查看</Text>
 									</View>
 								</TouchableOpacity>
 								<TouchableOpacity
@@ -63,7 +63,7 @@ export default class OneCleanerMsg extends Component<Props> {
 									}}>
 									<View style={styles.msg_one}>
 										<Image source={require('../../../assets/report/Assessmentscale.png')} style={styles.msg_img}/>
-										<Text>添加</Text>
+										<Text style={styles.constractOpa}>添加</Text>
 									</View>
 								</TouchableOpacity>
 							</View>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#F5FCFF',
 		// minHeight:height,
-		paddingBottom: 20
+		paddingBottom: global.isIphoneX()?30:20
 	},
 	main_msg: {
 		width: 0.9 * width,
@@ -167,5 +167,11 @@ const styles = StyleSheet.create({
 	},
 	none:{
 		display:'none'
+	},
+    /**
+	 * 对合同操作的字体
+     */
+    constractOpa:{
+    	fontSize:16
 	}
 });
