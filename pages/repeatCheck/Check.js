@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 	},
 	ck_font:{
 		marginLeft:10,
-		fontSize: 17,
+		fontSize: 18,
 		color: "#313735"
 	},
 	ck_row:{

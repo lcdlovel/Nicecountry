@@ -32,7 +32,7 @@ export default {
 	Normal_ContractType: 3,
 	commonCss: {
         fontFamily: "Helvetica",
-		borderColor: '#eeeeee',
+		borderColor: '#dddddd',
 		mainColor: 'rgb(112,218,173)',
 		fontColor: '#666666',
 		screenColor: '#fafafa',

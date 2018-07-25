@@ -9,7 +9,11 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
-	View
+	View,
+	Image,
+	TouchableOpacity,
+	ScrollView,
+	FlatList
 } from 'react-native';
 //获取屏幕信息
 let dimensions = require('Dimensions')

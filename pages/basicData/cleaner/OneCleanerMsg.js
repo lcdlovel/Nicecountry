@@ -37,7 +37,7 @@ export default class OneCleanerMsg extends Component<Props> {
 				<View>
 					<ShowDetailMsg detailMsg={personData} DataType={DataType}/>
 					<View style={[styles.contract,DataType === 'baseInfo'?styles.none:'']}>
-						<View style={styles.main_msg}>
+						<View style={[styles.main_msg,,DataType === 'contract'?styles.none:'']}>
 							<Image source={require('../../../assets/images/sign.png')} style={styles.sign}/>
 
 							<View style={[styles.contractMsg]}>

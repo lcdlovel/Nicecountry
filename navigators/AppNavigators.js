@@ -146,8 +146,15 @@ export const RepeatCheckTab = createMaterialTopTabNavigator({
 			height: 50,
 			backgroundColor: '#FFF',
 		},
+        indicatorStyle:{
+			height:global.ScreenUtil.hTd(12),
+			width:global.ScreenUtil.pTd(72),
+			backgroundColor:global.commonCss.mainColor,
+            borderRadius:6,
+			marginLeft:global.ScreenUtil.pTd(150)
+		},
 		labelStyle: {
-			fontSize: 15,
+			fontSize: 18,
 			flex: 0,
 			alignItems: 'center',
 			justifyContent: 'center'
@@ -260,12 +267,12 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 
 export const AppStackNavgator = createStackNavigator({
 	/**登录页面*/
-	Loader:{
-		screen:Loader,
-		navigationOptions:{
-			header:null
-		}
-	},
+	// Loader:{
+	// 	screen:Loader,
+	// 	navigationOptions:{
+	// 		header:null
+	// 	}
+	// },
 	/**主页面*/
 	Home: {
 		screen: Home,
@@ -302,7 +309,7 @@ export const AppStackNavgator = createStackNavigator({
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,
 					flex: 1,
-					textAlign: 'center'
+					textAlign: 'center',
 				},
 				headerStyle: {
 					backgroundColor: '#ffffff'
