@@ -26,7 +26,8 @@ export default class TaskContent extends Component<Props> {
         this.state = {
             isFocused: false,
             index: '',
-            cancelAllFocused: true
+            cancelAllFocused: true,
+            sureAll:''
         }
     }
 
@@ -46,9 +47,12 @@ export default class TaskContent extends Component<Props> {
      */
     _taskCreate(item) {
         return (
-            <TaskCard cardName={item}
-                      isAllFocuse={this.state.isFocused}
-                      cancelAllFocuse={this.cancelAllFocuse.bind(this)}
+            <TaskCard
+                key={item}
+                cardName={item.name}
+                isAllFocuse={this.state.isFocused}
+                sureAll={this.state.sureAll}
+                cancelAllFocuse={this.cancelAllFocuse.bind(this)}
             />
         )
     }
@@ -57,35 +61,39 @@ export default class TaskContent extends Component<Props> {
      * 取消全选按钮
      * @param val
      */
-    cancelAllFocuse(val){
-        console.log(val)
-        this.setState({isFocused:val})
+    cancelAllFocuse(val) {
+        console.log('取消全选',val)
+        this.setState({isFocused: val})
         // console.log(val)
         // this.setState({cancelAllFocused:val},function () {
         //     console.log(this.state.cancelAllFocused)
         // })
     }
+
     render() {
         return (
             <View style={styles.tc_row}>
                 <View style={styles.tc_title}>
                     <View style={styles.circle_dot}></View>
-                    <Text style={{fontSize: 18}}>{this.props.ableChooseList.taskName}</Text>
+                    <Text style={{fontSize: 18}}>{this.props.ableChooseList.name}</Text>
                     <TouchableOpacity
                         onPress={() => {
-                            this.setState({isFocused: !this.state.isFocused})
+                            this.setState({
+                                isFocused: !this.state.isFocused,
+                                sureAll:this.state.isFocused?'取消全选':'确定全选'
+                            })
                         }}
                         style={[]}
                     >
                         <Image
                             resizeMode='contain'
-                            style={[styles.check_box, this.state.isFocused?styles.check_box_img:'']}
-                            source={this.state.isFocused?require('../../assets/icons/true.png'):''}
+                            style={[styles.check_box, this.state.isFocused ? styles.check_box_img : '']}
+                            source={this.state.isFocused ? require('../../assets/icons/true.png') : ''}
                         />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.tc_tasktype}>
-                    {this.props.ableChooseList.taskArr.map(item => this._taskCreate(item))}
+                    {this.props.ableChooseList.titles.map(item => this._taskCreate(item))}
                 </View>
             </View>
         );
@@ -97,7 +105,7 @@ const styles = StyleSheet.create({
      * 整体样式
      */
     tc_row: {
-        backgroundColor:global.commonCss.screenColor
+        backgroundColor: global.commonCss.screenColor
     },
     /**
      * 选项名称的样式
@@ -156,7 +164,7 @@ const styles = StyleSheet.create({
      * 选中时选项框的样式
      */
     check_box_img: {
-        borderColor:'transparent'
+        borderColor: 'transparent'
     },
     choose: {
         backgroundColor: global.commonCss.mainColor

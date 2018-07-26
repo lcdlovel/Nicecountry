@@ -29,7 +29,9 @@ export default class AddTaskImg extends Component<Props> {
 			reactData:''
 		}
 	}
-
+	/**
+	 *页面左端添加按钮
+	 */
 	static navigationOptions = (props) => {
 		const {navigation} = props
 		return {
@@ -40,7 +42,7 @@ export default class AddTaskImg extends Component<Props> {
 						navigation.navigate('AddTextArea',{fromCheck:''})
 						console.log(navigation)
 					}}>
-					<Text style={{color:global.commonCss.mainColor}}>添加</Text>
+					<Text style={global.commonCss.confirm_btn}>添加</Text>
 				</TouchableOpacity>
 			)
 		}
@@ -52,7 +54,7 @@ export default class AddTaskImg extends Component<Props> {
 		return (
 			<ScrollView style={{flex: 1, backgroundColor: global.commonCss.screenColor}}>
 				<View style={styles.container}>
-					{/*内容的显示*/}
+					{/**内容的显示*/}
 					<View style={styles.item_header}>
 						<Point pointColor={styles.pointColor}/>
 						<Text style={styles.header_text}>内容</Text>
@@ -60,7 +62,7 @@ export default class AddTaskImg extends Component<Props> {
 					<View style={styles.choosed_cot}>
 
 					</View>
-					{/*回复内容*/}
+					{/**回复内容*/}
 					<View style={styles.item_header}>
 						<Point pointColor={styles.pointColor}/>
 						<Text style={styles.header_text}>回复内容</Text>
@@ -72,7 +74,7 @@ export default class AddTaskImg extends Component<Props> {
 							maxLength={300}
 						/>
 					</View>
-					{/*拍照或图片选择*/}
+					{/**拍照或图片选择*/}
 					<PickPhoto positionStyle={styles.photo_area} maxLength={10}/>
 				</View>
 			</ScrollView>

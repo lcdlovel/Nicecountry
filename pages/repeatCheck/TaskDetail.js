@@ -6,12 +6,12 @@
 
 import React, {Component} from 'react';
 import {
-	Platform,
-	StyleSheet,
-	Text,
-	View,
-	ScrollView,
-	TouchableOpacity
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    ScrollView,
+    TouchableOpacity
 } from 'react-native';
 import ShowDetailMsg from '../common/ShowDetailMsg'
 import ImgList from "../common/ImgList";
@@ -22,47 +22,50 @@ let dimensions = require('Dimensions')
 let {width} = dimensions.get('window')
 type Props = {};
 export default class TaskDetail extends Component<Props> {
-	constructor(props) {
-		super(props);
-		this.state = {}
-	}
-	componentWillMount(){
-		console.log(this.props.navigation.state.params.data.fileURLList)
-	}
-	static navigationOptions = (props)=>{
-		const {navigation}=props
-		const {params} = navigation.state
-		// console.log(type)
-		return{
-			headerRight:(
-		<TouchableOpacity
-			activeOpacity={0.8}
-			onPress={() => {
-				navigation.navigate('ReplyInformation')
-				console.log(navigation)
-			}}>
-			<Text style={{color:global.commonCss.mainColor}}>{params.type === 'received'?'回复':''}</Text>
-		</TouchableOpacity>
-			)
-		}
-	}
-	render() {
-		const {params} = this.props.navigation.state
-		return (
-			<ScrollView style={styles.container}>
-			<View >
-				<ShowDetailMsg detailMsg={params.data} DataType={params.DataType}/>
-				<ImgList imageList={params.data.fileURLList}/>
-			</View>
-			</ScrollView>
-		);
-	}
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+    componentWillMount() {
+        console.log(this.props.navigation.state.params)
+    }
+
+    static navigationOptions = (props) => {
+        const {navigation} = props
+        const {params} = navigation.state
+        // console.log(type)
+        return {
+            headerRight: (
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => {
+                        navigation.navigate('ReplyInformation')
+                        console.log(navigation)
+                    }}>
+                    <Text style={{color: global.commonCss.mainColor}}>{params.type === 'received' ? '回复' : ''}</Text>
+                </TouchableOpacity>
+            )
+        }
+    }
+
+    render() {
+        const {params} = this.props.navigation.state
+        return (
+            <ScrollView style={styles.container}>
+                <View>
+                    <ShowDetailMsg detailMsg={params.data} DataType={params.DataType}/>
+                    <ImgList imageList={params.data.fileURLList}/>
+                </View>
+            </ScrollView>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: global.commonCss.screenColor,
-	},
+    container: {
+        flex: 1,
+        backgroundColor: global.commonCss.screenColor,
+    },
 
 });

@@ -30,7 +30,7 @@ export default class SelfCheck extends Component<Props> {
 			<TouchableOpacity
 				activeOpacity={0.8}
 				onPress={() => {
-					navigation.navigate(routeName,{fromCheck:'SelfCheckTask'})
+					navigation.navigate(routeName,{fromCheck:'SelfCheckTask',title:'自查'})
 				}}>
 				<View style={styles.ck_row}>
 					<View style={styles.ck_item}>

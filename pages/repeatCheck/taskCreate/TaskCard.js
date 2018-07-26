@@ -23,10 +23,10 @@ export default class TaskCard extends Component<Props> {
         }
     }
     componentWillReceiveProps(nextProps) {
-
-        console.log(nextProps.isAllFocuse === this.state.isFocused)
-
-        nextProps.isAllFocuse === this.state.isFocused?'':this.setState({isFocused:nextProps.isAllFocuse})
+        console.log(nextProps.sureAll)
+        console.log(nextProps.isAllFocuse ,this.state.isFocused)
+        this.setState({isFocused:nextProps.isAllFocuse})
+        // nextProps.isAllFocuse === this.state.isFocused?this.setState({isFocused:nextProps.isAllFocuse}):''
 
     }
     render() {

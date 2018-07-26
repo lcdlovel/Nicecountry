@@ -191,8 +191,15 @@ export const MessageInformation = createMaterialTopTabNavigator({
 	tabBarOptions: {
 		style: {
 			height: 49,
-			backgroundColor: '#FFF'
+			backgroundColor: '#FFF',
 		},
+        indicatorStyle:{
+            height:global.ScreenUtil.hTd(12),
+            width:global.ScreenUtil.pTd(72),
+            backgroundColor:global.commonCss.mainColor,
+            borderRadius:6,
+            marginLeft:global.ScreenUtil.pTd(150)
+        },
 		activeBackgroundColor: '#ffffff',
 		activeTintColor: '#70daad',
 		inactiveBackgroundColor: '#ffffff',
@@ -227,8 +234,21 @@ export const CheckReceviedCheck = createMaterialTopTabNavigator({
 	tabBarOptions: {
 		style: {
 			height: 49,
-			backgroundColor: '#FFF'
+			backgroundColor: '#FFF',
 		},
+        indicatorStyle:{
+            height:global.ScreenUtil.hTd(12),
+            width:global.ScreenUtil.pTd(70),
+            backgroundColor:global.commonCss.mainColor,
+            borderRadius:6,
+            marginLeft:global.ScreenUtil.pTd(90)
+        },
+        labelStyle: {
+            fontSize: 18,
+            flex: 0,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
 		activeBackgroundColor: '#ffffff',
 		activeTintColor: '#70daad',
 		inactiveBackgroundColor: '#ffffff',
@@ -267,12 +287,12 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 
 export const AppStackNavgator = createStackNavigator({
 	/**登录页面*/
-	// Loader:{
-	// 	screen:Loader,
-	// 	navigationOptions:{
-	// 		header:null
-	// 	}
-	// },
+	Loader:{
+		screen:Loader,
+		navigationOptions:{
+			header:null
+		}
+	},
 	/**主页面*/
 	Home: {
 		screen: Home,
@@ -302,9 +322,9 @@ export const AppStackNavgator = createStackNavigator({
 	TaskCreate: {
 		screen: TaskCreate,
 		navigationOptions: (props) => {
-			const {navigation} = props
+			const {params} = props.navigation.state
 			return {
-				title: '创建任务',
+				title: '创建'+params.title+'任务',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,
@@ -323,7 +343,7 @@ export const AppStackNavgator = createStackNavigator({
 		navigationOptions: (props) => {
 			const {navigation} = props
 			return {
-				title: '创建任务',
+				title: '创建检查任务',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,
@@ -663,7 +683,7 @@ export const AppStackNavgator = createStackNavigator({
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
-				title: params.title,
+				title: '已接收'+params.title+'任务',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,

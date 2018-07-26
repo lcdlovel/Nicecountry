@@ -10,7 +10,7 @@ import UselessTextInput from './UselessTextInput'
 import YgButton from './YgButton'
 import YgInput from './YgInput'
 import SubHeadTitle from './SubHeadTitle'
-
+import TreeSelect from './TreeSelect'
 
 
 export  {
@@ -25,5 +25,6 @@ export  {
 	UselessTextInput,
 	YgButton,
 	YgInput,
-	SubHeadTitle
+	SubHeadTitle,
+    TreeSelect
 }

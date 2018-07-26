@@ -63,7 +63,7 @@ export default class ShowDetailMsg extends Component<Props> {
 				}) : DataType === 'confirmedCheck'?
 					this.setState({
 						listData:[
-							{title:'名称',content: detailMsg.theme},
+							{title:'名称',content: detailMsg.theme.slice(1,-1)},
 							{title:'时间',content:detailMsg.createTime},
 							{title:'待处理内容',content:detailMsg.info},
 							{title:'回复内容',content:detailMsg.replyInfo}
@@ -71,7 +71,7 @@ export default class ShowDetailMsg extends Component<Props> {
 					}):DataType === 'ReceivedCheck'?
 						this.setState({
 							listData:[
-								{title:'名称',content: detailMsg.theme},
+								{title:'名称',content: detailMsg.theme.slice(1,-1)},
 								{title:'时间',content:detailMsg.createTime},
 								{title:'内容',content:detailMsg.info}
 							]}):''
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: global.commonCss.screenColor,
 		paddingBottom: 10,
 	},
 	bac_head: {

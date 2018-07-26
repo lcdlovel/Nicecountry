@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { NavigationActions, NavigationState } from "react-navigation";
 import CrudApi from "../../../utils/request/crud";
+import global from "../../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -90,12 +91,12 @@ export default class ReceivedCheck extends Component<Props> {
 					</View>
 				</View>
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
-					<Text style={styles.rc_Itemfont}>{item.theme}</Text>
+					<Text style={styles.rc_Itemfont}>{item.theme.slice(1,-1)}</Text>
 				</View>
 				<View style={[styles.rc_conItem,styles.rc_content_last]}>
 					<TouchableOpacity
 						activeOpacity={0.8}
-						onPress={()=>{navigation.navigate('TaskDetail',{type:'received',DataType:'ReceivedCheck'})}}
+						onPress={()=>{navigation.navigate('TaskDetail',{type:'received',DataType:'ReceivedCheck',data:item})}}
 						style={styles.rc_confirm}
 					>
 						<Text style={{fontSize:15,color:'#4ECBFC'}}>查看及回复</Text>
@@ -109,8 +110,8 @@ export default class ReceivedCheck extends Component<Props> {
 			<View style={styles.container}>
 				<View >
 					<View style={styles.rc_header}>
-						<Text>发送地区名称</Text>
-						<Text style={{marginLeft:30}}>主题</Text>
+						<Text style={{fontSize:18}}>发送地区名称</Text>
+						<Text style={{marginLeft:30,fontSize:18}}>主题</Text>
 					</View>
 					<ScrollView>
 					{ this.state.listData.map(item => this._contentConstractor(item))}
@@ -124,24 +125,32 @@ export default class ReceivedCheck extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: global.commonCss.screenColor,
 	},
-	rc_header:{
-		flex:0,
-		flexDirection:'row',
-		alignItems:'center',
-		height:30,
-		backgroundColor:'#fff',
-		marginTop:8,
-		paddingLeft:20
-	},
-	rc_content:{
-		flex:0,
-		flexDirection:'row',
-		marginTop:10,
-		borderBottomWidth:1,
-		borderBottomColor:'#d4dcda'
-	},
+    /**
+     * 头部主题模块
+     */
+    rc_header: {
+        flex: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: global.ScreenUtil.hTd(100),
+        backgroundColor: '#fff',
+        marginTop: 8,
+        paddingLeft: 20
+    },
+    /**
+     * 信息模块一条信息的样式
+     */
+    rc_content: {
+        flex: 0,
+        flexDirection: 'row',
+        height: global.ScreenUtil.hTd(140),
+        alignItems:'center',
+        // marginTop: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#d4dcda'
+    },
 	rc_content_first:{
 		marginLeft:15
 	},
@@ -152,16 +161,22 @@ const styles = StyleSheet.create({
 		alignItems:'center',
 		justifyContent:'center'
 	},
-	rc_Itemfont:{
-		fontSize: 14,
-		color: "#0c0c0c"
-	},
+    /**
+     * 信息字体
+     */
+    rc_Itemfont: {
+        fontSize: 15,
+        color: "#0c0c0c"
+    },
 	rc_ItemBottom:{
 		marginTop:10
 	},
-	rc_bottomFont:{
-		fontSize:10
-	},
+    /**
+     * 时间的字体
+     */
+    rc_bottomFont: {
+        fontSize: 13
+    },
 	rc_confirm:{
 		flex:0,
 		justifyContent:'center',

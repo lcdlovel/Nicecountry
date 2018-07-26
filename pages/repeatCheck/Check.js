@@ -14,6 +14,7 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import TaskCreate from "./taskCreate/TaskCreate";
+import global from "../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -23,16 +24,31 @@ type Props = {};
 export default class Check extends Component<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+
+		}
 	}
+
+    /**
+	 * 路由跳转函数
+     * @param route
+     * @param name
+     * @param type
+     */
 	jumpRouter(route,name,type){
 		const {navigation} = this.props
-		navigation.navigate(route,{fromCheck:type,title:name})
+		navigation.navigate(route,{fromCheck:type,title:'检查'})
 	}
+
+    /**
+	 *模块构造函数
+     */
+
 	_rowconstrutor(imgSource,name,router,type){
 		return(
 			<TouchableOpacity
 				activeOpacity={0.8}
+
 				onPress={() => {
 					this.jumpRouter(router,name,type)
 				}}>
@@ -45,6 +61,8 @@ export default class Check extends Component<Props> {
 			</TouchableOpacity>
 		)
 	}
+
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -60,7 +78,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems:'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: global.commonCss.screenColor,
 	},
 	ck_item:{
 		flex:0,
