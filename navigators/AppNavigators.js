@@ -1018,7 +1018,7 @@ export const AppStackNavgator = createStackNavigator({
 		navigationOptions: (props) => {
 			const {params} = props.navigation.state
 			return {
-				title: '我的信息',
+				title: '个人资料',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,
