@@ -22,21 +22,52 @@ type Props = {};
 export default class CheckScore extends Component<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+            module:[]
+		}
 	}
-	_rowconstrutor(imgSource,name,url){
+	componentWillMount(){
+		this._module()
+	}
+	_module(){
+		this.setState({
+			module:[
+				{
+					moduleImg:require('../../assets/images/Assessmentscale.png'),
+					name:'考核评分表',
+					route:'RecoScore'
+				},
+                {
+                    moduleImg:require('../../assets/images/Self-examinationscoretable.png'),
+                    name:'自查评分表',
+                    route:'RecoScore'
+                },
+                {
+                    moduleImg:require('../../assets/narmal/Falsification.png'),
+                    name:'弄虚作假',
+                    route:'RecoScore'
+                },
+                {
+                    moduleImg:require('../../assets/narmal/Harnessthestubborndisease.png'),
+                    name:'治理顽疾',
+                    route:'RecoScore'
+                },
+			]
+		})
+	}
+	_rowconstrutor(item){
 		const {navigation} = this.props
 		return(
 			<TouchableOpacity
 				activeOpacity={0.8}
 				onPress={() =>
-					navigation.navigate(url)
+					navigation.navigate(item.route,{name:item.name})
 				}>
 				<View style={styles.ck_row}>
 					<View style={styles.ck_item}>
-						<Image style={styles.ck_png} source={imgSource}/>
+						<Image style={styles.ck_png} source={item.moduleImg}/>
 						<View style={styles.line}></View>
-						<Text style={styles.ck_font}>{name}</Text>
+						<Text style={styles.ck_font}>{item.name}</Text>
 					</View>
 				</View>
 			</TouchableOpacity>
@@ -45,8 +76,9 @@ export default class CheckScore extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				{this._rowconstrutor(require('../../assets/images/Assessmentscale.png'),'考核评分表','RecoScore')}
-				{this._rowconstrutor(require('../../assets/images/Self-examinationscoretable.png'),'自查评分表','Selfexamination')}
+				{this.state.module.map(item=>this._rowconstrutor(item))}
+				{/*{this._rowconstrutor(require('../../assets/images/Assessmentscale.png'),'考核评分表','RecoScore')}*/}
+				{/*{this._rowconstrutor(require('../../assets/images/Self-examinationscoretable.png'),'自查评分表','Selfexamination')}*/}
 			</View>
 		);
 	}
@@ -57,29 +89,41 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor:'#FFFFFF'
 	},
+    /**
+	 * 模块框的样式
+     */
 	ck_item:{
-		marginTop:15,
+		marginTop:global.ScreenUtil.hTd(22),
 		marginBottom:2,
 		flex:0,
-		width:0.95 * width,
+		width:global.ScreenUtil.pTd(696),
 		alignItems:'center',
 		justifyContent:'center',
-		height: 186,
-		borderRadius:10,
-		shadowOffset: {width: 0, height: 5},
-		shadowOpacity: 0.5,
-		shadowRadius: 5,
-		shadowColor: 'gray',
-		elevation: 1,
+		height: global.ScreenUtil.hTd(252),
+        borderRadius: 5,
+        backgroundColor: "#ffffff",
+        shadowColor: "rgba(68, 65, 65, 0.2)",
+        shadowOffset: {
+            width: 0,
+            height: 0
+        },
+        shadowRadius: 12,
+        shadowOpacity: 1
 	},
+    /**
+	 * 图片大小
+     */
 	ck_png:{
-		width: 155,
-		height: 108
+		width: global.ScreenUtil.pTd(204),
+		height: global.ScreenUtil.hTd(125)
 	},
+    /**
+	 * 图片下的字体
+     */
 	ck_font:{
 		marginLeft:10,
-		fontSize: 14,
-		color: "#313735"
+		fontSize: 18,
+		color: global.commonCss.mainColor
 	},
 	ck_row:{
 		flex:0,
@@ -93,8 +137,11 @@ const styles = StyleSheet.create({
 		transform: [{rotate:'-90deg'}],
 		marginRight:25
 	},
+    /**
+	 * 中间线的样式
+     */
 	line:{
-		width:0.8 * width,
+		width:global.ScreenUtil.pTd(600),
 		marginTop:15,
 		marginBottom:15,
 		height:0.7,

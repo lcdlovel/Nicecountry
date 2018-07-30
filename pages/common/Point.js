@@ -35,8 +35,8 @@ export default class Point extends Component<Props> {
 
 const styles = StyleSheet.create({
 	container: {
-		width:5,
-		height:5,
+		width:global.ScreenUtil.pTd(14),
+		height:global.ScreenUtil.hTd(global.isIphoneX()?12:14),
 		borderRadius:3,
 		backgroundColor:global.commonCss.mainColor
 	},

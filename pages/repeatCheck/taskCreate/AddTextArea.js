@@ -33,6 +33,7 @@ export default class AddTextArea extends Component<Props> {
             isFocused: null,
             nodesStatus: null,
             currentNode: null,
+            checkBoxIsView: false,
         }
     }
 
@@ -75,7 +76,7 @@ export default class AddTextArea extends Component<Props> {
      * @param item
      * @private
      */
-    _onPressCollapse = ({ e, item }) => { // eslint-disable-line
+    _onPressCollapse = ({e, item}) => { // eslint-disable-line
         // const { data } = this.props;
         const routes = this._find(this.state.listData, item.id);
         this.setState((state) => {
@@ -91,10 +92,10 @@ export default class AddTextArea extends Component<Props> {
             // onClick && onClick({ item, routes });
         });
     };
-    _onClickLeaf = ({ item }) => { // eslint-disable-line
+    _onClickLeaf = ({item}) => { // eslint-disable-line
         this.setState((state) => {
             const isFocused = new Map(state.isFocused);
-            isFocused.set( item.id, !isFocused.get( item.id)); // toggle
+            isFocused.set(item.id, !isFocused.get(item.id)); // toggle
             return {
                 currentNode: item.id,
                 isFocused
@@ -124,14 +125,20 @@ export default class AddTextArea extends Component<Props> {
             )
         }
     }
-    isHaveChildren(item){
-     if ( item && item.regionTreeVoLst && item.regionTreeVoLst.length){
-         return true}
-         else{
-         return false
-     }
+
+    isHaveChildren(item) {
+        if (item && item.regionTreeVoLst && item.regionTreeVoLst.length) {
+            return true
+        }
+        else {
+            return false
+        }
 
     }
+
+    /**
+     * 生命周期函数-componentWillMount
+     */
     componentWillMount() {
         CrudApi.getInfo({
             url: 'Region/getAllByAdmin',
@@ -143,10 +150,25 @@ export default class AddTextArea extends Component<Props> {
                 this.setState({listData: res.data})
             }
         })
+        const {fromRoute} = this.props.navigation.state.params
+        switch (fromRoute) {
+            case '考核评分表-编辑分数':
+                this.setState({checkBoxIsView: true})
+        }
+        // console.log('来自route',fromRoute)
     }
 
-    searchArea(text) {
-        console.log(text)
+    _onClickText(item) {
+        const {navigation} = this.props
+        const {fromRoute} = this.props.navigation.state.params
+        switch (fromRoute) {
+            case '考核评分表-编辑分数':
+                navigation.navigate('EditScore',{
+                    EditScoreData:item,
+                    title:navigation.state.params.title
+                })
+
+        }
     }
 
     _renderRow = ({item}) => {
@@ -157,14 +179,20 @@ export default class AddTextArea extends Component<Props> {
                 <View style={styles.total}>
                     <View style={styles.data_show}>
                         <TouchableOpacity
-                            onPress={(e) => this._onPressCollapse({ e, item })}
+                            onPress={(e) => this._onPressCollapse({e, item})}
                         >
-                            <View style={[styles.data_show_left,this.isHaveChildren(item)?styles.border_right:'']}>
-                                <View style={{ display:this.isHaveChildren(item)? 'flex': 'none'}} >
+                            <View style={[
+                                styles.data_show_left,
+                                this.isHaveChildren(item) ? styles.border_right : '',
+                            ]}>
+                                <View style={[
+                                    this.isHaveChildren(item) ? '':styles.none
+                                ]
+                                }>
                                     <Image
                                         resizeMode='contain'
                                         style={styles.fatherIocn}
-                                        source={!isOpen ?require('../../../assets/icons/shrink.png'):require('../../../assets/icons/Open.png')}
+                                        source={!isOpen ? require('../../../assets/icons/shrink.png') : require('../../../assets/icons/Open.png')}
                                     />
                                 </View>
                             </View>
@@ -172,7 +200,8 @@ export default class AddTextArea extends Component<Props> {
 
                         <View style={styles.data_show_right}>
                             <TouchableOpacity
-                                onPress={(e) => this._onClickLeaf({ e, item })}
+                                style={this.state.checkBoxIsView ? styles.none : ''}
+                                onPress={(e) => this._onClickLeaf({e, item})}
                             >
                                 <Image
                                     resizeMode='contain'
@@ -180,7 +209,11 @@ export default class AddTextArea extends Component<Props> {
                                     source={isFocused ? require('../../../assets/icons/true.png') : ''}
                                 />
                             </TouchableOpacity>
-                            <Text style={{fontSize: 15,}}>{item.name}</Text>
+                            <TouchableOpacity
+                                onPress={(item)=>{this._onClickText(item)}}
+                            >
+                                <Text style={{fontSize: 15,}}>{item.name}</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     {
@@ -197,8 +230,12 @@ export default class AddTextArea extends Component<Props> {
         return (
             <View style={styles.total}>
                 <View style={styles.data_show}>
-                    <View style={[styles.data_show_left,this.isHaveChildren(item)?styles.border_right:'']}>
-                        <View style={{ display:this.isHaveChildren(item)? 'flex': 'none'}} >
+                    <View style={[
+                        styles.data_show_left,
+                        this.isHaveChildren(item) ? styles.border_right : '',
+
+                    ]}>
+                        <View style={{display: this.isHaveChildren(item) ? 'flex' : 'none'}}>
                             <Image
                                 resizeMode='contain'
                                 style={styles.fatherIocn}
@@ -208,7 +245,8 @@ export default class AddTextArea extends Component<Props> {
                     </View>
                     <View style={styles.data_show_right}>
                         <TouchableOpacity
-                            onPress={(e) => this._onClickLeaf({ e, item })}
+                            style={this.state.checkBoxIsView ? styles.none : ''}
+                            onPress={(e) => this._onClickLeaf({e, item})}
                         >
                             <Image
                                 resizeMode='contain'
@@ -220,9 +258,9 @@ export default class AddTextArea extends Component<Props> {
                     </View>
                 </View>
                 {/*<FlatList*/}
-                    {/*style={{flex: 1}}*/}
-                    {/*data={item.regionTreeVoLst}*/}
-                    {/*renderItem={this._renderRow}*/}
+                {/*style={{flex: 1}}*/}
+                {/*data={item.regionTreeVoLst}*/}
+                {/*renderItem={this._renderRow}*/}
                 {/*/>*/}
             </View>
         )
@@ -286,6 +324,7 @@ export default class AddTextArea extends Component<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingBottom: global.isIphoneX() ? 20 : '',
         backgroundColor: global.commonCss.screenColor,
     },
     /**
@@ -349,8 +388,8 @@ const styles = StyleSheet.create({
      * 父级元素前的icon
      */
     fatherIocn: {
-        width:global.ScreenUtil.pTd(global.isIphoneX()?35:25),
-        height:global.ScreenUtil.hTd(25)
+        width: global.ScreenUtil.pTd(global.isIphoneX() ? 35 : 25),
+        height: global.ScreenUtil.hTd(25)
     },
     /**
      * 数据显示层
@@ -365,14 +404,14 @@ const styles = StyleSheet.create({
         // borderColor: global.commonCss.borderColor,
     },
     total: {
-        paddingLeft:20,
+        paddingLeft: 20,
     },
     /**
      * 显示单个数据的右边
      */
     data_show_right: {
         flex: 0,
-        marginLeft:20,
+        marginLeft: 20,
         // left: global.ScreenUtil.pTd(90),
         flexDirection: 'row',
         alignItems: 'center',
@@ -380,16 +419,16 @@ const styles = StyleSheet.create({
     /**
      * 显示单个数据的左边
      */
-    data_show_left:{
-        width:30,
+    data_show_left: {
+        width: 30,
         // left:global.ScreenUtil.pTd(50),
-        paddingRight:global.ScreenUtil.pTd(30),
+        paddingRight: global.ScreenUtil.pTd(30),
     },
     /**
      * 竖线
      */
-    border_right:{
-        borderRightWidth:global.ScreenUtil.pTd(0.5),
-        borderColor:global.commonCss.borderColor
+    border_right: {
+        borderRightWidth: global.ScreenUtil.pTd(0.5),
+        borderColor: global.commonCss.borderColor
     }
 });
