@@ -57,9 +57,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#ffffff',
 	},
+    /**
+	 * 每个item的总样式
+     */
 	row_item:{
 		width:width,
-		height:50,
+		height:global.ScreenUtil.hTd(160),
 		alignItems:'center',
 		flex:0,
 		flexDirection:'row',
@@ -67,13 +70,20 @@ const styles = StyleSheet.create({
 		borderColor:global.commonCss.borderColor
 
 	},
+    /**
+	 * item前的标志图
+     */
 	item_img:{
-		width:20,
-		height:20,
+		width:global.ScreenUtil.pTd(60),
+		height:global.ScreenUtil.hTd(60),
 		marginLeft:15,
 		marginRight:25
 	},
+    /**
+	 * 考核评分表中的字体
+     */
 	item_name:{
-		marginRight:10
+		fontSize:17,
+		marginRight:global.ScreenUtil.pTd(52),
 	}
 });

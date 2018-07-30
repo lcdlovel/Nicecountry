@@ -287,12 +287,12 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 
 export const AppStackNavgator = createStackNavigator({
 	/**登录页面*/
-	Loader:{
-		screen:Loader,
-		navigationOptions:{
-			header:null
-		}
-	},
+	// Loader:{
+	// 	screen:Loader,
+	// 	navigationOptions:{
+	// 		header:null
+	// 	}
+	// },
 	/**主页面*/
 	Home: {
 		screen: Home,
@@ -376,6 +376,7 @@ export const AppStackNavgator = createStackNavigator({
 		}
 
 	},
+
 	/**基础信息类型*/
 	BasicDataType: {
 		screen: BasicDataType,
@@ -394,6 +395,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**基础信息模块*/
 	BasicData: {
 		screen: BasicData,
@@ -453,6 +455,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**基础信息下的添加各个基础信息模块*/
 	AddAreaMsg: {
 		screen: AddAreaMsg,
@@ -526,6 +529,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**基础信息下的路由*/
 	BdArea: {
 		screen: AllArea,
@@ -545,6 +549,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**保洁人员的信息下*/
 	AllCleaner: {
 		screen: AllCleaner,
@@ -564,6 +569,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**保洁人员的增加*/
 	AddCleaner: {
 		screen: AddCleaner,
@@ -583,6 +589,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**人员基础信息*/
 	MsgList: {
 			screen: MsgList,
@@ -620,6 +627,7 @@ export const AppStackNavgator = createStackNavigator({
 				}
 			}
 		},
+
 	/**人员的合同列表*/
 	ContractorList: {
 			screen: ContractorList,
@@ -849,6 +857,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**查看表评分*/
 	queryTabData: {
 		screen: queryTabData,
@@ -868,6 +877,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**查看自身*/
 	SelfRating: {
 		screen: SelfRating,
@@ -887,6 +897,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**自查评分表*/
 	Selfexamination: {
 		screen: Selfexamination,
@@ -906,6 +917,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	/**自查评分表的选择区域*/
 	OptRegion:{
 		screen: OptRegion,
@@ -925,6 +937,7 @@ export const AppStackNavgator = createStackNavigator({
 			}
 		}
 	},
+
 	MsgInfomation: {
 		screen: MessageInformation,
 		navigationOptions: (props) => {
