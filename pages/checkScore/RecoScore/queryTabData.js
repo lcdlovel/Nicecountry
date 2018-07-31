@@ -9,7 +9,8 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
-	View
+	View,
+    FlatList
 } from 'react-native';
 import global from "../../../utils/global/global";
 //获取屏幕信息
@@ -22,7 +23,12 @@ export default class queryTabData extends Component<Props> {
 		super(props);
 		this.state = {}
 	}
+    _choosebox(item){
+		return(
+			<View></View>
 
+		)
+	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -31,6 +37,15 @@ export default class queryTabData extends Component<Props> {
 						总分:
 					</Text>
 					<Text style={[styles.title_font,styles.scores]}>100分</Text>
+				</View>
+				<View>
+					<FlatList
+                        data={[{name: '全部'}, {name: '90以上'}]}
+                        renderItem={({item}) => this._choosebox(item)}
+                        ItemSeparatorComponent={() => {
+                            return (<View style={styles.item_separator}></View>)
+                        }}
+					/>
 				</View>
 			</View>
 		);
