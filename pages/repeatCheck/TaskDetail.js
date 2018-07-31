@@ -43,7 +43,7 @@ export default class TaskDetail extends Component<Props> {
                         navigation.navigate('ReplyInformation')
                         console.log(navigation)
                     }}>
-                    <Text style={{color: global.commonCss.mainColor}}>{params.type === 'received' ? '回复' : ''}</Text>
+                    <Text style={global.commonCss.confirm_btn}>{params.type === 'received' ? '回复' : ''}</Text>
                 </TouchableOpacity>
             )
         }

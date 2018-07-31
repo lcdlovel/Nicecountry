@@ -48,7 +48,18 @@ export default {
 	},
 
 	uploadUrl: 'http://192.168.0.128:9090/beautifulCountry-v2.0/File/upload',
-
+    /**
+	 * 地区级别
+     */
+    regionLevel:{
+    	nation:1,
+		province:2,
+		city:3,
+        county:4,
+        town:5,
+        countryside:6,
+        group:7
+	},
     /**
 	 * 判断是不是iponeX
      * @returns {boolean}

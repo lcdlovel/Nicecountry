@@ -6,12 +6,13 @@
 
 import React, {Component} from 'react';
 import {
-	Platform,
-	StyleSheet,
-	Text,
-	View,
-	Image,
-	TouchableOpacity
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import Point from '../../common/Point'
 import global from "../../../utils/global/global";
@@ -21,69 +22,161 @@ let dimensions = require('Dimensions')
 let {width} = dimensions.get('window')
 type Props = {};
 export default class RecoScore extends Component<Props> {
-	constructor(props) {
-		super(props);
-		this.state = {}
-	}
-_rowItem(url,name,navigate,titleName){
-		const {navigation} = this.props
-		return(
-			<TouchableOpacity
-				style={styles.row_item}
-				onPress={()=>{
-					navigation.navigate(navigate,{title:titleName})
-				}}
-			>
-				<Image source={url} style={styles.item_img}/>
-				<Text style={styles.item_name}>{name}</Text>
-				<Point/>
-			</TouchableOpacity>
-		)
-}
-	render() {
-		return (
-			<View style={styles.container}>
-				{this._rowItem(require('../../../assets/images/Assessmentscale.png'),'编辑分数','EditScore','编辑分数')}
-				{this._rowItem(require('../../../assets/images/Assessmentscale.png'),'查看管辖','EditScore','管辖区域评分')}
-				{this._rowItem(require('../../../assets/images/Assessmentscale.png'),'查看自身','SelfRating','自身评分')}
-			</View>
-		);
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+            listData: []
+        }
+    }
+
+    componentWillMount() {
+        const {name} = this.props.navigation.state.params
+        if (name === '考核评分表') {
+            if (global.User_msg.regionCategoryId >= global.regionLevel.countryside) {
+                this.setState({
+                    listData: [
+                        {
+                            imgUrl: require('../../../assets/narmal/Oneself.png'),
+                            route: 'AddTextArea',
+                            name: '查看自身',
+                            titleName: '自身评分'
+                        },
+                    ]
+                })
+            } else {
+                this.setState({
+                    listData: [
+                        {
+                            imgUrl: require('../../../assets/narmal/edit.png'),
+                            route: 'AddTextArea',
+                            name: '编辑分数',
+                            titleName: '编辑分数',
+                            RoutedName:'考核评分表-编辑分数'
+                        },
+                        {
+                            imgUrl: require('../../../assets/narmal/Havejurisdictionover.png'),
+                            route: 'EditScore',
+                            name: '查看管辖',
+                            titleName: '管辖区域评分'
+                        },
+                        {
+                            imgUrl: require('../../../assets/narmal/Oneself.png'),
+                            route: 'EditScore',
+                            name: '查看自身',
+                            titleName: '自身评分'
+                        },
+
+                    ]
+                }, () => {
+                    // console.log('考核评分表' + this.state.listData)
+                })
+            }
+        } else if (name === '自查评分表') {
+            if (global.User_msg.regionCategoryId < global.regionLevel.countryside) {
+                this.setState({
+                    listData: [
+                        {
+                            imgUrl: require('../../../assets/narmal/Characteristicindustry.png'),
+                            route: 'EditScore',
+                            name: '查看分数',
+                            titleName: '管辖区域评分'
+                        },
+                    ]
+                }, () => {
+                    // console.log('考核评分表' + this.state.listData)
+                })
+            } else {
+                this.setState({
+                    listData: [
+                        {
+                            imgUrl: require('../../../assets/narmal/Characteristicindustry.png'),
+                            route: 'EditScore',
+                            name: '查看分数',
+                            titleName: '管辖区域评分'
+                        },
+                        {
+                            imgUrl: require('../../../assets/narmal/edit.png'),
+                            route: 'EditScore',
+                            name: '编辑分数',
+                            titleName: '编辑分数'
+                        },
+                    ]
+                }, () => {
+                    // console.log('考核评分表' + this.state.listData)
+                })
+            }
+        }
+    }
+
+    /**
+     * 一行数据的显示
+     * @param item
+     * @returns {*}
+     * @private
+     */
+    _rowItem(item) {
+        const {navigation} = this.props
+        return (
+            <TouchableOpacity
+                style={styles.row_item}
+                onPress={() => {
+                    navigation.navigate(item.route, {title: item.titleName,fromRoute:item.RoutedName})
+                }}
+            >
+                <Image source={item.imgUrl} style={styles.item_img}/>
+                <Text style={styles.item_name}>{item.name}</Text>
+                <Point/>
+            </TouchableOpacity>
+        )
+    }
+
+    render() {
+        return (
+            <ScrollView style={{flex:1,backgroundColor: global.commonCss.screenColor,}}>
+                <View style={styles.container}>
+                    {this.state.listData.map(item => this._rowItem(item))}
+                    {/*{this._rowItem(require('../../../assets/images/Assessmentscale.png'), '编辑分数', 'EditScore', '编辑分数')}*/}
+                    {/*{this._rowItem(require('../../../assets/images/Assessmentscale.png'), '查看管辖', 'EditScore', '管辖区域评分')}*/}
+                    {/*{this._rowItem(require('../../../assets/images/Assessmentscale.png'), '查看自身', 'SelfRating', '自身评分')}*/}
+                </View>
+            </ScrollView>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		backgroundColor: '#ffffff',
-	},
-    /**
-	 * 每个item的总样式
-     */
-	row_item:{
-		width:width,
-		height:global.ScreenUtil.hTd(160),
-		alignItems:'center',
-		flex:0,
-		flexDirection:'row',
-		borderWidth:0.5,
-		borderColor:global.commonCss.borderColor
 
-	},
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: global.commonCss.screenColor,
+    },
+    row_item: {
+        width: width,
+        height: 50,
+        alignItems: 'center',
+        flex: 0,
+        flexDirection: 'row',
+        borderWidth: 0.5,
+        borderColor: global.commonCss.borderColor
+
+    },
     /**
-	 * item前的标志图
+     * 模块图片
      */
-	item_img:{
-		width:global.ScreenUtil.pTd(60),
-		height:global.ScreenUtil.hTd(60),
-		marginLeft:15,
-		marginRight:25
-	},
+    item_img: {
+        width: global.ScreenUtil.pTd(global.isIphoneX() ? 50 : 41),
+        height: global.ScreenUtil.hTd(41),
+        marginLeft: 15,
+        marginRight: 25
+    },
     /**
-	 * 考核评分表中的字体
+     * 模块名称
      */
-	item_name:{
-		fontSize:17,
-		marginRight:global.ScreenUtil.pTd(52),
-	}
+    item_name: {
+        marginRight: global.ScreenUtil.pTd(36),
+        fontSize: 18,
+        color: global.commonCss.fontColor
+    }
+
 });

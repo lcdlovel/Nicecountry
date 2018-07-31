@@ -208,17 +208,18 @@ export const MessageInformation = createMaterialTopTabNavigator({
 })
 /**检查任务下已接受任务*/
 export const CheckReceviedCheck = createMaterialTopTabNavigator({
+
+	ReceviedChecked: {
+        screen: ReceviedChecked,
+        navigationOptions: {
+            tabBarLabel: '待处理',
+        }
+    },
+
 	ConfirmedCheck: {
 		screen: ConfirmedCheck,
 		navigationOptions: {
 			tabBarLabel: '已回复',
-		}
-	},
-
-	ReceviedChecked: {
-		screen: ReceviedChecked,
-		navigationOptions: {
-			tabBarLabel: '待处理',
 		}
 	},
 
@@ -259,14 +260,26 @@ export const CheckReceviedCheck = createMaterialTopTabNavigator({
 export const ReceviedCheck = createMaterialTopTabNavigator({
 	ReceviedChecked: {
 		screen: ReceviedChecked,
-		navigationOptions: {
-			tabBarLabel: '待处理',
+		navigationOptions:(props)=> {
+			return{
+                tabBarLabel: '待处理',
+			}
 		}
 	},
-	ConfirmedCheck: {
-		screen: SelfCheckTaskConfirm,
-		navigationOptions: {
-			tabBarLabel: '已确定',
+    ConfirmedCheck: {
+        screen: ConfirmedCheck,
+        navigationOptions:(props)=> {
+        	return{
+                tabBarLabel: '待处理',
+			}
+        }
+    },
+    AffirmTask: {
+		screen: AffirmTask,
+		navigationOptions:(props)=> {
+			return{
+                tabBarLabel: '已确定',
+			}
 		}
 	},
 }, {
@@ -277,6 +290,19 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 			height: 49,
 			backgroundColor: '#FFF'
 		},
+        indicatorStyle:{
+            height:global.ScreenUtil.hTd(12),
+            width:global.ScreenUtil.pTd(70),
+            backgroundColor:global.commonCss.mainColor,
+            borderRadius:6,
+            marginLeft:global.ScreenUtil.pTd(90)
+        },
+        labelStyle: {
+            fontSize: 18,
+            flex: 0,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
 		activeBackgroundColor: '#ffffff',
 		activeTintColor: '#70daad',
 		inactiveBackgroundColor: '#ffffff',
@@ -362,7 +388,7 @@ export const AppStackNavgator = createStackNavigator({
 		navigationOptions: (props) => {
 			const {navigation} = props
 			return {
-				title: '选择区域',
+				title: '筛选区域',
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,
@@ -708,8 +734,9 @@ export const AppStackNavgator = createStackNavigator({
 	ReceviedCheck: {
 		screen: ReceviedCheck,
 		navigationOptions: (props) => {
+			const {params} = props.navigation.state
 			return {
-				title: '已接受任务',
+				title: params.title,
 				headerTitleStyle: {
 					color: '#666666',
 					fontSize: global.commonCss.navigationFontSize,
