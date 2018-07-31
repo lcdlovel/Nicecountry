@@ -145,6 +145,7 @@ export default class RecoScore extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
         alignItems: 'center',
@@ -177,4 +178,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: global.commonCss.fontColor
     }
+
 });
