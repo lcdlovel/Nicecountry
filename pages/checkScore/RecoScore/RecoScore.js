@@ -39,7 +39,8 @@ export default class RecoScore extends Component<Props> {
                             imgUrl: require('../../../assets/narmal/Oneself.png'),
                             route: 'AddTextArea',
                             name: '查看自身',
-                            titleName: '自身评分'
+                            titleName: '自身评分',
+                            RoutedName:name
                         },
                     ]
                 })
@@ -51,19 +52,22 @@ export default class RecoScore extends Component<Props> {
                             route: 'AddTextArea',
                             name: '编辑分数',
                             titleName: '编辑分数',
-                            RoutedName:'考核评分表-编辑分数'
+                            RoutedName: name,
+
                         },
                         {
                             imgUrl: require('../../../assets/narmal/Havejurisdictionover.png'),
                             route: 'EditScore',
                             name: '查看管辖',
-                            titleName: '管辖区域评分'
+                            titleName: '管辖区域评分',
+                            RoutedName:name
                         },
                         {
                             imgUrl: require('../../../assets/narmal/Oneself.png'),
                             route: 'EditScore',
                             name: '查看自身',
-                            titleName: '自身评分'
+                            titleName: '自身评分',
+                            RoutedName:name
                         },
 
                     ]
@@ -79,7 +83,8 @@ export default class RecoScore extends Component<Props> {
                             imgUrl: require('../../../assets/narmal/Characteristicindustry.png'),
                             route: 'EditScore',
                             name: '查看分数',
-                            titleName: '管辖区域评分'
+                            titleName: '管辖区域评分',
+                            RoutedName:name
                         },
                     ]
                 }, () => {
@@ -92,13 +97,15 @@ export default class RecoScore extends Component<Props> {
                             imgUrl: require('../../../assets/narmal/Characteristicindustry.png'),
                             route: 'EditScore',
                             name: '查看分数',
-                            titleName: '管辖区域评分'
+                            titleName: '管辖区域评分',
+                            RoutedName:name
                         },
                         {
                             imgUrl: require('../../../assets/narmal/edit.png'),
                             route: 'EditScore',
                             name: '编辑分数',
-                            titleName: '编辑分数'
+                            titleName: '编辑分数',
+                            RoutedName:name
                         },
                     ]
                 }, () => {

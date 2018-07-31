@@ -313,12 +313,12 @@ export const ReceviedCheck = createMaterialTopTabNavigator({
 
 export const AppStackNavgator = createStackNavigator({
 	/**登录页面*/
-	// Loader:{
-	// 	screen:Loader,
-	// 	navigationOptions:{
-	// 		header:null
-	// 	}
-	// },
+	Loader:{
+        screen:Loader,
+        navigationOptions:{
+            header:null
+        }
+    },
 	/**主页面*/
 	Home: {
 		screen: Home,
@@ -400,7 +400,6 @@ export const AppStackNavgator = createStackNavigator({
 				},
 			}
 		}
-
 	},
 
 	/**基础信息类型*/

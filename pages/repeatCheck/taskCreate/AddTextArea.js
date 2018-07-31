@@ -38,6 +38,30 @@ export default class AddTextArea extends Component<Props> {
     }
 
     /**
+     * 生命周期函数-componentWillMount
+     */
+    componentWillMount() {
+        CrudApi.getInfo({
+            url: 'Region/getAllByAdmin',
+            data: {
+                type: 'check'
+            },
+            callback: (res) => {
+                console.log(res)
+                this.setState({listData: res.data})
+            }
+        })
+        const {fromRoute} = this.props.navigation.state.params
+        switch (fromRoute) {
+            case '考核评分表':
+                this.setState({
+                    checkBoxIsView: true,
+                })
+        }
+        // console.log('来自route',fromRoute)
+    }
+
+    /**
      * 找子的函数
      * @param data
      * @param id
@@ -114,13 +138,19 @@ export default class AddTextArea extends Component<Props> {
     static navigationOptions = (props) => {
         const {navigation} = props
         const {params} = navigation.state
+        const {fromRoute} = params
         return {
             headerRight: (
                 <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => {
                     }}>
-                    <Text style={global.commonCss.confirm_btn}>{params.fromCheck === 'SelfCheckTask' ? '' : '发送'}</Text>
+                    <Text style={[
+                        global.commonCss.confirm_btn,
+                        fromRoute==='考核评分表'? styles.none : ''
+                    ]}>
+                        {params.fromCheck === 'SelfCheckTask' ? '' : '发送'}
+                    </Text>
                 </TouchableOpacity>
             )
         }
@@ -136,36 +166,17 @@ export default class AddTextArea extends Component<Props> {
 
     }
 
-    /**
-     * 生命周期函数-componentWillMount
-     */
-    componentWillMount() {
-        CrudApi.getInfo({
-            url: 'Region/getAllByAdmin',
-            data: {
-                type: 'check'
-            },
-            callback: (res) => {
-                console.log(res)
-                this.setState({listData: res.data})
-            }
-        })
-        const {fromRoute} = this.props.navigation.state.params
-        switch (fromRoute) {
-            case '考核评分表-编辑分数':
-                this.setState({checkBoxIsView: true})
-        }
-        // console.log('来自route',fromRoute)
-    }
 
     _onClickText(item) {
         const {navigation} = this.props
         const {fromRoute} = this.props.navigation.state.params
+        console.log(fromRoute)
         switch (fromRoute) {
-            case '考核评分表-编辑分数':
-                navigation.navigate('EditScore',{
-                    EditScoreData:item,
-                    title:navigation.state.params.title
+            case '考核评分表':
+                navigation.navigate('EditScore', {
+                    fromRoute:fromRoute,
+                    EditScoreData: item,
+                    title: navigation.state.params.title
                 })
 
         }
@@ -186,7 +197,7 @@ export default class AddTextArea extends Component<Props> {
                                 this.isHaveChildren(item) ? styles.border_right : '',
                             ]}>
                                 <View style={[
-                                    this.isHaveChildren(item) ? '':styles.none
+                                    this.isHaveChildren(item) ? '' : styles.none
                                 ]
                                 }>
                                     <Image
@@ -210,7 +221,9 @@ export default class AddTextArea extends Component<Props> {
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity
-                                onPress={(item)=>{this._onClickText(item)}}
+                                onPress={(item) => {
+                                    this._onClickText(item)
+                                }}
                             >
                                 <Text style={{fontSize: 15,}}>{item.name}</Text>
                             </TouchableOpacity>
@@ -297,30 +310,7 @@ export default class AddTextArea extends Component<Props> {
         );
     }
 }
-{/*<View style={styles.item_style}>*/
-}
-{/*<View*/
-}
-{/*style={[styles.check_box, styles.item_check_box, params.fromCheck === 'SelfCheckTask' ? styles.none : '']}></View>*/
-}
-{/*<TouchableOpacity key={item.name}*/
-}
-{/*onPress={() => {*/
-}
-{/*this.setState({Group: item.name})*/
-}
-{/*params.fromCheck === 'SelfCheckTask' ? navigation.navigate('TaskCreate', {fromCheck: params.fromCheck}) : ''*/
-}
-{/*}}*/
-}
-{/*>*/
-}
-{/*<Text*/
-}
-{/*style={[styles.item_text, params.fromCheck === 'SelfCheckTask' ? styles.padding : '']}>{item.name}</Text></TouchableOpacity>*/
-}
-{/*</View>*/
-}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -378,9 +368,7 @@ const styles = StyleSheet.create({
     item_check_box: {
         marginRight: 6
     },
-    none: {
-        display: 'none'
-    },
+
     padding: {
         paddingLeft: 15
     },
@@ -430,5 +418,11 @@ const styles = StyleSheet.create({
     border_right: {
         borderRightWidth: global.ScreenUtil.pTd(0.5),
         borderColor: global.commonCss.borderColor
+    },
+    /**
+     * 隐藏属性
+     */
+    none: {
+        display: 'none'
     }
 });

@@ -11,6 +11,7 @@ import {
 	Text,
 	View
 } from 'react-native';
+import global from "../../../utils/global/global";
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -26,9 +27,10 @@ export default class queryTabData extends Component<Props> {
 		return (
 			<View style={styles.container}>
 				<View style={styles.head_row}>
-					<Text>
-						总分:1000分
+					<Text style={styles.title_font}>
+						总分:
 					</Text>
+					<Text style={[styles.title_font,styles.scores]}>100分</Text>
 				</View>
 			</View>
 		);
@@ -38,15 +40,19 @@ export default class queryTabData extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#ffffff',
+		backgroundColor: global.commonCss.screenColor,
 	},
+    /**
+	 * 标题行的样式
+     */
 	head_row: {
-		height: 40,
+		height: global.ScreenUtil.hTd(100),
 		width: width,
+		flexDirection:'row',
 		paddingLeft: 15,
 		backgroundColor: '#fafafa',
-		justifyContent: 'center',
-		shadowOffset: {width: 0, height: 5},
+		alignItems: 'center',
+		shadowOffset: {width: 0, height: 1},
 		shadowOpacity: 0.5,
 		shadowRadius: 5,
 		shadowColor: 'gray',
@@ -54,4 +60,18 @@ const styles = StyleSheet.create({
 		marginTop: 1,
 		marginBottom: 1
 	},
+    /**
+	 * 标题行的字体
+     */
+    title_font:{
+		fontSize:18,
+		color:'#0c0c0c'
+	},
+    /**
+	 * 分数
+     */
+    scores:{
+    	color:global.commonCss.mainColor
+	}
+
 });

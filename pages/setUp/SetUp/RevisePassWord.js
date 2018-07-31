@@ -48,6 +48,19 @@ export default class RevisePassWord extends Component<Props> {
             )
         }
     }
+    valueChoose(){
+        switch (item.name) {
+            case '原密码':
+                return this.state.oldPassWord
+                break;
+            case '新登录密码':
+                return this.state.newPassWord
+                break;
+            case '重复新密码':
+                return this.state.repeatPassWord
+                break;
+        }
+    }
     /**
      * 行构造器
      * @param item
@@ -67,7 +80,7 @@ export default class RevisePassWord extends Component<Props> {
                                style={styles.text_Input}
                                secureTextEntry={this.state.secureTextEntry}
                                underlineColorAndroid='transparent'
-                               value={this.state[item.name]}
+                               value={this.valueChoose.bind(this)}
                                onChangeText={(val)=>{
                                    this.setState((state)=>{
                                        state.passWord.set(item.name,val)
@@ -88,14 +101,24 @@ export default class RevisePassWord extends Component<Props> {
                     <TouchableOpacity
                         activeOpacity={0.8}
                         onPress={() => {
-                            console.log('game')
+                            passWord.set(item.name,'')
+                            switch (item.name) {
+                                case '原密码':
+                                    this.setState({oldPassWord:''},()=>{
+                                        console.log('原密码')
+                                        console.log(this.state.oldPassWord)
+                                    })
+                                    break;
+                                case '新登录密码':
+                                    this.setState({newPassWord:''})
+                                    break;
+                                case '重复新密码':
+                                    this.setState({repeatPassWord:''})
+                                    break;
+                            }
                             this.setState((state)=>{
                                 const passWord = state.passWord
                                 passWord.set(item.name,'')
-                                // passWord.set(item.name,'')
-                                return{
-                                    passWord
-                                }
                             },()=>{
                                 console.log(this.state.passWord)
                             })

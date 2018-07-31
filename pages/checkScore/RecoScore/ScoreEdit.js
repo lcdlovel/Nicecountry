@@ -15,6 +15,7 @@ import {
 import Point from '../../common/Point'
 import PopupDialog, {SlideAnimation} from 'react-native-popup-dialog';
 import global from "../../../utils/global/global";
+import ItemEditScore from './ItemEditScore'
 //获取屏幕信息
 let dimensions = require('Dimensions')
 //获取屏幕宽度
@@ -28,8 +29,28 @@ export default class ScoreEdit extends Component<Props> {
 			areaMsg:''
 		}
 	}
-	componentWillMount(){
 
+    /**
+	 * 页面右部确认字体
+     */
+    static navigationOptions = (props)=>{
+        const {params} = props.navigation.state
+    	return{
+    		headerRight:(
+				<TouchableOpacity
+					activeOpacity={0.8}
+					onPress={()=>
+						console.log(params)
+					}
+				>
+					<Text style={global.commonCss.confirm_btn}>确认</Text>
+				</TouchableOpacity>
+			)
+		}
+	}
+	componentWillMount(){
+        const {params} = this.props.navigation.state
+        console.log(params)
 	}
     /**
 	 * 一行数据的显示
@@ -74,11 +95,25 @@ export default class ScoreEdit extends Component<Props> {
 					dialogStyle={styles.dog_style}
                     overlayBackgroundColor='transparent'
 				>
-					<View>
+					<View style={{height:global.ScreenUtil.hTd(798)}}>
 						<View style={styles.item_header}>
                             <Text style={styles.item_name}>生活垃圾收集转运(20分)</Text>
 						</View>
 
+						<ItemEditScore/>
+
+						<View style={styles.item_bottom}>
+							<TouchableOpacity
+                                onPress={()=>{
+                                    this.popupDialog.dismiss()
+                                }}
+							>
+                                <Text style={styles.item_bottom_font} >取消</Text>
+							</TouchableOpacity>
+
+							<View style={styles.verticalLine}></View>
+							<Text style={styles.item_bottom_font}>确认</Text>
+						</View>
 					</View>
 				</PopupDialog>
 			</View>
@@ -100,7 +135,7 @@ const styles = StyleSheet.create({
 		paddingLeft: 15,
 		backgroundColor: '#fafafa',
 		justifyContent: 'center',
-		shadowOffset: {width: 0, height: 1},
+		shadowOffset: {width: 0, height: 0.5},
 		shadowOpacity: 0.5,
 		shadowRadius: 5,
 		shadowColor: 'gray',
@@ -164,6 +199,7 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 10,
         shadowOpacity: 1,
+		position:'relative',
 		width:global.ScreenUtil.pTd(578),
 		height:global.ScreenUtil.hTd(798),
 		top:global.ScreenUtil.hTd(-160)
@@ -191,6 +227,37 @@ const styles = StyleSheet.create({
     item_header:{
     	borderBottomWidth:global.ScreenUtil.hTd(1),
 		borderColor:global.commonCss.borderColor
-
+	},
+    /**
+	 * 底部样式
+     */
+    item_bottom:{
+    	borderTopWidth:0.5,
+		borderColor:global.commonCss.borderColor,
+    	position:'absolute',
+		bottom:0,
+    	// bottom:-global.ScreenUtil.hTd(720),
+		right:0,
+		flex:0,
+		flexDirection:'row'
+	},
+    /**
+	 * 底部样式字体
+     */
+    item_bottom_font:{
+    	fontSize:16,
+		flex:0,
+		textAlign:'center',
+		lineHeight:global.ScreenUtil.hTd(90),
+		height:global.ScreenUtil.hTd(95),
+		width:global.ScreenUtil.pTd(288),
+		color:global.commonCss.mainColor,
+	},
+    /**
+	 * 竖线
+     */
+    verticalLine:{
+    	width:0.5,
+		backgroundColor:global.commonCss.borderColor
 	}
 });
